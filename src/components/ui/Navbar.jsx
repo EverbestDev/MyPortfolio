@@ -76,8 +76,10 @@ const NavLink = ({ to, children, onClick, isActive }) => {
     <motion.a
       href={to}
       onClick={onClick}
-      className={`px-4 py-2 text-base font-medium relative cursor-pointer transition-all duration-300 ${
-        isActive ? "text-[--neon-cyan]" : "text-white/80 hover:text-[--neon-cyan"
+      className={`px-4 py-2 w-full text-base font-medium relative cursor-pointer transition-all duration-300 ${
+        isActive
+          ? "text-[--neon-cyan]"
+          : "text-white/80 hover:text-[--neon-cyan"
       }`}
       style={{ "--neon-cyan": NEON_CYAN }}
       whileHover={{
