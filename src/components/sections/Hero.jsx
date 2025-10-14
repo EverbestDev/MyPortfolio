@@ -4,7 +4,7 @@ import FaultyTerminal from "../effects/FaultyTerminal";
 
 // --- CONFIGURATION DATA & STYLES ---
 const NEON_CYAN = "#00ffff";
-const DARK_BG = "#080010"; // Slightly darker for enhanced contrast
+const DARK_BG = "#080812"; // Slightly darker for enhanced contrast
 
 // Staggered animation variant for the whole container
 const containerVariants = {

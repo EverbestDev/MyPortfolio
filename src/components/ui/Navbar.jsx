@@ -190,12 +190,12 @@ const Navbar = () => {
         className={`${baseClasses} ${scrollClasses}`}
         style={{ ...neonShadowStyle, "--dark-bg": DARK_BG }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center md:justify-between h-20 justify-end">
             {/* LEFT: Logo/Name */}
             <motion.a
               href="#home"
-              className="flex-shrink-0 cursor-pointer text-2xl md:text-3xl font-extrabold tracking-widest"
+              className="flex-shrink-0 cursor-pointer text-2xl md:text-3xl font-extrabold tracking-widest hidden sm:block"
               whileHover={{
                 scale: 1.08,
                 textShadow: `0 0 20px ${NEON_CYAN}, 0 0 40px ${NEON_CYAN}60`,

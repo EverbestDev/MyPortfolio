@@ -130,7 +130,7 @@ const Contact = () => {
       className="py-20 sm:py-32 relative overflow-hidden"
       style={{ backgroundColor: DARK_BG, color: "white" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"

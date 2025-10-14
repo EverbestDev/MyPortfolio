@@ -34,10 +34,10 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-20 sm:py-32"
+      className="py-20 sm:py-32 w-full overflow-hidden"
       style={{ backgroundColor: DARK_BG, color: "white" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: Animated on view */}
         <motion.div
           className="text-center mb-16"
@@ -67,7 +67,7 @@ const About = () => {
         </motion.div>
 
         {/* Content Grid: Text and Image/Code Block */}
-        <div className="grid md:grid-cols-12 gap-12 items-center">
+        <div className="grid md:grid-cols-12 gap-8 items-center max-w-6xl mx-auto px-4">
           {/* Left Column: Text Content (md:col-span-7) */}
           <motion.div
             className="md:col-span-7 space-y-6"
@@ -77,7 +77,7 @@ const About = () => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.p
-              className="text-lg text-gray-300 leading-relaxed"
+              className="text-md text-gray-300 leading-relaxed"
               variants={itemVariants}
             >
               My journey began with a deep curiosity for how digital products
@@ -120,7 +120,7 @@ const About = () => {
 
           {/* Right Column: Code Snippet/Visual (md:col-span-5) */}
           <motion.div
-            className="md:col-span-5 flex justify-center p-6 md:p-8"
+            className="md:col-span-5 flex justify-center"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.5 }}
@@ -128,22 +128,22 @@ const About = () => {
           >
             {/* Code Block Mockup with Neon Accent */}
             <div
-              className="w-full max-w-sm rounded-xl overflow-hidden shadow-2xl relative"
+              className="w-full rounded-xl overflow-hidden shadow-2xl relative"
               style={{
-                backgroundColor: "#1a1a2e", // Darker background for the code block
+                backgroundColor: "#1a1a2e",
                 boxShadow: `0 0 20px ${NEON_CYAN}30`,
                 border: `1px solid ${NEON_CYAN}40`,
               }}
             >
-              <div className="p-4 flex justify-between items-center text-xs text-gray-400 border-b border-gray-700">
-                <span>usamah.dev/About.jsx</span>
-                <div className="flex space-x-2">
+              <div className="p-3 sm:p-4 flex justify-between items-center text-xs text-gray-400 border-b border-gray-700">
+                <span className="truncate">usamah.dev/About.jsx</span>
+                <div className="flex space-x-2 flex-shrink-0 ml-2">
                   <span className="w-3 h-3 bg-red-500 rounded-full"></span>
                   <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
                   <span className="w-3 h-3 bg-green-500 rounded-full"></span>
                 </div>
               </div>
-              <pre className="p-4 text-sm overflow-x-auto font-mono">
+              <pre className="p-3 sm:p-4 text-xs sm:text-sm overflow-x-auto font-mono">
                 <code className="block whitespace-pre">
                   {/* FIX: Escaped '=' and '=>' to prevent JSX compilation error */}
                   <span className="text-red-400">const</span>{" "}
