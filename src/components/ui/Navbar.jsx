@@ -77,9 +77,7 @@ const NavLink = ({ to, children, onClick, isActive }) => {
       href={to}
       onClick={onClick}
       className={`px-4 py-2 w-full text-base font-medium relative cursor-pointer transition-all duration-300 ${
-        isActive
-          ? "text-[--neon-cyan]"
-          : "text-white/80 hover:text-[--neon-cyan"
+        isActive ? "text-[#00ffff]" : "text-white/80 hover:text-[#00ffff]"
       }`}
       style={{ "--neon-cyan": NEON_CYAN }}
       whileHover={{
@@ -126,10 +124,10 @@ const NavLink = ({ to, children, onClick, isActive }) => {
 const Button = ({ children, className = "" }) => {
   return (
     <motion.a
-      href="/assets/Usamah_Resume.pdf"
+      href="./assets/Usamah_Resume.pdf"
       target="_blank"
       rel="noopener noreferrer"
-      className={`flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-full transition-all duration-300
+      className={`flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-2xl transition-all duration-300
                   border-2 text-white ${className}`}
       style={{
         borderColor: NEON_CYAN,
@@ -191,7 +189,7 @@ const Navbar = () => {
         style={{ ...neonShadowStyle, "--dark-bg": DARK_BG }}
       >
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center md:justify-between h-20 justify-end">
+          <div className="flex items-center md:justify-between md:h-20 justify-end h:16">
             {/* LEFT: Logo/Name */}
             <motion.a
               href="#home"
@@ -218,7 +216,7 @@ const Navbar = () => {
                     {item.name}
                   </NavLink>
                 ))}
-                <Button>View Resume</Button>
+                <Button className="w-max-content animate-pulse"> Resume</Button>
               </div>
             </nav>
 
@@ -323,7 +321,7 @@ const Navbar = () => {
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: index * 0.1 }}
                         className={`block text-lg font-medium rounded-xl px-6 py-4 cursor-pointer transition-all duration-300 ${
-                          isActive ? "text-[--neon-cyan]" : "text-gray-400"
+                          isActive ? "text-[#00ffff]" : "text-gray-300"
                         }`}
                         style={{
                           "--neon-cyan": NEON_CYAN,
