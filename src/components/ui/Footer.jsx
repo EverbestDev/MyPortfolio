@@ -54,7 +54,7 @@ export default function Footer() {
         {/* Social/Contact Icons */}
         <div className="flex justify-center space-x-6 mb-6">
           <motion.a
-            href="#"
+            href="https://github.com/EverbestDev"
             target="_blank"
             className="text-gray-400 hover:text-neon-cyan transition-colors"
             whileHover={{ scale: 1.2, color: NEON_CYAN }}
@@ -62,7 +62,7 @@ export default function Footer() {
             <Github size={24} />
           </motion.a>
           <motion.a
-            href="#"
+            href="https://www.linkedin.com/in/everbest-studios-198464291?utm_source=share_via&utm_content=profile&utm_medium=member_android"
             target="_blank"
             className="text-gray-400 hover:text-neon-cyan transition-colors"
             whileHover={{ scale: 1.2, color: NEON_CYAN }}
@@ -70,7 +70,7 @@ export default function Footer() {
             <Linkedin size={24} />
           </motion.a>
           <motion.a
-            href="mailto:john.doe@example.com"
+            href="mailto:olawooreusamahabidemi@gmail.com"
             className="text-gray-400 hover:text-neon-cyan transition-colors"
             whileHover={{ scale: 1.2, color: NEON_CYAN }}
           >
@@ -104,8 +104,8 @@ export default function Footer() {
 
         {/* Copyright/Info */}
         <p className="text-xs text-gray-500 font-mono tracking-widest">
-          &copy; {new Date().getFullYear()} JOHN DOE / TERMINAL INTERFACE
-          V.3.1.2
+          &copy; {new Date().getFullYear()} EVERBESTDEV / TERMINAL INTERFACE
+          V.1.0
         </p>
         <p className="text-xs text-gray-700 mt-1">
           [ DATA TRANSMISSION COMPLETE ]

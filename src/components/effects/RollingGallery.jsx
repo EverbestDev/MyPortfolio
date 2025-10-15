@@ -121,7 +121,7 @@ const RollingGallery = ({
         }}
       />
                        {" "}
-      <div className="flex h-full items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
+      <div className="flex h-full items-center justify-center [perspective:1000px] [transform-style:preserve-3d] w-full">
                                {" "}
         <motion.div
           drag="x"
@@ -144,7 +144,7 @@ const RollingGallery = ({
           {images.map((url, i) => (
             <div
               key={i}
-              className="group absolute flex h-fit items-center justify-center p-[8%] [backface-visibility:hidden] md:p-[6%]"
+              className="group absolute flex h-fit items-center justify-center p-[8%] [backface-visibility:hidden] md:p-[6%] gap-12 mp:gap-6"
               style={{
                 width: `${faceWidth}px`,
                 transform: `rotateY(${
@@ -157,7 +157,8 @@ const RollingGallery = ({
                 src={url}
                 alt="gallery"
                 className="pointer-events-none h-[250px] w-[450px] rounded-[15px] border-[3px] border-white object-cover shadow-lg
-                           transition-all duration-400 ease-out 
+                           transition-all duration-400 ease-out mx-8
+                           
                            group-hover:scale-[1.07] group-hover:border-[#00ffff] group-hover:shadow-[0_0_20px_#00ffff40]
                            sm:h-[180px] sm:w-[350px]"
               />
