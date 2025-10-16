@@ -8,6 +8,7 @@ import Skills from "./components/sections/Skills";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/ui/Footer";
 import Gallery from "./components/sections/Gallery";
+import ExperienceTimeline from "./components/sections/Experience";
 
 function App() {
   // Make OGL constructors available on window for FaultyTerminal (it expects them)
@@ -19,10 +20,10 @@ function App() {
     <>
       <Navbar />
       <Hero />
-
       <About />
       <Projects />
       <Skills />
+      <ExperienceTimeline />
       <Gallery />
       <Contact />
       <Footer />

@@ -124,7 +124,7 @@ const NavLink = ({ to, children, onClick, isActive }) => {
 const Button = ({ children, className = "" }) => {
   return (
     <motion.a
-      href="./assets/Usamah_Resume.pdf"
+      href="/resume.pdf"
       target="_blank"
       rel="noopener noreferrer"
       className={`flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-2xl transition-all duration-300
@@ -193,7 +193,7 @@ const Navbar = () => {
             {/* LEFT: Logo/Name */}
             <motion.a
               href="#home"
-              className="flex-shrink-0 cursor-pointer text-2xl md:text-3xl font-extrabold tracking-widest hidden sm:block"
+              className="flex-shrink-0 cursor-pointer text-2xl md:text-3xl font-extrabold tracking-widest hidden md:block"
               whileHover={{
                 scale: 1.08,
                 textShadow: `0 0 20px ${NEON_CYAN}, 0 0 40px ${NEON_CYAN}60`,

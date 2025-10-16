@@ -269,12 +269,11 @@ const Hero = () => {
         />
       </motion.div>
 
-      {/* Content Container */}
       <motion.div
         className="relative z-10 max-w-4xl text-center px-4"
         style={{ y: y, opacity }}
       >
-        {/* 1. Intro Line: Runs on its own delay */}
+ 
         <motion.p
           className="text-lg sm:text-xl text-gray-400 font-medium mb-4"
           initial={{ y: 30, opacity: 0 }}
