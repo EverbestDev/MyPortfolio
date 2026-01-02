@@ -173,7 +173,7 @@ const Navbar = () => {
           <div className="flex items-center md:justify-between md:h-20 justify-end h:16">
             <motion.a
               href="#home"
-              className="flex-shrink-0 cursor-pointer text-2xl md:text-3xl font-extrabold tracking-widest hidden md:block"
+              className="flex-shrink-0 cursor-pointer text-lg md:text-xl font-extrabold tracking-widest hidden md:block"
               whileHover={{
                 scale: 1.08,
                 textShadow: `0 0 20px ${colors.NEON_CYAN}, 0 0 40px ${colors.NEON_CYAN}60`,
@@ -181,7 +181,7 @@ const Navbar = () => {
               whileTap={{ scale: 0.95 }}
               style={{ color: colors.NEON_CYAN }}
             >
-              {"EB.Dev"}
+              {"EVERBESTDEV"}
             </motion.a>
 
             <nav className="hidden md:block">
