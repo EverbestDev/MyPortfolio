@@ -1,4 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 @import "tailwindcss";
-body{
+
+/* Root CSS Variables for Theme Support */
+:root {
+  /* Light Theme Colors */
+  --neon-cyan-light: #0891b2;
+  --neon-purple-light: #7c3aed;
+  --dark-bg-light: #f8fafc;
+  --section-bg-light: #ffffff;
+  --card-bg-light: #f1f5f9;
+  --text-primary-light: #0f172a;
+  --text-secondary-light: #475569;
+  --text-tertiary-light: #64748b;
+  --border-light: #cbd5e1;
+  --border-accent-light: #0891b220;
+  
+  /* Dark Theme Colors */
+  --neon-cyan-dark: #00ffff;
+  --neon-purple-dark: #a855f7;
+  --dark-bg-dark: #080812;
+  --section-bg-dark: #060010;
+  --card-bg-dark: #1a1a2e;
+  --text-primary-dark: #ffffff;
+  --text-secondary-dark: #e2e8f0;
+  --text-tertiary-dark: #94a3b8;
+  --border-dark: #334155;
+  --border-accent-dark: #00ffff40;
+}
+
+/* Default to dark theme */
+:root,
+[data-theme="dark"] {
+  --neon-cyan: var(--neon-cyan-dark);
+  --neon-purple: var(--neon-purple-dark);
+  --dark-bg: var(--dark-bg-dark);
+  --section-bg: var(--section-bg-dark);
+  --card-bg: var(--card-bg-dark);
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --text-tertiary: var(--text-tertiary-dark);
+  --border-color: var(--border-dark);
+  --border-accent: var(--border-accent-dark);
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --neon-cyan: var(--neon-cyan-light);
+  --neon-purple: var(--neon-purple-light);
+  --dark-bg: var(--dark-bg-light);
+  --section-bg: var(--section-bg-light);
+  --card-bg: var(--card-bg-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --text-tertiary: var(--text-tertiary-light);
+  --border-color: var(--border-light);
+  --border-accent: var(--border-accent-light);
+}
+
+/* Global Styles */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
   font-family: "Geist", sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for dark theme */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 10px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #0f0f1e;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+  border-radius: 5px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #00cccc;
+}
+
+/* Custom scrollbar for light theme */
+[data-theme="light"] ::-webkit-scrollbar {
+  width: 10px;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #e2e8f0;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: var(--neon-cyan);
+  border-radius: 5px;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #0e7490;
 }

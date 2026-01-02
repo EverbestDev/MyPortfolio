@@ -1,23 +1,19 @@
 import RollingGallery from "../effects/RollingGallery";
-import React, { useState, useEffect } from "react";
-import {
-  motion,
-  useAnimation,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { useThemeColors } from "../../hooks/useThemeColors";
 
-// Sample images (replace with your own or pass as props)
 function Gallery() {
-  const NEON_CYAN = "#00ffff";
-  const DARK_BG = "#080812";
+  const colors = useThemeColors();
 
   return (
-    <div className="w-full flex items-center justify-center bg-[#080812] py-12 relative">
+    <div
+      className="w-full flex items-center justify-center py-20 relative sm:py-32"
+      style={{ backgroundColor: colors.DARK_BG }}
+    >
       <div
-        className="text-white text-3xl mb-4 absolute top-4 z-10 font-bold"
+        className="text-3xl mb-4 absolute top-10 z-10 font-extrabold tracking-tight"
         style={{
-          textShadow: `0 0 8px ${NEON_CYAN}60, 0 0 16px ${NEON_CYAN}40`,
+          color: colors.TEXT_PRIMARY,
+          textShadow: `0 0 10px ${colors.NEON_CYAN}40`,
         }}
       >
         My Gallery

@@ -10,32 +10,27 @@ import {
   Phone,
   Smartphone,
 } from "lucide-react";
+import { useThemeColors } from "../../hooks/useThemeColors";
 
-// --- CONFIGURATION DATA & STYLES ---
-const NEON_CYAN = "#00ffff";
-const NEON_PURPLE = "#a855f7";
-const DARK_BG = "#080812";
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || "YOUR_FORMSPREE_ENDPOINT_HERE";
 
-const FORMSPREE_ENDPOINT = process.env.FORMSPREE_ENDPOINT;
-
-// Custom Button Component (Styled for Scifi Look)
-const Button = ({ children, isSubmitting, className = "" }) => (
+const Button = ({ children, isSubmitting, className = "", colors }) => (
   <motion.button
     type="submit"
     disabled={isSubmitting}
     className={`relative flex items-center justify-center font-bold tracking-wider uppercase px-8 py-3 rounded-lg overflow-hidden transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     style={{
-      backgroundColor: NEON_CYAN,
-      color: DARK_BG,
+      backgroundColor: colors.NEON_CYAN,
+      color: colors.DARK_BG,
       boxShadow: isSubmitting
-        ? `0 0 15px ${NEON_PURPLE}`
-        : `0 0 10px ${NEON_CYAN}40`,
+        ? `0 0 15px ${colors.NEON_PURPLE}`
+        : `0 0 10px ${colors.NEON_CYAN}40`,
     }}
     whileHover={{
       scale: isSubmitting ? 1 : 1.05,
       boxShadow: isSubmitting
         ? undefined
-        : `0 0 25px ${NEON_CYAN}80, 0 0 10px ${NEON_PURPLE}80`,
+        : `0 0 25px ${colors.NEON_CYAN}80, 0 0 10px ${colors.NEON_PURPLE}80`,
       transition: { duration: 0.2 },
     }}
     whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
@@ -54,14 +49,13 @@ const Button = ({ children, isSubmitting, className = "" }) => (
       whileHover={{ x: isSubmitting ? "-100%" : "100%" }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
       style={{
-        background:
+        backgroundImage:
           "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)",
       }}
     />
   </motion.button>
 );
 
-// Custom Input Component (Styled for Scifi Terminal Look)
 const TerminalInput = ({
   id,
   label,
@@ -69,6 +63,7 @@ const TerminalInput = ({
   required = false,
   value,
   onChange,
+  colors
 }) => {
   const isFilled = value && value.length > 0;
 
@@ -81,31 +76,31 @@ const TerminalInput = ({
         value={value}
         onChange={onChange}
         required={required}
-        placeholder=" " // Important for the floating label effect
-        className="block w-full px-0 pt-3 pb-2 text-sm text-gray-100 bg-transparent border-0 border-b-2 appearance-none focus:outline-none peer placeholder-transparent"
+        placeholder=" "
+        className="block w-full px-0 pt-3 pb-2 text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none peer placeholder-transparent"
         style={{
-          borderColor: isFilled ? NEON_CYAN : "#3a3a5a", // Change color when filled
-          color: NEON_CYAN,
+          borderColor: isFilled ? colors.NEON_CYAN : colors.BORDER,
+          color: colors.TEXT_PRIMARY,
           transition: "border-color 0.3s",
         }}
       />
       <label
         htmlFor={id}
-        className={`absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 cursor-text ${
-          isFilled ? "text-cyan-400 scale-75 -translate-y-6" : "text-gray-400"
-        }`}
+        className={`absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 cursor-text ${isFilled ? "scale-75 -translate-y-6" : ""}`}
+        style={{
+          color: isFilled ? colors.NEON_CYAN : colors.TEXT_TERTIARY,
+        }}
       >
-        {label} {required && <span className="text-red-500">*</span>}
+        {label} {required && <span style={{ color: colors.NEON_PURPLE }}>*</span>}
       </label>
-      {/* Scifi focus line effect */}
       <motion.div
         className="absolute left-0 bottom-0 w-full h-0.5 transform origin-left"
         style={{
-          backgroundColor: NEON_CYAN,
-          boxShadow: `0 0 8px ${NEON_CYAN}`,
+          backgroundColor: colors.NEON_CYAN,
+          boxShadow: `0 0 8px ${colors.NEON_CYAN}`,
         }}
         initial={{ scaleX: 0 }}
-        animate={isFilled ? { scaleX: 1 } : { scaleX: 0 }} // Focus line persists when filled
+        animate={isFilled ? { scaleX: 1 } : { scaleX: 0 }}
         whileFocus={{ scaleX: 1 }}
         transition={{ duration: 0.3 }}
       />
@@ -113,8 +108,7 @@ const TerminalInput = ({
   );
 };
 
-// Custom TextArea Component
-const TerminalTextArea = ({ id, label, required = false, value, onChange }) => {
+const TerminalTextArea = ({ id, label, required = false, value, onChange, colors }) => {
   const isFilled = value && value.length > 0;
 
   return (
@@ -126,31 +120,31 @@ const TerminalTextArea = ({ id, label, required = false, value, onChange }) => {
         value={value}
         onChange={onChange}
         required={required}
-        placeholder=" " // Important for the floating label effect
-        className="block w-full px-0 pt-3 pb-2 text-sm text-gray-100 bg-transparent border-0 border-b-2 appearance-none focus:outline-none peer resize-none placeholder-transparent"
+        placeholder=" "
+        className="block w-full px-0 pt-3 pb-2 text-sm bg-transparent border-0 border-b-2 appearance-none focus:outline-none peer resize-none placeholder-transparent"
         style={{
-          borderColor: isFilled ? NEON_CYAN : "#3a3a5a",
-          color: NEON_CYAN,
+          borderColor: isFilled ? colors.NEON_CYAN : colors.BORDER,
+          color: colors.TEXT_PRIMARY,
           transition: "border-color 0.3s",
         }}
       />
       <label
         htmlFor={id}
-        className={`absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-cyan-400 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 cursor-text ${
-          isFilled ? "text-cyan-400 scale-75 -translate-y-6" : "text-gray-400"
-        }`}
+        className={`absolute text-sm duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 cursor-text ${isFilled ? "scale-75 -translate-y-6" : ""}`}
+        style={{
+          color: isFilled ? colors.NEON_CYAN : colors.TEXT_TERTIARY,
+        }}
       >
-        {label} {required && <span className="text-red-500">*</span>}
+        {label} {required && <span style={{ color: colors.NEON_PURPLE }}>*</span>}
       </label>
-      {/* Scifi focus line effect */}
       <motion.div
         className="absolute left-0 bottom-0 w-full h-0.5 transform origin-left"
         style={{
-          backgroundColor: NEON_CYAN,
-          boxShadow: `0 0 8px ${NEON_CYAN}`,
+          backgroundColor: colors.NEON_CYAN,
+          boxShadow: `0 0 8px ${colors.NEON_CYAN}`,
         }}
         initial={{ scaleX: 0 }}
-        animate={isFilled ? { scaleX: 1 } : { scaleX: 0 }} // Focus line persists when filled
+        animate={isFilled ? { scaleX: 1 } : { scaleX: 0 }}
         whileFocus={{ scaleX: 1 }}
         transition={{ duration: 0.3 }}
       />
@@ -158,8 +152,7 @@ const TerminalTextArea = ({ id, label, required = false, value, onChange }) => {
   );
 };
 
-// Reusable Component for Contact Details with Hover Effects
-const ContactDetail = ({ icon: Icon, title, content, link, subtext }) => (
+const ContactDetail = ({ icon: Icon, title, content, link, subtext, colors }) => (
   <motion.a
     href={link}
     target={
@@ -168,38 +161,39 @@ const ContactDetail = ({ icon: Icon, title, content, link, subtext }) => (
         : "_self"
     }
     rel="noopener noreferrer"
-    className="flex flex-col p-4 rounded-lg transition-all duration-300 cursor-pointer border border-transparent hover:border-cyan-400/50"
+    className="flex flex-col p-4 rounded-lg transition-all duration-300 cursor-pointer border"
+    style={{ borderColor: "transparent", color: colors.TEXT_PRIMARY }}
     whileHover={{
       scale: 1.02,
-      backgroundColor: "#10101c",
-      boxShadow: `0 0 10px ${NEON_CYAN}20`,
+      backgroundColor: colors.CARD_BG,
+      borderColor: `${colors.NEON_CYAN}80`,
+      boxShadow: `0 0 10px ${colors.NEON_CYAN}20`,
     }}
   >
     <div className="flex items-center mb-2">
       <Icon
         size={24}
-        style={{ color: NEON_CYAN }}
+        style={{ color: colors.NEON_CYAN }}
         className="mr-3 flex-shrink-0"
       />
-      <h4 className="text-lg font-semibold text-gray-100">{title}</h4>
+      <h4 className="text-lg font-semibold" style={{ color: colors.TEXT_PRIMARY }}>{title}</h4>
     </div>
-    <span className="ml-9 text-base text-cyan-400 font-medium break-all">
+    <span className="ml-9 text-base font-medium break-all" style={{ color: colors.NEON_CYAN }}>
       {content}
     </span>
-    {subtext && <span className="ml-9 text-sm text-gray-400">{subtext}</span>}
+    {subtext && <span className="ml-9 text-sm" style={{ color: colors.TEXT_TERTIARY }}>{subtext}</span>}
   </motion.a>
 );
 
-// New Interactive Element: System Status Grid
-const SystemStatusGrid = () => (
-  <div className="p-6 rounded-xl border border-neon-purple/50 shadow-lg bg-[#10101c] text-white hidden md:block">
-    <h3 className="text-xl font-bold mb-4 flex items-center text-gray-100">
-      <Loader2 size={20} className="mr-2 animate-spin text-purple-400" />
+const SystemStatusGrid = ({ colors }) => (
+  <div className="p-6 rounded-xl border shadow-lg hidden md:block" style={{ backgroundColor: colors.CARD_BG, borderColor: `${colors.NEON_PURPLE}50` }}>
+    <h3 className="text-xl font-bold mb-4 flex items-center" style={{ color: colors.TEXT_PRIMARY }}>
+      <Loader2 size={20} className="mr-2 animate-spin" style={{ color: colors.NEON_PURPLE }} />
       System Availability Status
     </h3>
-    <p className="text-sm text-gray-400 mb-4">
+    <p className="text-sm mb-4" style={{ color: colors.TEXT_SECONDARY }}>
       Real-time data synchronization feed. Status:{" "}
-      <span className="text-cyan-400 font-semibold">Active</span>.
+      <span style={{ color: colors.NEON_CYAN, fontWeight: "semibold" }}>Active</span>.
     </p>
     <div className="grid grid-cols-5 md:grid-cols-20 gap-2 w-full mx-auto px-4">
       {[...Array(100)].map((_, i) => (
@@ -207,46 +201,43 @@ const SystemStatusGrid = () => (
           key={i}
           className="w-4 h-4 rounded-sm"
           initial={{
-            backgroundColor: "#2a2a4a",
+            backgroundColor: `${colors.BORDER}40`,
             opacity: 0.7,
           }}
           animate={{
-            opacity: [0.7, 1, 0.7], // Subtle pulse
+            opacity: [0.7, 1, 0.7],
             scale: [1, 1.1, 1],
           }}
           transition={{
             duration: 1.5,
             repeat: Infinity,
-            delay: Math.random() * 2, // Staggered animation
+            delay: Math.random() * 2,
           }}
           whileHover={{
-            backgroundColor: NEON_CYAN,
-            boxShadow: `0 0 8px ${NEON_CYAN}`,
+            backgroundColor: colors.NEON_CYAN,
+            boxShadow: `0 0 8px ${colors.NEON_CYAN}`,
             opacity: 1,
             scale: 1.2,
           }}
           style={{
-            backgroundColor: i % 5 === 0 ? NEON_PURPLE : "#2a2a4a",
-            boxShadow: i % 5 === 0 ? `0 0 5px ${NEON_PURPLE}80` : "none",
+            backgroundColor: i % 5 === 0 ? colors.NEON_PURPLE : `${colors.BORDER}40`,
+            boxShadow: i % 5 === 0 ? `0 0 5px ${colors.NEON_PURPLE}80` : "none",
           }}
         />
       ))}
     </div>
-    <p className="text-xs text-center text-gray-500 mt-4">
-      // SYNCHRONIZED-ACCESS: Global.
-    </p>
   </div>
 );
 
-// --- MAIN CONTACT COMPONENT ---
 const Contact = () => {
+  const colors = useThemeColors();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
-  const [status, setStatus] = useState(null); // null, 'submitting', 'success', 'error'
+  const [status, setStatus] = useState(null);
   const isSubmitting = status === "submitting";
 
   const handleChange = (e) => {
@@ -254,7 +245,6 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    // Clear previous success/error messages on user interaction
     if (status !== null && status !== "submitting") {
       setStatus(null);
     }
@@ -266,12 +256,6 @@ const Contact = () => {
 
     try {
       if (FORMSPREE_ENDPOINT === "YOUR_FORMSPREE_ENDPOINT_HERE") {
-        // Use console.error instead of throw for better user experience in this context
-        console.error(
-          "Formspree endpoint is not configured. Simulating success."
-        );
-
-        // Simulate a successful response delay
         await new Promise((resolve) => setTimeout(resolve, 1500));
         setStatus("success");
         setFormData({ name: "", email: "", subject: "", message: "" });
@@ -289,7 +273,7 @@ const Contact = () => {
 
       if (response.ok) {
         setStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" }); // Clear form
+        setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setStatus("error");
       }
@@ -297,7 +281,6 @@ const Contact = () => {
       console.error("Submission error:", error);
       setStatus("error");
     } finally {
-      // Automatically clear status message after a few seconds
       setTimeout(() => setStatus(null), 5000);
     }
   };
@@ -310,9 +293,9 @@ const Contact = () => {
           animate={{ opacity: 1, y: 0 }}
           className="p-3 flex items-center justify-center rounded-lg font-semibold border mt-6"
           style={{
-            backgroundColor: NEON_CYAN + "30",
-            color: NEON_CYAN,
-            borderColor: NEON_CYAN,
+            backgroundColor: colors.NEON_CYAN + "30",
+            color: colors.NEON_CYAN,
+            borderColor: colors.NEON_CYAN,
           }}
         >
           <CheckCircle size={20} className="mr-2" />
@@ -325,10 +308,11 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-3 flex items-center justify-center rounded-lg font-semibold border text-red-400 mt-6"
+          className="p-3 flex items-center justify-center rounded-lg font-semibold border mt-6"
           style={{
-            backgroundColor: "#dc262630", // Red background
-            borderColor: "#dc2626", // Red border
+            backgroundColor: "#dc262630",
+            color: "#dc2626",
+            borderColor: "#dc2626",
           }}
         >
           <XCircle size={20} className="mr-2" />
@@ -343,14 +327,18 @@ const Contact = () => {
     <section
       id="contact"
       className="py-20 sm:py-32 relative overflow-hidden"
-      style={{ backgroundColor: DARK_BG, color: "white" }}
+      style={{ backgroundColor: colors.DARK_BG, color: colors.TEXT_PRIMARY }}
     >
-      {/* Background Flares for modern depth */}
-      <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-400 opacity-10 blur-3xl rounded-full pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500 opacity-10 blur-3xl rounded-full pointer-events-none transform -translate-x-1/2 translate-y-1/2"></div>
+      <div
+        className="absolute top-0 right-0 w-48 h-48 opacity-10 blur-3xl rounded-full pointer-events-none transform translate-x-1/2 -translate-y-1/2"
+        style={{ backgroundColor: colors.NEON_CYAN }}
+      ></div>
+      <div
+        className="absolute bottom-0 left-0 w-48 h-48 opacity-10 blur-3xl rounded-full pointer-events-none transform -translate-x-1/2 translate-y-1/2"
+        style={{ backgroundColor: colors.NEON_PURPLE }}
+      ></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
@@ -360,24 +348,23 @@ const Contact = () => {
         >
           <h3
             className="text-lg font-medium tracking-widest uppercase mb-2"
-            style={{ color: NEON_CYAN }}
+            style={{ color: colors.NEON_CYAN }}
           >
             Secure Data Uplink
           </h3>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-100">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold" style={{ color: colors.TEXT_PRIMARY }}>
             Connect with Me
           </h2>
         </motion.div>
 
         <div className="flex flex-wrap lg:flex-nowrap gap-12">
-          {/* Contact Info (Left Column) */}
-          {/* This column now focuses solely on contact points */}
           <div className="w-full lg:w-1/3 space-y-6">
             <motion.div
-              className="p-8 rounded-xl border border-neon-purple/50 shadow-lg space-y-4"
+              className="p-8 rounded-xl border shadow-lg space-y-4"
               style={{
-                backgroundColor: "#10101c",
-                boxShadow: `0 0 20px ${NEON_PURPLE}20`,
+                backgroundColor: colors.SECTION_BG,
+                borderColor: `${colors.NEON_PURPLE}40`,
+                boxShadow: `0 0 20px ${colors.NEON_PURPLE}10`,
               }}
               initial={{ x: -50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -386,7 +373,7 @@ const Contact = () => {
             >
               <h3
                 className="text-2xl font-bold mb-3"
-                style={{ color: NEON_CYAN }}
+                style={{ color: colors.NEON_CYAN }}
               >
                 Direct Comms Channel
               </h3>
@@ -395,8 +382,9 @@ const Contact = () => {
                 icon={Mail}
                 title="Primary Email"
                 content="EverbestDev@gmail.com"
-                link="mailto:olawooreusamahabidemi@gmail.com"
+                link="mailto:EverbestDev@gmail.com"
                 subtext="For job offers and official inquiries."
+                colors={colors}
               />
 
               <ContactDetail
@@ -404,36 +392,37 @@ const Contact = () => {
                 title="Current Sector"
                 content="Solace IT Solution, Nigeria"
                 subtext="Global Remote Access Enabled"
+                colors={colors}
               />
 
               <ContactDetail
                 icon={Phone}
-                title="Voice Protocol (Phone)"
+                title="Voice Protocol"
                 content="+234 911 745 0722"
                 link="tel:+2349117450722"
-                subtext="Please notify via email before calling."
+                subtext="Available for calls and messages."
+                colors={colors}
               />
 
               <ContactDetail
                 icon={Smartphone}
-                title="Encrypted Chat (WhatsApp)"
+                title="Instant Chat"
                 content="+234 911 745 0722"
-                link="https://wa.me/+2349117450722"
-                subtext="For urgent project discussions."
+                link="https://wa.me/2349117450722"
+                subtext="Available on WhatsApp."
+                colors={colors}
               />
             </motion.div>
-            {/* SystemStatusGrid was here, now moved to the right column */}
           </div>
 
-          {/* Contact Form and System Status (Right Column) */}
-          {/* Added space-y-6 for separation between the form and the status grid */}
           <div className="w-full lg:w-2/3 space-y-6">
             <motion.form
               onSubmit={handleSubmit}
-              className="p-8 rounded-xl border border-cyan-400/50 shadow-lg"
+              className="p-8 rounded-xl border shadow-lg"
               style={{
-                backgroundColor: "#10101c",
-                boxShadow: `0 0 20px ${NEON_CYAN}20`,
+                backgroundColor: colors.SECTION_BG,
+                borderColor: `${colors.NEON_CYAN}40`,
+                boxShadow: `0 0 20px ${colors.NEON_CYAN}10`,
               }}
               initial={{ x: 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -447,6 +436,7 @@ const Contact = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
+                  colors={colors}
                 />
                 <TerminalInput
                   id="email"
@@ -455,6 +445,7 @@ const Contact = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
+                  colors={colors}
                 />
               </div>
               <TerminalInput
@@ -462,16 +453,17 @@ const Contact = () => {
                 label="Subject Line"
                 value={formData.subject}
                 onChange={handleChange}
+                colors={colors}
               />
               <TerminalTextArea
                 id="message"
-                label="Your Message / Data Packet"
+                label="Your Message"
                 required
                 value={formData.message}
                 onChange={handleChange}
+                colors={colors}
               />
 
-              {/* Status message is now positioned to appear just before the submit button */}
               {renderStatusMessage()}
 
               {status !== "success" && (
@@ -479,6 +471,7 @@ const Contact = () => {
                   <Button
                     isSubmitting={isSubmitting}
                     className="w-full sm:w-auto"
+                    colors={colors}
                   >
                     <Send size={20} className="mr-2" />
                     Transmit Message
@@ -487,14 +480,13 @@ const Contact = () => {
               )}
             </motion.form>
 
-            {/* System Status Grid moved here for better visual balance */}
             <motion.div
               initial={{ y: 50, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <SystemStatusGrid />
+              <SystemStatusGrid colors={colors} />
             </motion.div>
           </div>
         </div>
