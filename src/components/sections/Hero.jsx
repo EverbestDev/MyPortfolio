@@ -212,7 +212,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="py-20 sm:py-32 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center pt-32 pb-20 relative overflow-hidden"
       style={{ backgroundColor: colors.DARK_BG, color: colors.TEXT_PRIMARY }}
     >
       <AnimatedGridBackground colors={colors} />

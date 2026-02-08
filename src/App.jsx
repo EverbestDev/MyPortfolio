@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import * as OGL from "ogl";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Navbar from "./components/ui/Navbar";
-import ThemeToggle from "./components/ui/ThemeToggle";
 import Chatbot from "./components/ui/Chatbot";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
@@ -21,7 +20,6 @@ function App() {
   return (
     <ThemeProvider>
       <Navbar />
-      <ThemeToggle />
       <Chatbot />
       <Hero />
       <About />

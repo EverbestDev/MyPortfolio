@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Monitor } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 
-const ThemeToggle = () => {
+const ThemeToggle = ({ className = "" }) => {
     const { theme, setTheme, resolvedTheme } = useTheme();
     const [isOpen, setIsOpen] = React.useState(false);
 
@@ -37,7 +37,7 @@ const ThemeToggle = () => {
     const colors = getColors();
 
     return (
-        <div className="fixed top-24 right-6 z-[100]">
+        <div className={`relative z-[100] ${className}`}>
             <AnimatePresence>
                 {isOpen && (
                     <>
