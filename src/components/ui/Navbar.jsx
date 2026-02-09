@@ -28,11 +28,11 @@ const Navbar = ({ sections = ["home", "about", "projects", "gallery", "testimoni
     return () => window.removeEventListener("scroll", handleScroll);
   }, [sections, activeSection]);
 
-  // Restore section on load
+
   useEffect(() => {
     const lastSection = localStorage.getItem("last_section");
     if (lastSection && lastSection !== "home") {
-      // Delay slightly to ensure elements are rendered
+
       setTimeout(() => {
         scrollToSection(lastSection);
       }, 500);

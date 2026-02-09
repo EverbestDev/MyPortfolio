@@ -40,11 +40,11 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
             whileTap={{ scale: 0.95 }}
           >
             <div
-              className="relative w-9 h-9 rounded-lg flex items-center justify-center overflow-hidden"
+              className="relative w-9 h-9 rounded-xl flex items-center justify-center overflow-hidden"
               style={{
                 background: `linear-gradient(135deg, ${colors.NEON_CYAN}25, ${colors.NEON_CYAN}15)`,
                 boxShadow: `0 2px 12px ${colors.NEON_CYAN}20`,
-                border: `1px solid ${colors.NEON_CYAN}30`
+                border: `1px solid ${colors.NEON_CYAN}20`
               }}
             >
               <img

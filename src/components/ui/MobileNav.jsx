@@ -41,11 +41,11 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
             whileTap={{ scale: 0.95 }}
           >
             <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center"
+              className="w-8 h-8 rounded-xl flex items-center justify-center overflow-hidden"
               style={{
                 background: `linear-gradient(135deg, ${colors.NEON_CYAN}25, ${colors.NEON_CYAN}15)`,
                 boxShadow: `0 2px 10px ${colors.NEON_CYAN}20`,
-                border: `1px solid ${colors.NEON_CYAN}30`
+                border: `1px solid ${colors.NEON_CYAN}20`
               }}
             >
               <img

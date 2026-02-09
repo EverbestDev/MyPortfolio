@@ -26,7 +26,7 @@ const Resume = () => {
             className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
             style={{ backgroundColor: colors.DARK_BG, color: colors.TEXT_PRIMARY }}
         >
-            {/* Background Elements */}
+
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[120px]"
                     style={{ backgroundColor: colors.NEON_CYAN }} />
@@ -35,7 +35,7 @@ const Resume = () => {
             </div>
 
             <div className="max-w-4xl mx-auto relative z-10">
-                {/* Header Actions */}
+
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-4 print:hidden">
                     <Link
                         to="/"
@@ -60,18 +60,18 @@ const Resume = () => {
                     </motion.button>
                 </div>
 
-                {/* Resume Content */}
+
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="p-8 sm:p-12 rounded-2xl shadow-2xl relative backdrop-blur-sm print:shadow-none print:p-0"
+                    className="p-8 sm:p-12 rounded-2xl shadow-2xl relative backdrop-blur-sm print:shadow-none print:p-0 resume-card"
                     style={{
-                        backgroundColor: "white", // Resume usually looks best on white for printing
-                        color: "#1a1a1a" // Dark text for readability
+                        backgroundColor: `${colors.CARD_BG}e0`,
+                        color: colors.TEXT_PRIMARY,
+                        border: `1px solid ${colors.BORDER}40`
                     }}
                 >
-                    {/* Print-specific style override */}
                     <style>
                         {`
                 @media print {
@@ -80,33 +80,37 @@ const Resume = () => {
                     .print\\:hidden { display: none !important; }
                     .print\\:shadow-none { box-shadow: none !important; }
                     .print\\:p-0 { padding: 0 !important; }
+                    .resume-card { background: white !important; color: black !important; border: none !important; box-shadow: none !important; }
+                    .resume-text-secondary { color: #4b5563 !important; }
+                    .resume-header { border-color: black !important; }
+                    .resume-accent { color: ${colors.NEON_CYAN} !important; }
                 }
                 `}
                     </style>
 
-                    {/* Resume Header */}
-                    <div className="border-b-2 pb-8 mb-8" style={{ borderColor: "#1a1a1a" }}>
+
+                    <div className="border-b-2 pb-8 mb-8 resume-header" style={{ borderColor: `${colors.BORDER}60` }}>
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                             <div>
                                 <h1 className="text-4xl sm:text-5xl font-extrabold uppercase tracking-tight mb-2">
-                                    Usamah <span style={{ color: colors.NEON_CYAN }}>Abidemi</span>
+                                    Usamah <span style={{ color: colors.NEON_CYAN }} className="resume-accent">Abidemi</span>
                                 </h1>
-                                <p className="text-xl font-medium text-gray-600">Full Stack Developer & Creative Technologist</p>
+                                <p className="text-xl font-medium resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>Full Stack Developer & Creative Technologist</p>
                             </div>
-                            <div className="flex flex-col items-start md:items-end gap-2 text-sm text-gray-600">
-                                <a href="mailto:EverbestDev@gmail.com" className="flex items-center gap-2 hover:text-black transition-colors">
+                            <div className="flex flex-col items-start md:items-end gap-2 text-sm resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>
+                                <a href="mailto:EverbestDev@gmail.com" className="flex items-center gap-2 hover:text-cyan-400 transition-colors">
                                     <Mail size={16} /> EverbestDev@gmail.com
                                 </a>
-                                <a href="tel:+2349117450722" className="flex items-center gap-2 hover:text-black transition-colors">
+                                <a href="tel:+2349117450722" className="flex items-center gap-2 hover:text-cyan-400 transition-colors">
                                     <Phone size={16} /> +234 911 745 0722
                                 </a>
                                 <div className="flex items-center gap-2">
                                     <MapPin size={16} /> Remote / Nigeria
                                 </div>
                                 <div className="flex gap-4 mt-1">
-                                    <a href="https://linkedin.com" className="hover:text-black"><Linkedin size={18} /></a>
-                                    <a href="https://github.com/everbestDev" className="hover:text-black"><Github size={18} /></a>
-                                    <a href="https://portfolio-v2.vercel.app" className="hover:text-black"><Globe size={18} /></a>
+                                    <a href="https://linkedin.com" className="hover:text-cyan-400"><Linkedin size={18} /></a>
+                                    <a href="https://github.com/everbestDev" className="hover:text-cyan-400"><Github size={18} /></a>
+                                    <a href="https://everbestdev.com.ng" className="hover:text-cyan-400"><Globe size={18} /></a>
                                 </div>
                             </div>
                         </div>
@@ -119,10 +123,10 @@ const Resume = () => {
                         <div className="md:col-span-2 space-y-8">
                             {/* Summary */}
                             <section>
-                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2">
-                                    <span className="w-2 h-8 bg-black block"></span> Profile
+                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2" style={{ borderColor: `${colors.BORDER}40` }}>
+                                    <span className="w-2 h-8 block" style={{ backgroundColor: colors.TEXT_PRIMARY }}></span> Profile
                                 </h2>
-                                <p className="text-gray-700 leading-relaxed">
+                                <p className="leading-relaxed resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>
                                     Innovative and detail-oriented Full Stack Developer with a passion for building scalable, user-centric web applications.
                                     Proficient in the MERN stack and modern frontend frameworks, with a strong ability to translate complex requirements
                                     into clean, efficient code. Dedicated to continuous learning and leveraging technology to solve real-world problems.
@@ -131,8 +135,8 @@ const Resume = () => {
 
                             {/* Experience */}
                             <section>
-                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2">
-                                    <span className="w-2 h-8 bg-black block"></span> Experience
+                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2" style={{ borderColor: `${colors.BORDER}40` }}>
+                                    <span className="w-2 h-8 block" style={{ backgroundColor: colors.TEXT_PRIMARY }}></span> Experience
                                 </h2>
 
                                 <div className="space-y-6">
@@ -152,11 +156,11 @@ const Resume = () => {
                                     ].map((job, i) => (
                                         <div key={i}>
                                             <div className="flex justify-between items-baseline mb-1">
-                                                <h3 className="font-bold text-lg">{job.role}</h3>
-                                                <span className="text-sm font-mono bg-gray-100 px-2 py-1 rounded">{job.period}</span>
+                                                <h3 className="font-bold text-lg" style={{ color: colors.TEXT_PRIMARY }}>{job.role}</h3>
+                                                <span className="text-sm font-mono px-2 py-1 rounded resume-text-secondary" style={{ backgroundColor: `${colors.NEON_CYAN}10`, color: colors.TEXT_SECONDARY }}>{job.period}</span>
                                             </div>
-                                            <p className="text-cyan-700 font-medium text-sm mb-2">{job.company}</p>
-                                            <p className="text-gray-700 text-sm leading-relaxed">{job.desc}</p>
+                                            <p className="font-medium text-sm mb-2 resume-accent" style={{ color: colors.NEON_CYAN }}>{job.company}</p>
+                                            <p className="text-sm leading-relaxed resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>{job.desc}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -164,8 +168,8 @@ const Resume = () => {
 
                             {/* Projects */}
                             <section>
-                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2">
-                                    <span className="w-2 h-8 bg-black block"></span> Key Projects
+                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2" style={{ borderColor: `${colors.BORDER}40` }}>
+                                    <span className="w-2 h-8 block" style={{ backgroundColor: colors.TEXT_PRIMARY }}></span> Key Projects
                                 </h2>
                                 <div className="space-y-4">
                                     {[
@@ -185,12 +189,12 @@ const Resume = () => {
                                             desc: "Smart attendance system utilizing Geofencing and face recognition for secure, automated student validation."
                                         }
                                     ].map((project, i) => (
-                                        <div key={i} className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                        <div key={i} className="p-4 rounded-lg border resume-card" style={{ backgroundColor: `${colors.NEON_CYAN}05`, borderColor: `${colors.BORDER}20` }}>
                                             <div className="flex justify-between items-center mb-1">
-                                                <h3 className="font-bold">{project.name}</h3>
-                                                <span className="text-xs text-gray-500">{project.tech}</span>
+                                                <h3 className="font-bold" style={{ color: colors.TEXT_PRIMARY }}>{project.name}</h3>
+                                                <span className="text-xs resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>{project.tech}</span>
                                             </div>
-                                            <p className="text-sm text-gray-700">{project.desc}</p>
+                                            <p className="text-sm resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>{project.desc}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -201,40 +205,40 @@ const Resume = () => {
                         <div className="space-y-8">
                             {/* Skills */}
                             <section>
-                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2">
-                                    <span className="w-2 h-8 bg-black block"></span> Skills
+                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2" style={{ borderColor: `${colors.BORDER}40` }}>
+                                    <span className="w-2 h-8 block" style={{ backgroundColor: colors.TEXT_PRIMARY }}></span> Skills
                                 </h2>
 
                                 <div className="space-y-4">
                                     <div>
-                                        <h4 className="font-semibold text-sm text-gray-900 mb-2 uppercase">Frontend</h4>
+                                        <h4 className="font-semibold text-sm mb-2 uppercase" style={{ color: colors.TEXT_PRIMARY }}>Frontend</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {["React", "Vue.js", "Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"].map(s => (
-                                                <span key={s} className="px-2 py-1 bg-gray-200 text-xs font-medium rounded-md text-gray-800">{s}</span>
+                                                <span key={s} className="px-2 py-1 text-xs font-medium rounded-md resume-text-secondary" style={{ backgroundColor: `${colors.NEON_CYAN}15`, color: colors.TEXT_SECONDARY }}>{s}</span>
                                             ))}
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-sm text-gray-900 mb-2 uppercase">Backend</h4>
+                                        <h4 className="font-semibold text-sm mb-2 uppercase" style={{ color: colors.TEXT_PRIMARY }}>Backend</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {["Node.js", "Express", "Python", "FastAPI", "MongoDB", "PostgreSQL"].map(s => (
-                                                <span key={s} className="px-2 py-1 bg-gray-200 text-xs font-medium rounded-md text-gray-800">{s}</span>
+                                                <span key={s} className="px-2 py-1 text-xs font-medium rounded-md resume-text-secondary" style={{ backgroundColor: `${colors.NEON_CYAN}15`, color: colors.TEXT_SECONDARY }}>{s}</span>
                                             ))}
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-sm text-gray-900 mb-2 uppercase">No-Code & Automation</h4>
+                                        <h4 className="font-semibold text-sm mb-2 uppercase" style={{ color: colors.TEXT_PRIMARY }}>No-Code & Automation</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {["WordPress", "Bubble", "Webflow", "Zapier", "Make.com", "FlutterFlow"].map(s => (
-                                                <span key={s} className="px-2 py-1 bg-gray-200 text-xs font-medium rounded-md text-gray-800">{s}</span>
+                                                <span key={s} className="px-2 py-1 text-xs font-medium rounded-md resume-text-secondary" style={{ backgroundColor: `${colors.NEON_CYAN}15`, color: colors.TEXT_SECONDARY }}>{s}</span>
                                             ))}
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-sm text-gray-900 mb-2 uppercase">IT & Management Tools</h4>
+                                        <h4 className="font-semibold text-sm mb-2 uppercase" style={{ color: colors.TEXT_PRIMARY }}>IT & Management Tools</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {["Jira", "Postman", "Notion", "Slack", "Trello", "ClickUp"].map(s => (
-                                                <span key={s} className="px-2 py-1 bg-gray-200 text-xs font-medium rounded-md text-gray-800">{s}</span>
+                                                <span key={s} className="px-2 py-1 text-xs font-medium rounded-md resume-text-secondary" style={{ backgroundColor: `${colors.NEON_CYAN}15`, color: colors.TEXT_SECONDARY }}>{s}</span>
                                             ))}
                                         </div>
                                     </div>
@@ -243,20 +247,20 @@ const Resume = () => {
 
                             {/* Education */}
                             <section>
-                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2">
-                                    <span className="w-2 h-8 bg-black block"></span> Education
+                                <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2" style={{ borderColor: `${colors.BORDER}40` }}>
+                                    <span className="w-2 h-8 block" style={{ backgroundColor: colors.TEXT_PRIMARY }}></span> Education
                                 </h2>
                                 <div>
-                                    <h3 className="font-bold text-lg">B.Sc. Computer Science</h3>
-                                    <p className="text-sm text-gray-600">Tai Solarin University of Education</p>
-                                    <p className="text-xs text-gray-400 mt-1">2021 - Present</p>
+                                    <h3 className="font-bold text-lg" style={{ color: colors.TEXT_PRIMARY }}>B.Sc. Computer Science</h3>
+                                    <p className="text-sm resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>Tai Solarin University of Education</p>
+                                    <p className="text-xs mt-1 resume-text-secondary opacity-60" style={{ color: colors.TEXT_SECONDARY }}>2021 - Present</p>
                                 </div>
                             </section>
                         </div>
                     </div>
 
                     {/* Footer */}
-                    <div className="mt-12 pt-6 border-t border-gray-200 text-center text-xs text-gray-400">
+                    <div className="mt-12 pt-6 border-t text-center text-xs opacity-60 resume-text-secondary" style={{ borderColor: `${colors.BORDER}60`, color: colors.TEXT_SECONDARY }}>
                         <p>© {new Date().getFullYear()} Usamah Abidemi. Built with React & Tailwind CSS.</p>
                     </div>
                 </motion.div>

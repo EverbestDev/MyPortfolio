@@ -78,7 +78,7 @@ const Testimonials = () => {
 
                 <div className="relative max-w-4xl mx-auto">
                     {/* Mobile Navigation - Top */}
-                    <div className="flex md:hidden justify-center gap-4 mb-6">
+                    <div className="flex md:hidden justify-between items-center mb-6 px-2">
                         <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}

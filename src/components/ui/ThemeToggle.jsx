@@ -20,7 +20,7 @@ const ThemeToggle = ({ className = "" }) => {
 
     return (
         <div className={`relative ${className}`}>
-            {/* Toggle Button */}
+
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 relative overflow-hidden group"
@@ -60,28 +60,58 @@ const ThemeToggle = ({ className = "" }) => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[90]"
+                            className="fixed inset-0 z-[150] bg-black/60 backdrop-blur-md"
                             onClick={() => setIsOpen(false)}
                         />
 
-                        {/* Dropdown Menu */}
+                        {/* Theme Selection Container */}
                         <motion.div
-                            initial={{ opacity: 0, y: 12, scale: 0.9, filter: "blur(10px)" }}
-                            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-                            exit={{ opacity: 0, y: 12, scale: 0.9, filter: "blur(10px)" }}
+                            initial={
+                                window.innerWidth < 768
+                                    ? { opacity: 0, scale: 0.9, y: 20 }
+                                    : { opacity: 0, y: 12, scale: 0.9, filter: "blur(10px)" }
+                            }
+                            animate={
+                                window.innerWidth < 768
+                                    ? { opacity: 1, scale: 1, y: 0 }
+                                    : { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
+                            }
+                            exit={
+                                window.innerWidth < 768
+                                    ? { opacity: 0, scale: 0.9, y: 20 }
+                                    : { opacity: 0, y: 12, scale: 0.9, filter: "blur(10px)" }
+                            }
                             transition={{
                                 type: "spring",
                                 stiffness: 300,
                                 damping: 25
                             }}
-                            className="absolute top-full right-0 mt-3 p-2 rounded-2xl min-w-[150px] shadow-2l border z-[100] backdrop-blur-2xl"
+                            className={`
+                                ${window.innerWidth < 768
+                                    ? "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[320px] p-6"
+                                    : "absolute top-full right-0 mt-3 p-2 min-w-[150px]"
+                                } 
+                                rounded-3xl shadow-2xl border z-[160] backdrop-blur-2xl
+                            `}
                             style={{
-                                backgroundColor: `${colors.CARD_BG}F0`, // Slightly more opaque for better legibility
+                                backgroundColor: `${colors.CARD_BG}F8`,
                                 borderColor: `${colors.NEON_CYAN}30`,
-                                boxShadow: `0 12px 40px -8px rgba(0, 0, 0, 0.4), 0 0 20px ${colors.NEON_CYAN}15`,
+                                boxShadow: `0 24px 60px -12px rgba(0, 0, 0, 0.5), 0 0 30px ${colors.NEON_CYAN}20`,
                             }}
                         >
-                            <div className="flex flex-col gap-1">
+                            {/* Mobile Header */}
+                            {window.innerWidth < 768 && (
+                                <div className="mb-6 text-center">
+                                    <h3 className="text-xl font-bold tracking-tight mb-1" style={{ color: colors.TEXT_PRIMARY }}>
+                                        Select Appearance
+                                    </h3>
+                                    <p className="text-sm opacity-60" style={{ color: colors.TEXT_SECONDARY }}>
+                                        Choose your preferred theme
+                                    </p>
+                                </div>
+                            )}
+
+                            <div className="flex flex-col gap-2">
                                 {themes.map((themeOption) => {
                                     const Icon = themeOption.icon;
                                     const isActive = theme === themeOption.name;
@@ -93,22 +123,24 @@ const ThemeToggle = ({ className = "" }) => {
                                                 setTheme(themeOption.name);
                                                 setIsOpen(false);
                                             }}
-                                            className="group flex items-center justify-between px-3 py-2.5 rounded-xl transition-all duration-200"
+                                            className="group flex items-center justify-between px-4 py-3.5 rounded-2xl transition-all duration-300"
                                             style={{
                                                 backgroundColor: isActive ? `${colors.NEON_CYAN}15` : 'transparent',
+                                                border: isActive ? `1px solid ${colors.NEON_CYAN}30` : '1px solid transparent',
                                                 color: isActive ? colors.NEON_CYAN : colors.TEXT_SECONDARY,
                                             }}
                                         >
-                                            <div className="flex items-center gap-3">
+                                            <div className="flex items-center gap-4">
                                                 <div
-                                                    className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
+                                                    className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
                                                     style={{
                                                         backgroundColor: isActive ? `${colors.NEON_CYAN}20` : `${colors.BORDER}10`,
+                                                        boxShadow: isActive ? `0 0 15px ${colors.NEON_CYAN}30` : 'none'
                                                     }}
                                                 >
-                                                    <Icon size={16} className={isActive ? "text-cyan-400" : "opacity-70 group-hover:opacity-100"} />
+                                                    <Icon size={18} className={isActive ? "text-cyan-400" : "opacity-70 group-hover:opacity-100"} />
                                                 </div>
-                                                <span className={`text-sm font-semibold tracking-wide ${isActive ? "text-white" : "opacity-80 group-hover:opacity-100"}`}>
+                                                <span className={`text-base font-bold tracking-wide transition-colors ${isActive ? "text-white" : "opacity-80 group-hover:opacity-100"}`}>
                                                     {themeOption.label}
                                                 </span>
                                             </div>
@@ -118,14 +150,32 @@ const ThemeToggle = ({ className = "" }) => {
                                                     initial={{ scale: 0, opacity: 0 }}
                                                     animate={{ scale: 1, opacity: 1 }}
                                                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                                    className="w-6 h-6 rounded-full flex items-center justify-center"
+                                                    style={{ backgroundColor: colors.NEON_CYAN }}
                                                 >
-                                                    <Check size={14} className="text-cyan-400" />
+                                                    <Check size={14} className="text-black" />
                                                 </motion.div>
                                             )}
                                         </button>
                                     );
                                 })}
                             </div>
+
+                            {/* Mobile Close Button */}
+                            {window.innerWidth < 768 && (
+                                <motion.button
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => setIsOpen(false)}
+                                    className="mt-6 w-full py-3 rounded-2xl font-bold text-sm transition-all border"
+                                    style={{
+                                        backgroundColor: 'transparent',
+                                        borderColor: `${colors.BORDER}40`,
+                                        color: colors.TEXT_SECONDARY
+                                    }}
+                                >
+                                    Cancel
+                                </motion.button>
+                            )}
                         </motion.div>
                     </>
                 )}

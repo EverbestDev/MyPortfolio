@@ -3,17 +3,29 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { useThemeColors } from "../../hooks/useThemeColors";
 import { Maximize2, Camera, Heart, Share2, X } from "lucide-react";
 
+import img1 from "../../assets/gallery/gal_new_1.jpg";
+import img2 from "../../assets/gallery/gal_new_2.jpg";
+import img3 from "../../assets/gallery/gal_new_3.jpg";
+import img4 from "../../assets/gallery/gal_new_4.jpg";
+import img5 from "../../assets/gallery/gal_new_5.jpg";
+import img6 from "../../assets/gallery/gal_new_6.jpg";
+import img7 from "../../assets/gallery/gal_new_7.jpg";
+import img8 from "../../assets/gallery/gal_new_8.jpg";
+import img9 from "../../assets/gallery/img9.jpg";
+import img11 from "../../assets/gallery/img11.jpg";
+
+
 const images = [
-  { id: 1, src: "/src/assets/gallery/gal_new_1.jpg", title: "Creative Workspace", span: "md:col-span-2 md:row-span-2" },
-  { id: 2, src: "/src/assets/gallery/gal_new_2.jpg", title: "Digital Art", span: "md:col-span-1 md:row-span-1" },
-  { id: 3, src: "/src/assets/gallery/gal_new_3.jpg", title: "Minimal Setup", span: "md:col-span-1 md:row-span-1" },
-  { id: 4, src: "/src/assets/gallery/gal_new_4.jpg", title: "Abstract Flow", span: "md:col-span-1 md:row-span-2" },
-  { id: 5, src: "/src/assets/gallery/gal_new_5.jpg", title: "Neon Nights", span: "md:col-span-1 md:row-span-1" },
-  { id: 6, src: "/src/assets/gallery/gal_new_6.jpg", title: "Studio Session", span: "md:col-span-2 md:row-span-1" },
-  { id: 7, src: "/src/assets/gallery/gal_new_7.jpg", title: "Creative Process", span: "md:col-span-1 md:row-span-1" },
-  { id: 8, src: "/src/assets/gallery/gal_new_8.jpg", title: "Visual Narrative", span: "md:col-span-1 md:row-span-1" },
-  { id: 9, src: "/src/assets/gallery/img9.jpg", title: "Urban Exploration", span: "md:col-span-1 md:row-span-1" },
-  { id: 11, src: "/src/assets/gallery/img11.jpg", title: "Cloud Architecture", span: "md:col-span-2 md:row-span-1" },
+  { id: 1, src: img1, title: "Creative Workspace", span: "md:col-span-2 md:row-span-2" },
+  { id: 2, src: img2, title: "Digital Art", span: "md:col-span-1 md:row-span-1" },
+  { id: 3, src: img3, title: "Minimal Setup", span: "md:col-span-1 md:row-span-1" },
+  { id: 4, src: img4, title: "Abstract Flow", span: "md:col-span-1 md:row-span-2" },
+  { id: 5, src: img5, title: "Neon Nights", span: "md:col-span-1 md:row-span-1" },
+  { id: 6, src: img6, title: "Studio Session", span: "md:col-span-2 md:row-span-1" },
+  { id: 7, src: img7, title: "Creative Process", span: "md:col-span-1 md:row-span-1" },
+  { id: 8, src: img8, title: "Visual Narrative", span: "md:col-span-1 md:row-span-1" },
+  { id: 9, src: img9, title: "Urban Exploration", span: "md:col-span-1 md:row-span-1" },
+  { id: 11, src: img11, title: "Cloud Architecture", span: "md:col-span-2 md:row-span-1" },
 ];
 
 const GalleryItem = ({ image, colors, index, onViewFull }) => {

@@ -201,7 +201,7 @@ const Chatbot = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 20 }}
                                 transition={{ delay: 0.5 }}
-                                className="px-5 py-2.5 rounded-2xl shadow-xl whitespace-nowrap hidden lg:flex items-center gap-3"
+                                className="px-5 py-2.5 rounded-2xl shadow-xl whitespace-nowrap flex items-center gap-3"
                                 style={{
                                     backgroundColor: `${colors.CARD_BG}f2`,
                                     border: `1px solid ${colors.BORDER}40`,
@@ -210,7 +210,10 @@ const Chatbot = () => {
                                 }}
                             >
                                 <span className="flex h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
-                                <p className="text-[11px] font-semibold italic opacity-90">Everbot is online</p>
+                                <p className="text-[11px] font-semibold italic opacity-90">
+                                    <span className="lg:hidden">Have any question?...</span>
+                                    <span className="hidden lg:inline">Everbot is online</span>
+                                </p>
                             </motion.div>
 
                             <motion.button
