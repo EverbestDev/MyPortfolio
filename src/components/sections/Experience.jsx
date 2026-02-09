@@ -40,12 +40,11 @@ const TimelineCard = ({ data, index, colors }) => (
   >
     {/* Center Line Dot */}
     <div
-      className="absolute left-0 sm:left-1/2 w-4 h-4 rounded-full border-2 transform -translate-x-1/2 mt-6 sm:mt-0 z-10 transition-all duration-300 group-hover:scale-125"
+      className="absolute left-4 sm:left-1/2 w-4 h-4 rounded-full border-2 transform -translate-x-1/2 mt-6 sm:mt-0 z-10 transition-all duration-300 group-hover:scale-125"
       style={{
         backgroundColor: colors.DARK_BG,
         borderColor: colors.NEON_CYAN,
-        boxShadow: `0 0 10px ${colors.NEON_CYAN}`,
-        left: 'calc(0px)' // Aligns with the line at left-4 by adjusting parent relative positioning if needed, or just using 4px
+        boxShadow: `0 0 10px ${colors.NEON_CYAN}`
       }}
     />
 
@@ -134,7 +133,7 @@ const ExperienceTimeline = () => {
 
         <div className="relative max-w-4xl mx-auto space-y-12 sm:space-y-24">
           {/* Vertical Line for Mobile/Desktop */}
-          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent sm:hidden" />
+          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent" />
 
           {experiences.map((exp, index) => (
             <TimelineCard key={exp.id} data={exp} index={index} colors={colors} />
