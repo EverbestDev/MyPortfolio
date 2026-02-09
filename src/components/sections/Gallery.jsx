@@ -68,7 +68,7 @@ const GalleryItem = ({ image, colors, index, onViewFull }) => {
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
       />
 
-      {/* Overlay */}
+
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
         <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
           <h3 className="text-white font-bold text-lg mb-2">{image.title}</h3>
@@ -103,7 +103,7 @@ const GalleryItem = ({ image, colors, index, onViewFull }) => {
         </div>
       </div>
 
-      {/* Shine effect on hover */}
+
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
     </motion.div>
   );
@@ -162,7 +162,7 @@ function Gallery() {
         </motion.div>
       </div>
 
-      {/* Lightbox Modal */}
+      {/* gallery */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div
@@ -211,7 +211,7 @@ function Gallery() {
         )}
       </AnimatePresence>
 
-      {/* Background elements */}
+
       <div className="absolute top-1/2 left-0 w-full h-full -z-0 opacity-20 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/30 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]" />

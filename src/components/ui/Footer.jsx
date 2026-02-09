@@ -41,7 +41,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 
-          {/* Brand Section */}
+
           <div className="md:col-span-1">
             <h3 className="text-2xl font-bold mb-4 tracking-wider flex items-center gap-2">
               <span className="text-cyan-400" style={{ color: colors.NEON_CYAN }}>Everbest</span>Dev
@@ -74,7 +74,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+
           <div>
             <h4 className="font-bold mb-6 text-sm uppercase tracking-widest" style={{ color: colors.TEXT_TERTIARY }}>Navigation</h4>
             <ul className="space-y-3 text-sm">
@@ -85,7 +85,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services/Tags */}
+
           <div>
             <h4 className="font-bold mb-6 text-sm uppercase tracking-widest" style={{ color: colors.TEXT_TERTIARY }}>Expertise</h4>
             <ul className="space-y-3 text-sm">
@@ -96,7 +96,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* CTA */}
+
           <div>
             <h4 className="font-bold mb-4 text-sm uppercase tracking-widest" style={{ color: colors.NEON_CYAN }}>Start a Project</h4>
             <p className="text-xs mb-4 opacity-70">Ready to bring your ideas to life? I'm just a click away.</p>
@@ -114,7 +114,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+
         <div className="pt-8 border-t flex justify-center items-center text-xs opacity-60" style={{ borderColor: `${colors.BORDER}30` }}>
           <p className="font-mono">&copy; {new Date().getFullYear()} EverbestDev. All rights reserved.</p>
         </div>

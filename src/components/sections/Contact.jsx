@@ -103,9 +103,7 @@ const Contact = () => {
       className="py-24 sm:py-32 relative overflow-hidden"
       style={{ backgroundColor: colors.DARK_BG }}
     >
-      {/* Background Gradients */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
+      {/* home */}
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -116,13 +114,19 @@ const Contact = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
+              <div className="flex items-center gap-3 mb-6">
+                <span className="flex h-3 w-3 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-sm font-bold tracking-widest uppercase" style={{ color: colors.TEXT_TERTIARY }}>
+                  Available for Hire & Freelance
+                </span>
+              </div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
                 Let's Build Something <br />
                 <span style={{ color: colors.NEON_CYAN }}>Extraordinary</span>
               </h2>
               <p className="text-base mb-8 leading-relaxed max-w-md" style={{ color: colors.TEXT_SECONDARY }}>
-                Have a project in mind? I'm always open to discussing new ideas,
-                creative opportunities, and cutting-edge tech.
+                Ready to transform your vision into a scalable reality? I'm currently accepting new projects and freelance opportunities.
+                Let's discuss how I can help your business grow.
               </p>
             </motion.div>
 
@@ -245,7 +249,7 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Everbot Feedback Modal */}
+      {/* contact */}
       <AnimatePresence>
         {showModal && (
           <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
@@ -271,7 +275,7 @@ const Contact = () => {
               <div className="flex justify-center mb-6">
                 <div className="relative">
                   <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-cyan-500/30">
-                    <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover" />
+                    <img src="/pfp.jpg" alt="Everbot" className="w-full h-full object-cover" />
                   </div>
                   <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-4 border-slate-900 shadow-sm" />
                 </div>
@@ -313,13 +317,13 @@ const Contact = () => {
                 </button>
               </div>
 
-              {/* Decorative Glow */}
+
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-cyan-500/10 blur-2xl rounded-full pointer-events-none" />
             </motion.div>
           </div>
         )}
       </AnimatePresence>
-    </section>
+    </section >
   );
 };
 
@@ -355,12 +359,12 @@ const InputField = ({ label, name, type = "text", required, value, onChange, tex
           placeholder=" "
         />
       )}
-      {/* Background/Border Container */}
+
       <div
         className="absolute inset-0 border rounded-xl pointer-events-none"
         style={{ borderColor: `${colors.BORDER}60` }}
       />
-      {/* Animated Underline */}
+
       <div
         className="absolute bottom-0 left-0 h-[2px] w-0 bg-cyan-500 transition-all duration-500 peer-focus:w-full z-20"
         style={{ backgroundColor: colors.NEON_CYAN }}

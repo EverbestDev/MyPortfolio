@@ -38,7 +38,7 @@ const TimelineCard = ({ data, index, colors }) => (
     transition={{ duration: 0.5, delay: index * 0.2 }}
     className="relative pl-10 sm:pl-0 sm:flex sm:items-center sm:justify-between group w-full"
   >
-    {/* Center Line Dot */}
+
     <div
       className="absolute left-4 sm:left-1/2 w-4 h-4 rounded-full border-2 transform -translate-x-1/2 mt-6 sm:mt-0 z-10 transition-all duration-300 group-hover:scale-125"
       style={{
@@ -48,7 +48,7 @@ const TimelineCard = ({ data, index, colors }) => (
       }}
     />
 
-    {/* Content Card - Left or Right */}
+
     <div className={`w-full sm:w-[45%] ${index % 2 === 0 ? 'sm:mr-auto sm:text-right' : 'sm:ml-auto sm:text-left'} relative`}>
       <motion.div
         className="p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 overflow-hidden"
@@ -63,7 +63,7 @@ const TimelineCard = ({ data, index, colors }) => (
         }}
       >
         <div className={`flex flex-col ${index % 2 === 0 ? 'sm:items-end' : 'sm:items-start'}`}>
-          {/* Mobile Date Badge */}
+
           <div className="sm:hidden mb-4 self-start">
             <span className="text-[10px] font-mono px-2 py-1 rounded-full uppercase tracking-tighter" style={{ backgroundColor: `${colors.NEON_CYAN}20`, color: colors.NEON_CYAN, border: `1px solid ${colors.NEON_CYAN}30` }}>
               {data.duration}
@@ -96,7 +96,7 @@ const TimelineCard = ({ data, index, colors }) => (
         </div>
       </motion.div>
 
-      {/* Desktop Date Label - Opposite Side */}
+
       <div className={`absolute top-1/2 -translate-y-1/2 ${index % 2 === 0 ? 'right-[-120%] text-left pl-8' : 'left-[-120%] text-right pr-8'} hidden sm:block w-full`}>
         <div className="flex items-center gap-2 font-mono text-sm tracking-widest opacity-70" style={{ color: colors.TEXT_TERTIARY }}>
           <Calendar size={14} />
@@ -132,7 +132,7 @@ const ExperienceTimeline = () => {
         </motion.div>
 
         <div className="relative max-w-4xl mx-auto space-y-12 sm:space-y-24">
-          {/* Vertical Line for Mobile/Desktop */}
+          {/* background */}
           <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent" />
 
           {experiences.map((exp, index) => (

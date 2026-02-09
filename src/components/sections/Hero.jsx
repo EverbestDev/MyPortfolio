@@ -248,6 +248,7 @@ const Hero = () => {
         className="relative z-10 max-w-4xl mx-auto text-center px-4"
         style={{ y: y }}
       >
+        {/* hero */}
         <motion.p
           className="text-lg sm:text-xl font-medium mb-4"
           style={{ color: colors.TEXT_TERTIARY }}
@@ -288,7 +289,7 @@ const Hero = () => {
               color: "transparent",
             }}
           >
-            Full-Stack Software Developer
+            Full-Stack Developer & SaaS Architect
           </motion.h2>
 
           <motion.p
@@ -296,17 +297,17 @@ const Hero = () => {
             style={{ color: colors.TEXT_SECONDARY }}
             variants={itemVariants}
           >
-            Crafting scalable, user-centric digital solutions with cutting-edge full-stack technologies.
-            I bridge the gap between complex backend logic and intuitive frontend design.
+            Engineering scalable business solutions and high-performance SaaS architectures.
+            From rapid MVP deployment to complex production systems, I build the digital backbone of successful ventures.
           </motion.p>
 
           <motion.div
             className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8"
             variants={itemVariants}
           >
-            <Button href="#contact" colors={colors}>Get in Touch</Button>
+            <Button href="#contact" colors={colors}>Start a Project</Button>
             <Button href="#projects" secondary={true} colors={colors}>
-              View My Work
+              Explore Portfolio
             </Button>
           </motion.div>
         </motion.div>

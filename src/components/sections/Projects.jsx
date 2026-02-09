@@ -306,7 +306,7 @@ const Projects = () => {
         </div>
       </div>
 
-      {/* Project Details Modal */}
+      {/* project details */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
@@ -331,7 +331,7 @@ const Projects = () => {
             >
               {/* Modal Content - Scrollable area */}
               <div className="overflow-y-auto custom-scrollbar h-full">
-                {/* Modal Preview Area */}
+
                 <div className="relative h-64 sm:h-96 w-full bg-black/20 flex-shrink-0">
                   <IframePreview
                     url={selectedProject.iframeUrl}
@@ -413,7 +413,7 @@ const Projects = () => {
                 </div>
               </div>
 
-              {/* Sticky Close Button */}
+
               <button
                 onClick={() => setSelectedProject(null)}
                 className="absolute top-6 right-6 p-2 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full text-white hover:bg-red-500/80 transition-all z-[80] shadow-xl group"

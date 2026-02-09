@@ -41,7 +41,7 @@ function App() {
     window.ogl = OGL;
   }, []);
 
-  // Scroll to top on route change (unless there's a hash)
+
   useEffect(() => {
     if (!window.location.hash) {
       window.scrollTo(0, 0);

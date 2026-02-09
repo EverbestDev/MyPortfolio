@@ -165,7 +165,7 @@ const Chatbot = () => {
 
     return (
         <>
-            {/* Action Buttons Group */}
+
             <div className="fixed bottom-6 right-6 z-[120] flex flex-col items-end gap-4 pointer-events-none">
                 <AnimatePresence>
                     {showScrollTop && (
@@ -226,7 +226,7 @@ const Chatbot = () => {
                                 aria-label="Open chat"
                             >
                                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                                <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg relative z-10" />
+                                <img src="/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg relative z-10" />
                                 <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border border-white animate-bounce flex items-center justify-center">
                                     <span className="text-[7px] font-bold text-white">!</span>
                                 </span>
@@ -259,7 +259,7 @@ const Chatbot = () => {
                                 backdropFilter: "blur(24px)",
                             }}
                         >
-                            {/* Header */}
+
                             <div
                                 className="px-6 py-5 flex items-center justify-between border-b relative overflow-hidden"
                                 style={{
@@ -277,7 +277,7 @@ const Chatbot = () => {
                                             border: `1px solid ${colors.NEON_CYAN}20`
                                         }}
                                     >
-                                        <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-xl" />
+                                        <img src="/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-xl" />
                                         <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-slate-900 shadow-sm" />
                                     </div>
                                     <div>
@@ -304,7 +304,7 @@ const Chatbot = () => {
                                 </div>
                             </div>
 
-                            {/* Chat Area */}
+
                             <div className="flex-1 overflow-y-auto px-5 py-6 space-y-6 custom-scrollbar">
                                 {messages.map((message, index) => (
                                     <motion.div
@@ -322,7 +322,7 @@ const Chatbot = () => {
                                             }}
                                         >
                                             {message.type === 'bot' ? (
-                                                <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg" />
+                                                <img src="/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg" />
                                             ) : (
                                                 <User size={18} style={{ color: colors.TEXT_SECONDARY }} />
                                             )}
@@ -361,7 +361,7 @@ const Chatbot = () => {
                                             className="w-9 h-9 rounded-xl flex items-center justify-center animate-pulse"
                                             style={{ backgroundColor: `${colors.NEON_CYAN}15` }}
                                         >
-                                            <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg" />
+                                            <img src="/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg" />
                                         </div>
                                         <div
                                             className="px-5 py-3.5 rounded-2xl rounded-tl-none flex gap-1.5 items-center shadow-inner"
@@ -387,7 +387,7 @@ const Chatbot = () => {
                                 <div ref={messagesEndRef} className="h-4" />
                             </div>
 
-                            {/* Suggestions Area */}
+
                             {messages.length < 5 && (
                                 <div className="px-6 py-4 space-y-3 bg-gradient-to-t from-black/20 to-transparent">
                                     <div className="flex items-center gap-2 mb-2 opacity-60">
@@ -419,7 +419,7 @@ const Chatbot = () => {
                                 </div>
                             )}
 
-                            {/* Input Form */}
+
                             <div
                                 className="p-6 border-t md:rounded-b-3xl relative"
                                 style={{
@@ -473,7 +473,7 @@ const Chatbot = () => {
                             </div>
                         </motion.div>
 
-                        {/* Custom scrollbar styles */}
+
                         <style>{`
                             .custom-scrollbar::-webkit-scrollbar {
                                 width: 5px;

@@ -100,7 +100,7 @@ const About = () => {
       className="py-16 sm:py-20 relative overflow-hidden"
       style={{ backgroundColor: colors.DARK_BG }}
     >
-      {/* Background Decor */}
+      {/* about */}
       <div className="absolute top-0 right-0 p-20 opacity-20 transform translate-x-1/2 -translate-y-1/2 pointer-events-none">
         <div
           className="w-96 h-96 rounded-full blur-3xl"
@@ -128,26 +128,26 @@ const About = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6">
-          {/* Main Bio Card */}
+
           <div className="md:col-span-6 lg:col-span-8">
             <BentoCard colors={colors} className="h-full flex flex-col justify-center">
               <div className="md:col-span-7 space-y-6">
                 <h3 className="text-2xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
-                  The Developer Behind the Code
+                  The Engine Behind Your Digital Growth
                 </h3>
                 <p className="text-lg leading-relaxed mb-6" style={{ color: colors.TEXT_SECONDARY }}>
-                  I'm a Full-Stack Developer with a passion for building beautiful, functional, and scalable digital experiences.
-                  My journey started with a curiosity for how things work, which evolved into a career crafting high-performance applications.
+                  I am a results-driven Full-Stack Developer specializing in high-performance SaaS engines and scalable digital architectures.
+                  I bridge the gap between ambitious business goals and technical reality, transforming complex problems into elegant, market-ready solutions.
                 </p>
                 <p className="text-lg leading-relaxed" style={{ color: colors.TEXT_SECONDARY }}>
-                  I specialize in bridging the gap between <strong style={{ color: colors.NEON_CYAN }}>robust backend logic</strong> and <strong style={{ color: colors.NEON_CYAN }}>intuitive frontend design</strong>.
-                  Whether it's a complex dashboard or a landing page, I focus on performance, accessibility, and user experience.
+                  By combining <strong style={{ color: colors.NEON_CYAN }}>robust backend logic</strong> with <strong style={{ color: colors.NEON_CYAN }}>high-conversion design</strong>,
+                  I ensure every digital asset I build drives measurable ROI—whether it's a mission-critical dashboard or a high-speed No-Code MVP.
                 </p>
               </div>
             </BentoCard>
           </div>
 
-          {/* Stats Card */}
+
           <div className="md:col-span-3 lg:col-span-4">
             <BentoCard colors={colors} delay={0.1} className="h-full">
               <div className="flex flex-col h-full justify-between gap-6">
@@ -173,7 +173,7 @@ const About = () => {
             </BentoCard>
           </div>
 
-          {/* Tech Stack Card */}
+
           <div className="md:col-span-3 lg:col-span-5">
             <BentoCard colors={colors} delay={0.2} className="h-full">
               <h3 className="text-xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
@@ -256,7 +256,7 @@ const About = () => {
             </BentoCard>
           </div>
 
-          {/* Philosophy/Approach Card */}
+
           <div className="md:col-span-6 lg:col-span-7">
             <BentoCard colors={colors} delay={0.3} className="h-full">
               <h3 className="text-xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
@@ -266,20 +266,20 @@ const About = () => {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 mb-2">
                     <Zap size={20} style={{ color: colors.NEON_CYAN }} />
-                    <h4 className="font-semibold" style={{ color: colors.TEXT_PRIMARY }}>Performance First</h4>
+                    <h4 className="font-semibold" style={{ color: colors.TEXT_PRIMARY }}>Performance & SEO</h4>
                   </div>
                   <p className="text-sm leading-relaxed" style={{ color: colors.TEXT_SECONDARY }}>
-                    Optimizing for speed and efficiency. Every millisecond counts in retaining users and improving SEO rankings.
+                    Engineering for speed, accessibility, and organic visibility. I build platforms that search engines reward and users love.
                   </p>
                 </div>
 
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 mb-2">
                     <Layout size={20} style={{ color: colors.NEON_CYAN }} />
-                    <h4 className="font-semibold" style={{ color: colors.TEXT_PRIMARY }}>User-Centric</h4>
+                    <h4 className="font-semibold" style={{ color: colors.TEXT_PRIMARY }}>Market-Ready Design</h4>
                   </div>
                   <p className="text-sm leading-relaxed" style={{ color: colors.TEXT_SECONDARY }}>
-                    Designing with the end-user in mind. Intuitive interfaces and seamless interactions are non-negotiable.
+                    I build products that are ready for the marketplace. High-conversion interfaces that turn visitors into loyal customers.
                   </p>
                 </div>
               </div>

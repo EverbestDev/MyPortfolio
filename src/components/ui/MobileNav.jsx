@@ -21,7 +21,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
 
   return (
     <>
-      {/* Mobile Header */}
+
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -34,7 +34,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
         }}
       >
         <div className="flex items-center justify-between">
-          {/* Logo */}
+
           <motion.button
             onClick={() => handleNavigate("home")}
             className="flex items-center gap-2 group"
@@ -49,7 +49,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
               }}
             >
               <img
-                src="/public/pfp.jpg"
+                src="/pfp.jpg"
                 alt="EverbestDev logo"
                 className="w-full h-full object-cover"
               />
@@ -62,7 +62,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
             </span>
           </motion.button>
 
-          {/* Right Actions */}
+
           <div className="flex items-center gap-2">
             <ThemeToggle />
 
@@ -108,11 +108,11 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
         </div>
       </motion.header>
 
-      {/* Mobile Menu */}
+
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -137,7 +137,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
               }}
             >
               <div className="flex flex-col h-full">
-                {/* Header */}
+
                 <div
                   className="flex items-center justify-between p-5 border-b"
                   style={{ borderColor: `${colors.NEON_CYAN}15` }}
@@ -151,7 +151,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                       }}
                     >
                       <img
-                        src="/public/pfp.jpg"
+                        src="/pfp.jpg"
                         alt="EverbestDev logo"
                         className="w-full h-full object-cover"
                       />
@@ -183,7 +183,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                   </motion.button>
                 </div>
 
-                {/* Navigation Links */}
+
                 <nav className="flex-1 p-5 space-y-1">
                   {sections.map((section, idx) => {
                     const isActive = activeSection === section;
@@ -220,7 +220,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                   })}
                 </nav>
 
-                {/* Footer Actions */}
+
                 <div
                   className="p-5 space-y-3 border-t"
                   style={{ borderColor: `${colors.NEON_CYAN}15` }}
@@ -248,7 +248,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                     <ArrowRight size={16} />
                   </motion.a>
 
-                  {/* Social Links */}
+
                   <div className="flex items-center justify-center gap-3 pt-2">
                     <Link
                       to="/github"

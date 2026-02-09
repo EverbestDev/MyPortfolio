@@ -7,11 +7,9 @@ const MouseCursor = () => {
     const [isHovering, setIsHovering] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
-    // Use MotionValues for high-performance position tracking (no re-renders)
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // Spring configurations for the "Butterfly" trail effect
     // Inner dot is snappy/accurate
     const innerSpringConfig = { damping: 20, stiffness: 400 };
     const dotX = useSpring(mouseX, innerSpringConfig);
@@ -61,7 +59,7 @@ const MouseCursor = () => {
 
     return (
         <div className="fixed inset-0 pointer-events-none z-[999999] overflow-hidden">
-            {/* Trail (The Butterfly Effect) */}
+
             <motion.div
                 className="absolute top-0 left-0 w-6 h-6 rounded-full"
                 style={{
@@ -76,7 +74,7 @@ const MouseCursor = () => {
                 }}
             />
 
-            {/* Core Point (Accurate Dot) */}
+
             <motion.div
                 className="absolute top-0 left-0 w-1.5 h-1.5 rounded-full"
                 style={{
@@ -90,7 +88,7 @@ const MouseCursor = () => {
                 }}
             />
 
-            {/* Subtle Atmospheric Light (Follows Trail) */}
+
             <motion.div
                 className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full"
                 style={{

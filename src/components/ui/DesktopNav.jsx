@@ -32,7 +32,7 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+
           <motion.button
             onClick={() => scrollToSection("home")}
             className="flex items-center gap-3 group cursor-pointer"
@@ -48,7 +48,7 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
               }}
             >
               <img
-                src="/public/pfp.jpg"
+                src="/pfp.jpg"
                 alt="EverbestDev logo"
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
@@ -61,7 +61,7 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
             </span>
           </motion.button>
 
-          {/* Navigation Links */}
+
           <nav className="flex items-center gap-1">
             {sections.map((section) => {
               const isActive = activeSection === section;
@@ -81,7 +81,7 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
                 >
                   <span className="relative z-10">{section}</span>
 
-                  {/* Active indicator background */}
+
                   {isActive && (
                     <motion.div
                       layoutId="activeTab"
@@ -94,7 +94,7 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
                     />
                   )}
 
-                  {/* Bottom indicator */}
+
                   {isActive && (
                     <motion.div
                       layoutId="navIndicator"
@@ -113,26 +113,29 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
             })}
           </nav>
 
-          {/* Actions */}
+
           <div className="flex items-center gap-3">
-            <Link
-              to="/resume"
-              className="flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-lg transition-all duration-300"
-              style={{
-                border: `1px solid ${colors.NEON_CYAN}30`,
-                background: `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`,
-                color: colors.TEXT_PRIMARY,
-                boxShadow: `0 2px 12px ${colors.NEON_CYAN}12`
-              }}
+            <motion.div
               whileHover={{
                 scale: 1.05,
                 boxShadow: `0 4px 20px ${colors.NEON_CYAN}25, inset 0 0 16px ${colors.NEON_CYAN}10`
               }}
               whileTap={{ scale: 0.95 }}
             >
-              Resume
-              <ArrowRight size={14} />
-            </Link>
+              <Link
+                to="/resume"
+                className="flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-lg transition-all duration-300 h-full"
+                style={{
+                  border: `1px solid ${colors.NEON_CYAN}30`,
+                  background: `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`,
+                  color: colors.TEXT_PRIMARY,
+                  boxShadow: `0 2px 12px ${colors.NEON_CYAN}12`
+                }}
+              >
+                Resume
+                <ArrowRight size={14} />
+              </Link>
+            </motion.div>
 
             <motion.div
               whileHover={{ scale: 1.1 }}

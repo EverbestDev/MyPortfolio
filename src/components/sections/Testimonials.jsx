@@ -42,6 +42,13 @@ const Testimonials = () => {
         setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
     };
 
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            nextTestimonial();
+        }, 8000);
+        return () => clearInterval(interval);
+    }, [currentIndex]);
+
     return (
         <section
             id="testimonials"
@@ -70,6 +77,26 @@ const Testimonials = () => {
                 </motion.div>
 
                 <div className="relative max-w-4xl mx-auto">
+                    {/* Mobile Navigation - Top */}
+                    <div className="flex md:hidden justify-center gap-4 mb-6">
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={prevTestimonial}
+                            className="p-3 rounded-full border border-white/10 bg-white/5 text-white"
+                        >
+                            <ChevronLeft size={24} />
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={nextTestimonial}
+                            className="p-3 rounded-full border border-white/10 bg-white/5 text-white"
+                        >
+                            <ChevronRight size={24} />
+                        </motion.button>
+                    </div>
+
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentIndex}
@@ -119,7 +146,7 @@ const Testimonials = () => {
                         </motion.div>
                     </AnimatePresence>
 
-                    {/* Side Navigation Buttons (Desktop) */}
+
                     <div className="hidden md:block">
                         <motion.button
                             whileHover={{ scale: 1.1, backgroundColor: `${colors.NEON_CYAN}20` }}
@@ -140,29 +167,9 @@ const Testimonials = () => {
                             <ChevronRight size={24} />
                         </motion.button>
                     </div>
-
-                    {/* Mobile Navigation Controls */}
-                    <div className="flex md:hidden justify-center gap-4 mt-8">
-                        <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={prevTestimonial}
-                            className="p-3 rounded-full border border-white/10 bg-white/5 text-white"
-                        >
-                            <ChevronLeft size={24} />
-                        </motion.button>
-                        <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={nextTestimonial}
-                            className="p-3 rounded-full border border-white/10 bg-white/5 text-white"
-                        >
-                            <ChevronRight size={24} />
-                        </motion.button>
-                    </div>
                 </div>
 
-                {/* Dynamic Dots */}
+
                 <div className="flex justify-center gap-2 mt-8">
                     {testimonials.map((_, index) => (
                         <button
