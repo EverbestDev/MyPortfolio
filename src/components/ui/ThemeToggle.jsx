@@ -55,48 +55,71 @@ const ThemeToggle = ({ className = "" }) => {
             <AnimatePresence>
                 {isOpen && (
                     <>
-                        {/* Backdrop */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[150] bg-black/60 backdrop-blur-md"
-                            onClick={() => setIsOpen(false)}
-                        />
+                        {/* Backdrop - Only on Mobile */}
+                        {window.innerWidth < 768 && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="fixed inset-0 z-[150] bg-black/60 backdrop-blur-md md:hidden"
+                                onClick={() => setIsOpen(false)}
+                            />
+                        )}
+
+                        {/* Desktop Backdrop - Invisible click area */}
+                        {window.innerWidth >= 768 && (
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="fixed inset-0 z-[90] hidden md:block"
+                                onClick={() => setIsOpen(false)}
+                            />
+                        )}
 
                         {/* Theme Selection Container */}
                         <motion.div
                             initial={
                                 window.innerWidth < 768
                                     ? { opacity: 0, scale: 0.9, y: 20 }
-                                    : { opacity: 0, y: 12, scale: 0.9, filter: "blur(10px)" }
+                                    : { opacity: 0, y: 8, scale: 0.95 }
                             }
                             animate={
                                 window.innerWidth < 768
                                     ? { opacity: 1, scale: 1, y: 0 }
-                                    : { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
+                                    : { opacity: 1, y: 0, scale: 1 }
                             }
                             exit={
                                 window.innerWidth < 768
                                     ? { opacity: 0, scale: 0.9, y: 20 }
-                                    : { opacity: 0, y: 12, scale: 0.9, filter: "blur(10px)" }
+                                    : { opacity: 0, y: 8, scale: 0.95 }
                             }
                             transition={{
                                 type: "spring",
-                                stiffness: 300,
-                                damping: 25
+                                stiffness: 400,
+                                damping: 30,
+                                mass: 0.8
                             }}
                             className={`
                                 ${window.innerWidth < 768
-                                    ? "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[320px] p-6"
-                                    : "absolute top-full right-0 mt-3 p-2 min-w-[150px]"
+                                    ? "fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[320px] p-6 rounded-3xl"
+                                    : "absolute top-full right-0 mt-3 p-2 min-w-[150px] rounded-2xl"
                                 } 
-                                rounded-3xl shadow-2xl border z-[160] backdrop-blur-2xl
+                                shadow-2xl border z-[160] backdrop-blur-2xl
                             `}
                             style={{
-                                backgroundColor: `${colors.CARD_BG}F8`,
+                                ...(window.innerWidth < 768 ? {
+                                    top: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    maxHeight: 'calc(100vh - 120px)',
+                                    overflowY: 'auto'
+                                } : {}),
+                                backgroundColor: window.innerWidth < 768 ? `${colors.CARD_BG}F8` : `${colors.CARD_BG}F0`,
                                 borderColor: `${colors.NEON_CYAN}30`,
-                                boxShadow: `0 24px 60px -12px rgba(0, 0, 0, 0.5), 0 0 30px ${colors.NEON_CYAN}20`,
+                                boxShadow: window.innerWidth < 768
+                                    ? `0 24px 60px -12px rgba(0, 0, 0, 0.5), 0 0 30px ${colors.NEON_CYAN}20`
+                                    : `0 12px 40px -8px rgba(0, 0, 0, 0.4), 0 0 20px ${colors.NEON_CYAN}15`,
                             }}
                         >
                             {/* Mobile Header */}
@@ -111,10 +134,11 @@ const ThemeToggle = ({ className = "" }) => {
                                 </div>
                             )}
 
-                            <div className="flex flex-col gap-2">
+                            <div className={window.innerWidth < 768 ? "flex flex-col gap-2" : "flex flex-col gap-1"}>
                                 {themes.map((themeOption) => {
                                     const Icon = themeOption.icon;
                                     const isActive = theme === themeOption.name;
+                                    const isMobile = window.innerWidth < 768;
 
                                     return (
                                         <button
@@ -123,24 +147,29 @@ const ThemeToggle = ({ className = "" }) => {
                                                 setTheme(themeOption.name);
                                                 setIsOpen(false);
                                             }}
-                                            className="group flex items-center justify-between px-4 py-3.5 rounded-2xl transition-all duration-300"
+                                            className={`group flex items-center justify-between transition-all duration-200 ${isMobile ? "px-4 py-3.5 rounded-2xl" : "px-3 py-2.5 rounded-xl"
+                                                }`}
                                             style={{
                                                 backgroundColor: isActive ? `${colors.NEON_CYAN}15` : 'transparent',
-                                                border: isActive ? `1px solid ${colors.NEON_CYAN}30` : '1px solid transparent',
+                                                border: isMobile && isActive ? `1px solid ${colors.NEON_CYAN}30` : '1px solid transparent',
                                                 color: isActive ? colors.NEON_CYAN : colors.TEXT_SECONDARY,
                                             }}
                                         >
-                                            <div className="flex items-center gap-4">
+                                            <div className={`flex items-center ${isMobile ? "gap-4" : "gap-3"}`}>
                                                 <div
-                                                    className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
+                                                    className={`rounded-lg flex items-center justify-center transition-colors ${isMobile ? "w-10 h-10 rounded-xl" : "w-8 h-8"
+                                                        }`}
                                                     style={{
                                                         backgroundColor: isActive ? `${colors.NEON_CYAN}20` : `${colors.BORDER}10`,
-                                                        boxShadow: isActive ? `0 0 15px ${colors.NEON_CYAN}30` : 'none'
+                                                        boxShadow: isMobile && isActive ? `0 0 15px ${colors.NEON_CYAN}30` : 'none'
                                                     }}
                                                 >
-                                                    <Icon size={18} className={isActive ? "text-cyan-400" : "opacity-70 group-hover:opacity-100"} />
+                                                    <Icon size={isMobile ? 18 : 16} className={isActive ? "text-cyan-400" : "opacity-70 group-hover:opacity-100"} />
                                                 </div>
-                                                <span className={`text-base font-bold tracking-wide transition-colors ${isActive ? "text-white" : "opacity-80 group-hover:opacity-100"}`}>
+                                                <span className={`tracking-wide ${isMobile
+                                                    ? "text-base font-bold"
+                                                    : "text-sm font-semibold"
+                                                    } ${isActive ? "text-white" : "opacity-80 group-hover:opacity-100"}`}>
                                                     {themeOption.label}
                                                 </span>
                                             </div>
@@ -150,10 +179,10 @@ const ThemeToggle = ({ className = "" }) => {
                                                     initial={{ scale: 0, opacity: 0 }}
                                                     animate={{ scale: 1, opacity: 1 }}
                                                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                                    className="w-6 h-6 rounded-full flex items-center justify-center"
-                                                    style={{ backgroundColor: colors.NEON_CYAN }}
+                                                    className={isMobile ? "w-6 h-6 rounded-full flex items-center justify-center" : ""}
+                                                    style={isMobile ? { backgroundColor: colors.NEON_CYAN } : {}}
                                                 >
-                                                    <Check size={14} className="text-black" />
+                                                    <Check size={14} className={isMobile ? "text-black" : "text-cyan-400"} />
                                                 </motion.div>
                                             )}
                                         </button>
@@ -180,7 +209,7 @@ const ThemeToggle = ({ className = "" }) => {
                     </>
                 )}
             </AnimatePresence>
-        </div>
+        </div >
     );
 };
 
