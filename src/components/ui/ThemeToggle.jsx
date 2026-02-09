@@ -62,7 +62,8 @@ const ThemeToggle = ({ className = "" }) => {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 0.2 }}
-                                className="fixed inset-0 z-[150] bg-black/60 backdrop-blur-md md:hidden"
+                                className="fixed inset-0 bg-black/60 backdrop-blur-md"
+                                style={{ zIndex: 9999 }}
                                 onClick={() => setIsOpen(false)}
                             />
                         )}
@@ -103,18 +104,19 @@ const ThemeToggle = ({ className = "" }) => {
                             }}
                             className={`
                                 ${window.innerWidth < 768
-                                    ? "fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[320px] p-6 rounded-3xl"
+                                    ? "fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[300px] p-5 rounded-3xl"
                                     : "absolute top-full right-0 mt-3 p-2 min-w-[150px] rounded-2xl"
                                 } 
-                                shadow-2xl border z-[160] backdrop-blur-2xl
+                                shadow-2xl border backdrop-blur-2xl
                             `}
                             style={{
                                 ...(window.innerWidth < 768 ? {
                                     top: '50%',
                                     transform: 'translate(-50%, -50%)',
-                                    maxHeight: 'calc(100vh - 120px)',
-                                    overflowY: 'auto'
-                                } : {}),
+                                    maxHeight: 'calc(100vh - 100px)',
+                                    overflowY: 'auto',
+                                    zIndex: 10000
+                                } : { zIndex: 100 }),
                                 backgroundColor: window.innerWidth < 768 ? `${colors.CARD_BG}F8` : `${colors.CARD_BG}F0`,
                                 borderColor: `${colors.NEON_CYAN}30`,
                                 boxShadow: window.innerWidth < 768
@@ -124,17 +126,17 @@ const ThemeToggle = ({ className = "" }) => {
                         >
                             {/* Mobile Header */}
                             {window.innerWidth < 768 && (
-                                <div className="mb-6 text-center">
-                                    <h3 className="text-xl font-bold tracking-tight mb-1" style={{ color: colors.TEXT_PRIMARY }}>
+                                <div className="mb-4 text-center">
+                                    <h3 className="text-lg font-bold tracking-tight mb-0.5" style={{ color: colors.TEXT_PRIMARY }}>
                                         Select Appearance
                                     </h3>
-                                    <p className="text-sm opacity-60" style={{ color: colors.TEXT_SECONDARY }}>
+                                    <p className="text-xs opacity-60" style={{ color: colors.TEXT_SECONDARY }}>
                                         Choose your preferred theme
                                     </p>
                                 </div>
                             )}
 
-                            <div className={window.innerWidth < 768 ? "flex flex-col gap-2" : "flex flex-col gap-1"}>
+                            <div className={window.innerWidth < 768 ? "flex flex-col gap-2.5" : "flex flex-col gap-1"}>
                                 {themes.map((themeOption) => {
                                     const Icon = themeOption.icon;
                                     const isActive = theme === themeOption.name;
@@ -147,7 +149,7 @@ const ThemeToggle = ({ className = "" }) => {
                                                 setTheme(themeOption.name);
                                                 setIsOpen(false);
                                             }}
-                                            className={`group flex items-center justify-between transition-all duration-200 ${isMobile ? "px-4 py-3.5 rounded-2xl" : "px-3 py-2.5 rounded-xl"
+                                            className={`group flex items-center justify-between transition-all duration-200 ${isMobile ? "px-3.5 py-3 rounded-2xl" : "px-3 py-2.5 rounded-xl"
                                                 }`}
                                             style={{
                                                 backgroundColor: isActive ? `${colors.NEON_CYAN}15` : 'transparent',
@@ -195,7 +197,7 @@ const ThemeToggle = ({ className = "" }) => {
                                 <motion.button
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => setIsOpen(false)}
-                                    className="mt-6 w-full py-3 rounded-2xl font-bold text-sm transition-all border"
+                                    className="mt-4 w-full py-2.5 rounded-2xl font-bold text-sm transition-all border"
                                     style={{
                                         backgroundColor: 'transparent',
                                         borderColor: `${colors.BORDER}40`,
