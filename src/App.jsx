@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import * as OGL from "ogl";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Navbar from "./components/ui/Navbar";
@@ -6,29 +7,44 @@ import Chatbot from "./components/ui/Chatbot";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
 import Projects from "./components/sections/Projects";
-import Skills from "./components/sections/Skills";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/ui/Footer";
 import Gallery from "./components/sections/Gallery";
 import ExperienceTimeline from "./components/sections/Experience";
+import Resume from "./components/pages/Resume";
+
+const MainPortfolio = () => (
+  <>
+    <Navbar />
+    <Chatbot />
+    <Hero />
+    <About />
+    <Projects />
+    <ExperienceTimeline />
+    <Gallery />
+    <Contact />
+    <Footer />
+  </>
+);
 
 function App() {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     window.ogl = OGL;
   }, []);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <ThemeProvider>
-      <Navbar />
-      <Chatbot />
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
-      <ExperienceTimeline />
-      <Gallery />
-      <Contact />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<MainPortfolio />} />
+        <Route path="/resume" element={<Resume />} />
+      </Routes>
     </ThemeProvider>
   );
 }

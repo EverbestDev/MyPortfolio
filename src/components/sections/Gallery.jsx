@@ -10,13 +10,11 @@ function Gallery() {
       style={{ backgroundColor: colors.DARK_BG }}
     >
       <div
-        className="text-3xl mb-4 absolute top-10 z-10 font-extrabold tracking-tight"
-        style={{
-          color: colors.TEXT_PRIMARY,
-          textShadow: `0 0 10px ${colors.NEON_CYAN}40`,
-        }}
+        className="text-center mb-8 absolute top-10 z-10"
       >
-        My Gallery
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" style={{ color: colors.TEXT_PRIMARY }}>
+          My <span style={{ color: colors.NEON_CYAN }}>Gallery</span>
+        </h2>
       </div>
       <RollingGallery autoplay={true} pauseOnHover={true} />
     </div>

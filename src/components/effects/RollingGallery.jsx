@@ -36,9 +36,9 @@ const RollingGallery = ({
   }, []);
 
   // 1. Increased component width (cylinderWidth)
-  const cylinderWidth = isScreenSizeSm ? 1300 : 2200; // Increased from 1100 & 1800
+  const cylinderWidth = isScreenSizeSm ? 1800 : 3600;
   const faceCount = images.length;
-  const faceWidth = (cylinderWidth / faceCount) * 1.5;
+  const faceWidth = (cylinderWidth / faceCount); // Removed multiplier to reduce spacing
   const radius = cylinderWidth / (2 * Math.PI);
 
   const dragFactor = 0.05;
@@ -54,7 +54,7 @@ const RollingGallery = ({
     controls.start({
       rotateY: [startAngle, startAngle - 360],
       transition: {
-        duration: 20,
+        duration: 35, // Slower spin for larger gallery
         ease: "linear",
         repeat: Infinity,
       },
@@ -103,9 +103,9 @@ const RollingGallery = ({
   };
 
   return (
-    <div className="relative h-[500px] w-full overflow-hidden">
+    <div className="relative h-[600px] w-full overflow-hidden">
       <div
-        className="absolute top-0 left-0 h-full w-[48px] z-10"
+        className="absolute top-0 left-0 h-full w-[80px] z-10"
         style={{
           background:
             "linear-gradient(to left, rgba(0,0,0,0) 0%, #060010 100%)",
@@ -113,7 +113,7 @@ const RollingGallery = ({
       />
 
       <div
-        className="absolute top-0 right-0 h-full w-[48px] z-10"
+        className="absolute top-0 right-0 h-full w-[80px] z-10"
         style={{
           background:
             "linear-gradient(to right, rgba(0,0,0,0) 0%, #060010 100%)",
@@ -136,23 +136,22 @@ const RollingGallery = ({
             width: cylinderWidth,
             transformStyle: "preserve-3d",
           }}
-          className="flex min-h-[200px] cursor-grab items-center justify-center [transform-style:preserve-3d] w-full"
+          className="flex min-h-[400px] cursor-grab items-center justify-center [transform-style:preserve-3d] w-full"
         >
           {images.map((url, i) => (
             <div
               key={i}
-              className="group absolute flex h-fit items-center justify-center p-[8%] [backface-visibility:hidden] md:p-[6%] gap-12 mp:gap-6"
+              className="group absolute flex h-fit items-center justify-center p-0 [backface-visibility:hidden]"
               style={{
                 width: `${faceWidth}px`,
-                transform: `rotateY(${
-                  (360 / faceCount) * i
-                }deg) translateZ(${radius}px)`,
+                transform: `rotateY(${(360 / faceCount) * i
+                  }deg) translateZ(${radius}px)`,
               }}
             >
               <img
                 src={url}
                 alt="gallery"
-                className="pointer-events-none h-[250px] w-[450px] rounded-[15px] border-[3px] border-white object-cover shadow-lg transition-all duration-400 ease-out mx-8 group-hover:scale-[1.07] group-hover:border-[#00ffff] group-hover:shadow-[0_0_20px_#00ffff40] sm:h-[180px] sm:w-[350px]"
+                className="pointer-events-none h-[300px] w-[500px] rounded-[20px] border-[4px] border-white object-cover shadow-2xl transition-all duration-400 ease-out group-hover:scale-[1.05] group-hover:border-[#00ffff] group-hover:shadow-[0_0_30px_#00ffff40] sm:h-[220px] sm:w-[400px]"
               />
             </div>
           ))}

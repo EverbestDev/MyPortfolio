@@ -110,16 +110,16 @@ const ThemeToggle = ({ className = "" }) => {
             {/* Toggle Button */}
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-3 rounded-full backdrop-blur-md border-2 transition-all duration-300 shadow-lg"
+                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300"
                 style={{
-                    backgroundColor: `${colors.bgColor}90`,
-                    borderColor: colors.neonColor,
-                    color: colors.neonColor,
-                    boxShadow: `0 0 15px ${colors.neonColor}40`,
+                    backgroundColor: `${colors.neonColor}06`,
+                    color: colors.textColor,
                 }}
                 whileHover={{
                     scale: 1.1,
-                    boxShadow: `0 0 25px ${colors.neonColor}60`,
+                    backgroundColor: `${colors.neonColor}12`,
+                    color: colors.neonColor,
+                    boxShadow: `0 0 16px ${colors.neonColor}20`,
                 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Toggle theme"
@@ -131,7 +131,7 @@ const ThemeToggle = ({ className = "" }) => {
                     exit={{ rotate: 180, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                 >
-                    <CurrentIcon size={20} />
+                    <CurrentIcon size={18} />
                 </motion.div>
             </motion.button>
         </div>

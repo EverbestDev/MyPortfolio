@@ -1,123 +1,144 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Briefcase, Calendar, Building2 } from "lucide-react";
 import { useThemeColors } from "../../hooks/useThemeColors";
 
 const experiences = [
   {
+    id: 1,
     role: "Senior Full-Stack Developer",
     company: "Innovatech Solutions",
     duration: "2022 - Present",
-    description: "Led the development team in migrating legacy systems to a modern React/Node.js stack, resulting in a 40% reduction in latency and a 25% decrease in hosting costs. Implemented continuous integration and deployment (CI/CD) pipelines.",
+    description: "Spearheaded the migration of legacy monoliths to microservices using Node.js and Docker, reducing deployment times by 60%. Mentored junior devs and implemented strict code quality standards.",
+    tech: ["Node.js", "React", "Docker", "AWS"],
   },
   {
+    id: 2,
     role: "Frontend Specialist",
     company: "Creative Digital Agency",
     duration: "2019 - 2022",
-    description: "Architected and built reusable component libraries using React and TypeScript, accelerating client project delivery time by 30%. Introduced component-based unit testing using Jest and Enzyme.",
+    description: "Designed and developed award-winning interactive web experiences for Fortune 500 clients. Specialized in complex GSAP animations and accessible, responsive UI components.",
+    tech: ["React", "TypeScript", "GSAP", "Figma"],
   },
   {
+    id: 3,
     role: "Junior Web Developer",
     company: "Local Tech Startup",
     duration: "2018 - 2019",
-    description: "Developed and maintained responsive web applications using HTML5, CSS3, and vanilla JavaScript. Assisted with content management system integration and database queries.",
+    description: "Collaborated in an agile team to build the MVP of a SaaS product. Handled UI implementation and integrated third-party APIs for payment and authentication.",
+    tech: ["HTML/CSS", "JavaScript", "PHP", "MySQL"],
   },
 ];
 
-const TimelineEntry = ({ role, company, duration, description, index, colors }) => {
-  const slideIn = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: {
-      type: "spring",
-      stiffness: 80,
-      damping: 15,
-      delay: index * 0.15 + 0.1,
-    },
-    viewport: { once: true, amount: 0.3 },
-  };
+const TimelineCard = ({ data, index, colors }) => (
+  <motion.div
+    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: index * 0.2 }}
+    className="relative pl-8 sm:pl-0 sm:flex sm:items-center sm:justify-between group"
+  >
+    {/* Center Line & Dot */}
+    <div className="absolute left-0 sm:left-1/2 top-0 bottom-0 w-px -ml-px bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent sm:block hidden"
+      style={{ borderColor: `${colors.NEON_CYAN}40` }} />
 
-  return (
-    <motion.div className="flex relative" {...slideIn}>
-      <div className="flex flex-col items-center mr-4 md:mr-6">
-        <div
-          className="flex-shrink-0 w-4 h-4 rounded-full relative z-10 transition duration-300 group-hover:scale-125"
-          style={{
-            backgroundColor: colors.NEON_CYAN,
-            boxShadow: `0 0 10px ${colors.NEON_CYAN}80`
-          }}
-        />
-        {index < experiences.length - 1 && (
-          <div
-            className="h-full w-0.5 mt-2 flex-grow"
-            style={{ backgroundColor: colors.BORDER }}
-          />
-        )}
-      </div>
+    <div className={`absolute left-0 sm:left-1/2 w-4 h-4 rounded-full border-2 transform -translate-x-1/2 mt-6 sm:mt-0 z-10 transition-all duration-300 group-hover:scale-125`}
+      style={{
+        backgroundColor: colors.DARK_BG,
+        borderColor: colors.NEON_CYAN,
+        boxShadow: `0 0 10px ${colors.NEON_CYAN}`
+      }}
+    />
 
+    {/* Content Card - Left or Right */}
+    <div className={`sm:w-[45%] ${index % 2 === 0 ? 'sm:mr-auto sm:text-right' : 'sm:ml-auto sm:text-left'} relative`}>
       <motion.div
-        className="flex-grow pb-12 p-6 -mt-2 mb-8 rounded-xl border transition duration-300 cursor-pointer"
+        className="p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:-translate-y-1"
         style={{
-          backgroundColor: colors.SECTION_BG,
-          borderColor: colors.BORDER,
-          color: colors.TEXT_PRIMARY
+          backgroundColor: `${colors.CARD_BG}60`,
+          borderColor: `${colors.BORDER}40`,
+          boxShadow: `0 10px 30px -10px rgba(0,0,0,0.3)`
         }}
         whileHover={{
-          y: -2,
           borderColor: colors.NEON_CYAN,
-          boxShadow: `0 10px 30px ${colors.NEON_CYAN}15`
+          boxShadow: `0 0 20px ${colors.NEON_CYAN}20`
         }}
-        transition={{ duration: 0.2 }}
       >
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-          <h3 className="font-bold text-xl mr-4" style={{ color: colors.TEXT_PRIMARY }}>{role}</h3>
-          <p className="text-sm font-light mt-1 sm:mt-0 whitespace-nowrap" style={{ color: colors.TEXT_TERTIARY }}>
-            {duration}
-          </p>
-        </div>
+        <div className={`flex flex-col ${index % 2 === 0 ? 'sm:items-end' : 'sm:items-start'}`}>
+          <h3 className="text-xl font-bold mb-1" style={{ color: colors.TEXT_PRIMARY }}>{data.role}</h3>
+          <div className="flex items-center gap-2 mb-3 text-sm font-medium" style={{ color: colors.NEON_CYAN }}>
+            <Building2 size={14} />
+            <span>{data.company}</span>
+          </div>
 
-        <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: colors.NEON_CYAN }}>
-          {company}
-        </p>
-        <p className="leading-relaxed text-base" style={{ color: colors.TEXT_SECONDARY }}>{description}</p>
+          <p className="text-sm leading-relaxed mb-4" style={{ color: colors.TEXT_SECONDARY }}>
+            {data.description}
+          </p>
+
+          <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'sm:justify-end' : 'sm:justify-start'}`}>
+            {data.tech.map(t => (
+              <span key={t} className="text-xs px-2 py-1 rounded bg-white/5 border" style={{ borderColor: `${colors.BORDER}`, color: colors.TEXT_TERTIARY }}>
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className={`absolute top-4 ${index % 2 === 0 ? 'left-4' : 'right-4'} opacity-20`}>
+            <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-transparent font-outline-1">
+              0{data.id}
+            </span>
+          </div>
+        </div>
       </motion.div>
-    </motion.div>
-  );
-};
+
+      {/* Date Label - Opposite Side */}
+      <div className={`absolute top-1/2 -translate-y-1/2 ${index % 2 === 0 ? 'right-[-120%] text-left pl-8' : 'left-[-120%] text-right pr-8'} hidden sm:block w-full`}>
+        <div className="flex items-center gap-2 font-mono text-sm tracking-widest opacity-70" style={{ color: colors.TEXT_TERTIARY }}>
+          <Calendar size={14} />
+          {data.duration}
+        </div>
+      </div>
+    </div>
+
+    {/* Mobile Date (inside card for mobile) */}
+    <div className="sm:hidden mb-2 pl-6">
+      <span className="text-xs font-mono px-2 py-1 rounded" style={{ backgroundColor: `${colors.NEON_CYAN}15`, color: colors.NEON_CYAN }}>
+        {data.duration}
+      </span>
+    </div>
+  </motion.div>
+);
 
 const ExperienceTimeline = () => {
   const colors = useThemeColors();
-  const headerVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
 
   return (
     <section
       id="experience"
-      className="py-24 px-4 sm:px-6 lg:px-8 transition-colors duration-300"
-      style={{ backgroundColor: colors.DARK_BG, color: colors.TEXT_PRIMARY }}
+      className="py-24 sm:py-32 relative overflow-hidden"
+      style={{ backgroundColor: colors.DARK_BG }}
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
-          className="text-center mb-16"
-          initial="hidden"
-          whileInView="visible"
-          variants={headerVariants}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: colors.TEXT_PRIMARY }}>
             Professional <span style={{ color: colors.NEON_CYAN }}>Journey</span>
           </h2>
-          <p className="text-xl" style={{ color: colors.TEXT_SECONDARY }}>
-            A chronological look at my career path and achievements.
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: colors.TEXT_SECONDARY }}>
+            A timeline of my career growth, key roles, and the impact I've made along the way.
           </p>
         </motion.div>
 
-        <div className="relative pt-4">
+        <div className="relative max-w-4xl mx-auto space-y-12 sm:space-y-24">
+          {/* Vertical Line for Mobile/Desktop */}
+          <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent sm:hidden" />
+
           {experiences.map((exp, index) => (
-            <div key={index} className="group">
-              <TimelineEntry {...exp} index={index} colors={colors} />
-            </div>
+            <TimelineCard key={exp.id} data={exp} index={index} colors={colors} />
           ))}
         </div>
       </div>

@@ -70,6 +70,9 @@ const KNOWLEDGE_BASE = {
 const Chatbot = () => {
     const colors = useThemeColors();
     const [isOpen, setIsOpen] = useState(false);
+    const [showScrollTop, setShowScrollTop] = useState(false);
+
+    // ... existing message state ...
     const [messages, setMessages] = useState([
         {
             type: 'bot',
@@ -89,6 +92,19 @@ const Chatbot = () => {
         scrollToBottom();
     }, [messages]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowScrollTop(window.scrollY > 300);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // ... existing findResponse and handleSendMessage ...
     const findResponse = (question) => {
         const lowerQuestion = question.toLowerCase();
 
@@ -130,45 +146,69 @@ const Chatbot = () => {
 
     return (
         <>
-            <AnimatePresence>
-                {!isOpen && (
-                    <motion.div
-                        initial={{ scale: 0, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0, opacity: 0 }}
-                        className="fixed bottom-24 right-6 z-[100] flex items-center gap-3"
-                    >
-                        <motion.div
-                            initial={{ opacity: 0, x: 10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="px-4 py-2 rounded-full shadow-lg whitespace-nowrap"
-                            style={{
-                                backgroundColor: colors.CARD_BG,
-                                border: `1px solid ${colors.BORDER}`,
-                                color: colors.TEXT_PRIMARY,
-                            }}
-                        >
-                            <p className="text-sm font-medium">You've got questions? Ask Everbot!</p>
-                        </motion.div>
-
+            <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end gap-4 pointer-events-none">
+                <AnimatePresence>
+                    {showScrollTop && (
                         <motion.button
+                            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.8, y: 20 }}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            onClick={() => setIsOpen(true)}
-                            className="p-4 rounded-full shadow-2xl"
+                            onClick={scrollToTop}
+                            className="p-3 rounded-full pointer-events-auto shadow-lg"
                             style={{
-                                backgroundColor: colors.NEON_CYAN,
-                                color: colors.DARK_BG,
-                                boxShadow: `0 0 20px ${colors.NEON_CYAN}60`,
+                                backgroundColor: colors.CARD_BG,
+                                border: `1px solid ${colors.NEON_CYAN}`,
+                                color: colors.NEON_CYAN,
+                                boxShadow: `0 0 15px ${colors.NEON_CYAN}40`,
                             }}
-                            aria-label="Open chat"
+                            aria-label="Scroll to top"
                         >
-                            <Bot size={28} />
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="m18 15-6-6-6 6" />
+                            </svg>
                         </motion.button>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    )}
+                </AnimatePresence>
+
+                <AnimatePresence>
+                    {!isOpen && (
+                        <div className="flex items-center gap-3 pointer-events-auto">
+                            <motion.div
+                                initial={{ opacity: 0, x: 10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: 10 }}
+                                transition={{ delay: 0.5 }}
+                                className="px-4 py-2 rounded-full shadow-lg whitespace-nowrap hidden md:block"
+                                style={{
+                                    backgroundColor: colors.CARD_BG,
+                                    border: `1px solid ${colors.BORDER}`,
+                                    color: colors.TEXT_PRIMARY,
+                                }}
+                            >
+                                <p className="text-sm font-medium">You've got questions? Ask Everbot!</p>
+                            </motion.div>
+
+                            <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => setIsOpen(true)}
+                                className="p-4 rounded-full shadow-2xl relative"
+                                style={{
+                                    backgroundColor: colors.NEON_CYAN,
+                                    color: colors.DARK_BG,
+                                    boxShadow: `0 0 20px ${colors.NEON_CYAN}60`,
+                                }}
+                                aria-label="Open chat"
+                            >
+                                <Bot size={28} />
+                                <span className="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-white animate-pulse" />
+                            </motion.button>
+                        </div>
+                    )}
+                </AnimatePresence>
+            </div>
 
             <AnimatePresence>
                 {isOpen && (

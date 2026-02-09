@@ -205,7 +205,6 @@ const Hero = () => {
   const colors = useThemeColors();
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const [typingComplete, setTypingComplete] = useState(false);
 
@@ -220,7 +219,7 @@ const Hero = () => {
       <motion.div
         style={{
           width: "100%",
-          height: "600px",
+          height: "100%",
           position: "absolute",
           top: 0,
           left: 0,
@@ -247,7 +246,7 @@ const Hero = () => {
 
       <motion.div
         className="relative z-10 max-w-4xl mx-auto text-center px-4"
-        style={{ y: y, opacity }}
+        style={{ y: y }}
       >
         <motion.p
           className="text-lg sm:text-xl font-medium mb-4"
@@ -297,11 +296,8 @@ const Hero = () => {
             style={{ color: colors.TEXT_SECONDARY }}
             variants={itemVariants}
           >
-            Building high-performance applications with{" "}
-            <span style={{ color: colors.NEON_CYAN, fontWeight: "600" }}>
-              Next.js, TypeScript, Python (FastAPI/Django)
-            </span>{" "}
-            and modern full-stack architectures.
+            Crafting scalable, user-centric digital solutions with cutting-edge full-stack technologies.
+            I bridge the gap between complex backend logic and intuitive frontend design.
           </motion.p>
 
           <motion.div
@@ -312,30 +308,6 @@ const Hero = () => {
             <Button href="#projects" secondary={true} colors={colors}>
               View My Work
             </Button>
-          </motion.div>
-        </motion.div>
-
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:block"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 1 }}
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 rounded-full flex justify-center pt-2"
-            style={{ borderColor: `${colors.NEON_CYAN}60` }}
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1.5 h-1.5 rounded-full"
-              style={{
-                backgroundColor: colors.NEON_CYAN,
-                boxShadow: `0 0 8px ${colors.NEON_CYAN}`,
-              }}
-            />
           </motion.div>
         </motion.div>
       </motion.div>

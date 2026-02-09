@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Code2, Github, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useThemeColors } from "../../hooks/useThemeColors";
 import ThemeToggle from "./ThemeToggle";
 
@@ -23,7 +24,7 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
       style={{
         backgroundColor: scrolled ? `${colors.DARK_BG}f8` : `${colors.DARK_BG}e6`,
         backdropFilter: scrolled ? "blur(16px)" : "blur(8px)",
-        boxShadow: scrolled 
+        boxShadow: scrolled
           ? `0 4px 24px ${colors.NEON_CYAN}08, 0 1px 0 ${colors.NEON_CYAN}12`
           : "none",
         borderBottom: scrolled ? `1px solid ${colors.NEON_CYAN}10` : "none"
@@ -38,7 +39,7 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div 
+            <div
               className="relative w-9 h-9 rounded-lg flex items-center justify-center overflow-hidden"
               style={{
                 background: `linear-gradient(135deg, ${colors.NEON_CYAN}25, ${colors.NEON_CYAN}15)`,
@@ -46,13 +47,13 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
                 border: `1px solid ${colors.NEON_CYAN}30`
               }}
             >
-              <Code2 
-                className="relative z-10 transition-transform duration-300 group-hover:scale-110" 
+              <Code2
+                className="relative z-10 transition-transform duration-300 group-hover:scale-110"
                 size={18}
                 style={{ color: colors.NEON_CYAN }}
               />
             </div>
-            <span 
+            <span
               className="text-lg font-bold tracking-wide"
               style={{ color: colors.TEXT_PRIMARY }}
             >
@@ -72,14 +73,14 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
                   style={{
                     color: isActive ? colors.NEON_CYAN : `${colors.TEXT_SECONDARY}dd`
                   }}
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.05,
                     color: colors.NEON_CYAN
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <span className="relative z-10">{section}</span>
-                  
+
                   {/* Active indicator background */}
                   {isActive && (
                     <motion.div
@@ -92,7 +93,7 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
-                  
+
                   {/* Bottom indicator */}
                   {isActive && (
                     <motion.div
@@ -114,6 +115,25 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
+            <Link
+              to="/resume"
+              className="flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-lg transition-all duration-300"
+              style={{
+                border: `1px solid ${colors.NEON_CYAN}30`,
+                background: `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`,
+                color: colors.TEXT_PRIMARY,
+                boxShadow: `0 2px 12px ${colors.NEON_CYAN}12`
+              }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: `0 4px 20px ${colors.NEON_CYAN}25, inset 0 0 16px ${colors.NEON_CYAN}10`
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Resume
+              <ArrowRight size={14} />
+            </Link>
+
             <motion.a
               href="https://github.com/yourusername"
               target="_blank"
@@ -136,27 +156,6 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
             </motion.a>
 
             <ThemeToggle />
-
-            <motion.a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-lg transition-all duration-300"
-              style={{
-                border: `1px solid ${colors.NEON_CYAN}30`,
-                background: `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`,
-                color: colors.TEXT_PRIMARY,
-                boxShadow: `0 2px 12px ${colors.NEON_CYAN}12`
-              }}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: `0 4px 20px ${colors.NEON_CYAN}25, inset 0 0 16px ${colors.NEON_CYAN}10`
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Resume
-              <ArrowRight size={14} />
-            </motion.a>
           </div>
         </div>
       </div>
