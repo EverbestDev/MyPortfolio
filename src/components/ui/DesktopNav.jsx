@@ -47,10 +47,10 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
                 border: `1px solid ${colors.NEON_CYAN}30`
               }}
             >
-              <Code2
-                className="relative z-10 transition-transform duration-300 group-hover:scale-110"
-                size={18}
-                style={{ color: colors.NEON_CYAN }}
+              <img
+                src="/public/pfp.jpg"
+                alt="EverbestDev logo"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
             </div>
             <span
@@ -134,26 +134,23 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
               <ArrowRight size={14} />
             </Link>
 
-            <motion.a
-              href="https://github.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300"
-              style={{
-                color: `${colors.TEXT_SECONDARY}cc`,
-                backgroundColor: `${colors.NEON_CYAN}06`
-              }}
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: `${colors.NEON_CYAN}12`,
-                color: colors.NEON_CYAN,
-                boxShadow: `0 0 16px ${colors.NEON_CYAN}20`
-              }}
+            <motion.div
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              aria-label="GitHub"
             >
-              <Github size={18} />
-            </motion.a>
+              <Link
+                to="/github"
+                className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300"
+                style={{
+                  color: `${colors.TEXT_SECONDARY}cc`,
+                  backgroundColor: `${colors.NEON_CYAN}06`,
+                  border: `1px solid ${colors.NEON_CYAN}20`
+                }}
+                aria-label="GitHub Gateway"
+              >
+                <Github size={18} />
+              </Link>
+            </motion.div>
 
             <ThemeToggle />
           </div>

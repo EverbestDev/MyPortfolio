@@ -79,12 +79,12 @@ const Contact = () => {
     >
       {/* Background Gradients */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left Column: Info */}
-          <div className="flex flex-col justify-between h-full py-4">
+          {/* Left Column: Info & Map */}
+          <div className="space-y-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -100,32 +100,58 @@ const Contact = () => {
               </p>
             </motion.div>
 
-            <div className="space-y-3">
+            {/* Contact Cards in a row */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <ContactInfoCard
                 icon={Mail}
-                title="Email Me"
+                title="Email"
                 value="EverbestDev@gmail.com"
                 link="mailto:EverbestDev@gmail.com"
                 delay={0.1}
                 colors={colors}
+                compact
               />
               <ContactInfoCard
                 icon={Smartphone}
-                title="WhatsApp / Call"
+                title="WhatsApp"
                 value="+234 911 745 0722"
                 link="https://wa.me/2349117450722"
                 delay={0.2}
                 colors={colors}
+                compact
               />
               <ContactInfoCard
                 icon={MapPin}
                 title="Location"
-                value="Remote / Nigeria"
-                link="#"
+                value="Ijebu-Ode, Ogun"
+                link="https://maps.google.com/?q=240,+Ondo+benin+Road,+Ijebu-Ode+Ogun+state"
                 delay={0.3}
                 colors={colors}
+                compact
               />
             </div>
+
+            {/* Google Map */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="w-full h-80 rounded-3xl overflow-hidden border backdrop-blur-md relative"
+              style={{
+                borderColor: `${colors.BORDER}40`,
+                boxShadow: `0 20px 40px -20px rgba(0,0,0,0.5)`
+              }}
+            >
+              <iframe
+                title="Location Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.08833939622!2d3.921389!3d6.8125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bc3704685ff8b%3A0xe510f9797072499d!2zMjQwLCBPbmRvIGJlbmluIFJvYWQsIElqZWJ1LU9kZSBPZ3VuIHN0YXRl!5e0!3m2!1sen!2sng!4v1707440000000!5m2!1sen!2sng"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: colors.DARK_BG === '#080812' ? 'invert(90%) hue-rotate(180deg)' : 'none' }}
+                allowFullScreen=""
+                loading="lazy"
+              ></iframe>
+            </motion.div>
           </div>
 
           {/* Right Column: Form */}
@@ -256,19 +282,19 @@ const InputField = ({ label, name, type = "text", required, value, onChange, tex
       />
     )}
     <label
-      className="absolute left-4 top-3 text-sm pointer-events-none transition-all duration-300 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:bg-black peer-focus:px-2 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base"
+      className="absolute left-4 top-3 text-sm pointer-events-none transition-all duration-300 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:bg-black peer-focus:px-2 peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:bg-black peer-[:not(:placeholder-shown)]:px-2"
       style={{ color: colors.TEXT_SECONDARY }}
     >
       {label}
     </label>
     <div
-      className="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent transition-all duration-500 peer-focus:w-full"
+      className="absolute bottom-0 left-0 h-[2px] w-0 bg-cyan-500 transition-all duration-500 peer-focus:w-full"
       style={{ backgroundColor: colors.NEON_CYAN }}
     />
   </div>
 );
 
-const ContactInfoCard = ({ icon: Icon, title, value, link, delay, colors }) => (
+const ContactInfoCard = ({ icon: Icon, title, value, link, delay, colors, compact }) => (
   <motion.a
     href={link}
     target="_blank"
@@ -277,9 +303,9 @@ const ContactInfoCard = ({ icon: Icon, title, value, link, delay, colors }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay }}
-    className="flex items-center gap-4 p-5 rounded-2xl border transition-all duration-300 group"
+    className={`flex ${compact ? 'flex-col items-start gap-2 p-4' : 'items-center gap-4 p-5'} rounded-2xl border transition-all duration-300 group`}
     style={{
-      backgroundColor: colors.CARD_BG,
+      backgroundColor: `${colors.CARD_BG}c0`,
       borderColor: `${colors.BORDER}40`
     }}
     whileHover={{
@@ -289,20 +315,22 @@ const ContactInfoCard = ({ icon: Icon, title, value, link, delay, colors }) => (
     }}
   >
     <div
-      className="w-12 h-12 rounded-full flex items-center justify-center transition-colors group-hover:bg-cyan-500/10"
+      className={`${compact ? 'w-10 h-10' : 'w-12 h-12'} rounded-full flex items-center justify-center transition-colors group-hover:bg-cyan-500/10`}
       style={{ backgroundColor: `${colors.NEON_CYAN}10` }}
     >
-      <Icon size={24} style={{ color: colors.NEON_CYAN }} />
+      <Icon size={compact ? 20 : 24} style={{ color: colors.NEON_CYAN }} />
     </div>
     <div>
-      <h4 className="text-sm font-medium mb-1" style={{ color: colors.TEXT_SECONDARY }}>{title}</h4>
-      <p className="font-semibold text-lg" style={{ color: colors.TEXT_PRIMARY }}>{value}</p>
+      <h4 className="text-xs font-medium mb-1" style={{ color: colors.TEXT_SECONDARY }}>{title}</h4>
+      <p className={`${compact ? 'text-[13px]' : 'text-lg'} font-semibold truncate max-w-[140px]`} style={{ color: colors.TEXT_PRIMARY }}>{value}</p>
     </div>
-    <ArrowRight
-      size={20}
-      className="ml-auto opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-      style={{ color: colors.NEON_CYAN }}
-    />
+    {!compact && (
+      <ArrowRight
+        size={20}
+        className="ml-auto opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+        style={{ color: colors.NEON_CYAN }}
+      />
+    )}
   </motion.a>
 );
 

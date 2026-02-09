@@ -11,17 +11,22 @@ import Contact from "./components/sections/Contact";
 import Footer from "./components/ui/Footer";
 import Gallery from "./components/sections/Gallery";
 import ExperienceTimeline from "./components/sections/Experience";
+import Testimonials from "./components/sections/Testimonials";
+import OfflineStatus from "./components/ui/OfflineStatus";
 import Resume from "./components/pages/Resume";
+import GithubGateway from "./components/pages/GithubGateway";
 
 const MainPortfolio = () => (
   <>
     <Navbar />
     <Chatbot />
+    <OfflineStatus />
     <Hero />
     <About />
     <Projects />
     <ExperienceTimeline />
     <Gallery />
+    <Testimonials />
     <Contact />
     <Footer />
   </>
@@ -34,9 +39,11 @@ function App() {
     window.ogl = OGL;
   }, []);
 
-  // Scroll to top on route change
+  // Scroll to top on route change (unless there's a hash)
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   return (
@@ -44,6 +51,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPortfolio />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/github" element={<GithubGateway />} />
       </Routes>
     </ThemeProvider>
   );

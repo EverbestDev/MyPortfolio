@@ -12,6 +12,7 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const getInitialTheme = () => {
+    if (typeof window === 'undefined') return 'system';
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
       return savedTheme;
@@ -19,15 +20,19 @@ export const ThemeProvider = ({ children }) => {
     return 'system';
   };
 
-  const [theme, setTheme] = useState(getInitialTheme);
-  const [resolvedTheme, setResolvedTheme] = useState('dark');
-
   const getSystemTheme = () => {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       return 'dark';
     }
     return 'light';
   };
+
+  const initialTheme = getInitialTheme();
+  const [theme, setTheme] = useState(initialTheme);
+  const [resolvedTheme, setResolvedTheme] = useState(() => {
+    if (initialTheme === 'system') return getSystemTheme();
+    return initialTheme;
+  });
 
   useEffect(() => {
     const updateResolvedTheme = () => {

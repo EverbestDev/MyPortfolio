@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Code2, Github, Linkedin, Mail, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useThemeColors } from "../../hooks/useThemeColors";
 import ThemeToggle from "./ThemeToggle";
 
@@ -39,7 +40,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
             className="flex items-center gap-2 group"
             whileTap={{ scale: 0.95 }}
           >
-            <div 
+            <div
               className="w-8 h-8 rounded-lg flex items-center justify-center"
               style={{
                 background: `linear-gradient(135deg, ${colors.NEON_CYAN}25, ${colors.NEON_CYAN}15)`,
@@ -47,12 +48,13 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                 border: `1px solid ${colors.NEON_CYAN}30`
               }}
             >
-              <Code2 
-                size={16} 
-                style={{ color: colors.NEON_CYAN }}
+              <img
+                src="/public/pfp.jpg"
+                alt="EverbestDev logo"
+                className="w-full h-full object-cover"
               />
             </div>
-            <span 
+            <span
               className="font-bold text-base tracking-wide"
               style={{ color: colors.TEXT_PRIMARY }}
             >
@@ -63,7 +65,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
           {/* Right Actions */}
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            
+
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
               className="w-9 h-9 rounded-lg flex items-center justify-center"
@@ -136,21 +138,25 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
             >
               <div className="flex flex-col h-full">
                 {/* Header */}
-                <div 
+                <div
                   className="flex items-center justify-between p-5 border-b"
                   style={{ borderColor: `${colors.NEON_CYAN}15` }}
                 >
                   <div className="flex items-center gap-2">
-                    <div 
+                    <div
                       className="w-8 h-8 rounded-lg flex items-center justify-center"
                       style={{
                         background: `linear-gradient(135deg, ${colors.NEON_CYAN}25, ${colors.NEON_CYAN}15)`,
                         border: `1px solid ${colors.NEON_CYAN}30`
                       }}
                     >
-                      <Code2 size={16} style={{ color: colors.NEON_CYAN }} />
+                      <img
+                        src="/public/pfp.jpg"
+                        alt="EverbestDev logo"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    <span 
+                    <span
                       className="font-bold text-base"
                       style={{ color: colors.TEXT_PRIMARY }}
                     >
@@ -191,14 +197,14 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                         className="w-full text-left px-5 py-3.5 rounded-xl font-medium text-base capitalize transition-all duration-300"
                         style={{
                           color: isActive ? colors.NEON_CYAN : `${colors.TEXT_SECONDARY}dd`,
-                          background: isActive 
+                          background: isActive
                             ? `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`
                             : "transparent",
-                          boxShadow: isActive 
-                            ? `0 0 16px ${colors.NEON_CYAN}10, inset 0 0 16px ${colors.NEON_CYAN}06` 
+                          boxShadow: isActive
+                            ? `0 0 16px ${colors.NEON_CYAN}10, inset 0 0 16px ${colors.NEON_CYAN}06`
                             : "none",
-                          borderLeft: isActive 
-                            ? `3px solid ${colors.NEON_CYAN}` 
+                          borderLeft: isActive
+                            ? `3px solid ${colors.NEON_CYAN}`
                             : "3px solid transparent"
                         }}
                         whileHover={{
@@ -215,7 +221,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                 </nav>
 
                 {/* Footer Actions */}
-                <div 
+                <div
                   className="p-5 space-y-3 border-t"
                   style={{ borderColor: `${colors.NEON_CYAN}15` }}
                 >
@@ -244,19 +250,26 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
 
                   {/* Social Links */}
                   <div className="flex items-center justify-center gap-3 pt-2">
-                    <SocialLink 
-                      href="https://github.com/yourusername"
-                      icon={<Github size={18} />}
-                      label="GitHub"
-                      colors={colors}
-                    />
-                    <SocialLink 
+                    <Link
+                      to="/github"
+                      onClick={() => setIsOpen(false)}
+                      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all"
+                      style={{
+                        background: `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`,
+                        color: colors.NEON_CYAN,
+                        boxShadow: `0 2px 10px ${colors.NEON_CYAN}10`,
+                        border: `1px solid ${colors.NEON_CYAN}20`
+                      }}
+                    >
+                      <Github size={18} />
+                    </Link>
+                    <SocialLink
                       href="https://linkedin.com/in/yourusername"
                       icon={<Linkedin size={18} />}
                       label="LinkedIn"
                       colors={colors}
                     />
-                    <SocialLink 
+                    <SocialLink
                       href="mailto:your.email@example.com"
                       icon={<Mail size={18} />}
                       label="Email"
@@ -284,8 +297,8 @@ const SocialLink = ({ href, icon, label, colors }) => (
       color: colors.NEON_CYAN,
       boxShadow: `0 2px 10px ${colors.NEON_CYAN}10`
     }}
-    whileHover={{ 
-      scale: 1.1, 
+    whileHover={{
+      scale: 1.1,
       y: -2,
       boxShadow: `0 4px 16px ${colors.NEON_CYAN}20`
     }}

@@ -8,7 +8,11 @@ import {
   Layout,
   Database,
   Terminal,
-  Coffee
+  Coffee,
+  Workflow,
+  Settings,
+  MousePointer2,
+  Activity
 } from "lucide-react";
 import { useThemeColors } from "../../hooks/useThemeColors";
 
@@ -221,6 +225,31 @@ const About = () => {
                     { name: 'Git', icon: Code2 },
                     { name: 'AWS', icon: Globe },
                     { name: 'Linux', icon: Terminal },
+                  ]}
+                />
+                <TechCategory
+                  title="No-Code Development"
+                  icon={Workflow}
+                  colors={colors}
+                  skills={[
+                    { name: 'Bubble', icon: MousePointer2 },
+                    { name: 'WordPress', icon: Globe },
+                    { name: 'Webflow', icon: Layout },
+                    { name: 'Zapier', icon: Zap },
+                    { name: 'Make.com', icon: Workflow },
+                    { name: 'FlutterFlow', icon: Globe },
+                  ]}
+                />
+                <TechCategory
+                  title="IT & Management Tools"
+                  icon={Settings}
+                  colors={colors}
+                  skills={[
+                    { name: 'Jira', icon: Activity },
+                    { name: 'Postman', icon: Terminal },
+                    { name: 'Notion', icon: Layout },
+                    { name: 'Slack', icon: Globe },
+                    { name: 'Trello', icon: Layout },
                   ]}
                 />
               </div>

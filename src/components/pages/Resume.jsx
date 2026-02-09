@@ -89,19 +89,19 @@ const Resume = () => {
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                             <div>
                                 <h1 className="text-4xl sm:text-5xl font-extrabold uppercase tracking-tight mb-2">
-                                    Usamah <span style={{ color: colors.NEON_CYAN }}>Popoola</span>
+                                    Usamah <span style={{ color: colors.NEON_CYAN }}>Abidemi</span>
                                 </h1>
                                 <p className="text-xl font-medium text-gray-600">Full Stack Developer & Creative Technologist</p>
                             </div>
                             <div className="flex flex-col items-start md:items-end gap-2 text-sm text-gray-600">
-                                <a href="mailto:popoolausamah8@gmail.com" className="flex items-center gap-2 hover:text-black transition-colors">
-                                    <Mail size={16} /> popoolausamah8@gmail.com
+                                <a href="mailto:EverbestDev@gmail.com" className="flex items-center gap-2 hover:text-black transition-colors">
+                                    <Mail size={16} /> EverbestDev@gmail.com
                                 </a>
-                                <a href="tel:+2348074635671" className="flex items-center gap-2 hover:text-black transition-colors">
-                                    <Phone size={16} /> +234 807 463 5671
+                                <a href="tel:+2349117450722" className="flex items-center gap-2 hover:text-black transition-colors">
+                                    <Phone size={16} /> +234 911 745 0722
                                 </a>
                                 <div className="flex items-center gap-2">
-                                    <MapPin size={16} /> Lagos, Nigeria
+                                    <MapPin size={16} /> Remote / Nigeria
                                 </div>
                                 <div className="flex gap-4 mt-1">
                                     <a href="https://linkedin.com" className="hover:text-black"><Linkedin size={18} /></a>
@@ -181,8 +181,8 @@ const Resume = () => {
                                         },
                                         {
                                             name: "University E-Attendance",
-                                            tech: "Vue.js, Firebase, QR Code",
-                                            desc: "Automated student attendance tracking system reducing admin workload by 40%."
+                                            tech: "Vue.js, Geofencing, Face-API.js",
+                                            desc: "Smart attendance system utilizing Geofencing and face recognition for secure, automated student validation."
                                         }
                                     ].map((project, i) => (
                                         <div key={i} className="bg-gray-50 p-4 rounded-lg border border-gray-100">
@@ -223,9 +223,17 @@ const Resume = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-sm text-gray-900 mb-2 uppercase">Tools & DevOps</h4>
+                                        <h4 className="font-semibold text-sm text-gray-900 mb-2 uppercase">No-Code & Automation</h4>
                                         <div className="flex flex-wrap gap-2">
-                                            {["Git", "Docker", "AWS", "Vite", "Figma", "Linux"].map(s => (
+                                            {["WordPress", "Bubble", "Webflow", "Zapier", "Make.com", "FlutterFlow"].map(s => (
+                                                <span key={s} className="px-2 py-1 bg-gray-200 text-xs font-medium rounded-md text-gray-800">{s}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 className="font-semibold text-sm text-gray-900 mb-2 uppercase">IT & Management Tools</h4>
+                                        <div className="flex flex-wrap gap-2">
+                                            {["Jira", "Postman", "Notion", "Slack", "Trello", "ClickUp"].map(s => (
                                                 <span key={s} className="px-2 py-1 bg-gray-200 text-xs font-medium rounded-md text-gray-800">{s}</span>
                                             ))}
                                         </div>
@@ -249,7 +257,7 @@ const Resume = () => {
 
                     {/* Footer */}
                     <div className="mt-12 pt-6 border-t border-gray-200 text-center text-xs text-gray-400">
-                        <p>© {new Date().getFullYear()} Usamah Popoola. Built with React & Tailwind CSS.</p>
+                        <p>© {new Date().getFullYear()} Usamah Abidemi. Built with React & Tailwind CSS.</p>
                     </div>
                 </motion.div>
             </div>

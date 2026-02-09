@@ -44,7 +44,7 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="md:col-span-1">
             <h3 className="text-2xl font-bold mb-4 tracking-wider flex items-center gap-2">
-              <span className="text-cyan-400" tyle={{ color: colors.NEON_CYAN }}>Everbest</span>Dev
+              <span className="text-cyan-400" style={{ color: colors.NEON_CYAN }}>Everbest</span>Dev
             </h3>
             <p className="text-sm leading-relaxed mb-6 opacity-80" style={{ color: colors.TEXT_SECONDARY }}>
               Building digital experiences that merge creativity with robust engineering. Let's create something memorable.
@@ -97,11 +97,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 text-xs opacity-60" style={{ borderColor: `${colors.BORDER}30` }}>
+        <div className="pt-8 border-t flex justify-center items-center text-xs opacity-60" style={{ borderColor: `${colors.BORDER}30` }}>
           <p className="font-mono">&copy; {new Date().getFullYear()} EverbestDev. All rights reserved.</p>
-          <p className="flex items-center gap-2">
-            Designed & Built with <span className="text-red-500">♥</span> in Nigeria
-          </p>
         </div>
       </div>
     </footer>

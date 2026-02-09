@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
-const Navbar = ({ sections = ["home", "about", "projects", "skills", "contact"] }) => {
+const Navbar = ({ sections = ["home", "about", "projects", "gallery", "testimonials", "contact"] }) => {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
@@ -17,13 +17,27 @@ const Navbar = ({ sections = ["home", "about", "projects", "skills", "contact"] 
         }
       });
 
-      setActiveSection(current);
+      if (current !== activeSection) {
+        setActiveSection(current);
+        localStorage.setItem("last_section", current);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [sections]);
+  }, [sections, activeSection]);
+
+  // Restore section on load
+  useEffect(() => {
+    const lastSection = localStorage.getItem("last_section");
+    if (lastSection && lastSection !== "home") {
+      // Delay slightly to ensure elements are rendered
+      setTimeout(() => {
+        scrollToSection(lastSection);
+      }, 500);
+    }
+  }, []);
 
   const scrollToSection = (section) => {
     const element = document.getElementById(section);
@@ -35,6 +49,7 @@ const Navbar = ({ sections = ["home", "about", "projects", "skills", "contact"] 
         behavior: "smooth"
       });
       setActiveSection(section);
+      localStorage.setItem("last_section", section);
     }
   };
 
