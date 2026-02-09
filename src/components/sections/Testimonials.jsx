@@ -9,7 +9,7 @@ const testimonials = [
         name: "Amina Bello",
         role: "CEO of Zula Boutique",
         content: "EverbestDev built our Zula PWA store from the ground up. The offline shopping feature and the fluid mobile-first design have significantly boosted our sales in areas with poor network coverage. It feels just like a native app!",
-        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&h=150&auto=format&fit=crop",
+        avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=300&h=300&auto=format&fit=crop",
         rating: 5
     },
     {
@@ -17,7 +17,7 @@ const testimonials = [
         name: "Dr. Olumide Adeleke",
         role: "Foundation Director at SSCF",
         content: "The Digital Health Platform developed for SSCF has revolutionized how we provide medical wisdom to the sickle cell community in Nigeria. The genotype checker and video hubs are seamless, impactful, and vital resources.",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&h=150&auto=format&fit=crop",
+        avatar: "https://images.unsplash.com/photo-1612349317150-e413f6a5b1f8?q=80&w=300&h=300&auto=format&fit=crop",
         rating: 5
     },
     {
@@ -25,7 +25,7 @@ const testimonials = [
         name: "Olawoore Sufyan Ayemu",
         role: "CEO, ILI-Nigeria",
         content: "The Translation Hub simplified our complex interpreting workflows beyond expectations. The automated email notifications and secure file management have made our multilingual translation process 60% more efficient.",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&h=150&auto=format&fit=crop",
+        avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&h=300&auto=format&fit=crop",
         rating: 5
     }
 ];
@@ -45,14 +45,14 @@ const Testimonials = () => {
     return (
         <section
             id="testimonials"
-            className="py-24 sm:py-32 relative overflow-hidden"
+            className="py-16 sm:py-20 relative overflow-hidden"
             style={{ backgroundColor: colors.DARK_BG }}
         >
 
 
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                 <motion.div
-                    className="text-center mb-16"
+                    className="text-center mb-10"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -119,13 +119,35 @@ const Testimonials = () => {
                         </motion.div>
                     </AnimatePresence>
 
-                    {/* Navigation Controls */}
-                    <div className="flex justify-center md:justify-end gap-4 mt-8">
+                    {/* Side Navigation Buttons (Desktop) */}
+                    <div className="hidden md:block">
+                        <motion.button
+                            whileHover={{ scale: 1.1, backgroundColor: `${colors.NEON_CYAN}20` }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={prevTestimonial}
+                            className="absolute left-[-60px] top-1/2 -translate-y-1/2 p-4 rounded-full border border-white/10 bg-white/5 text-white transition-all shadow-xl backdrop-blur-md"
+                            style={{ borderColor: `${colors.BORDER}20` }}
+                        >
+                            <ChevronLeft size={24} />
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.1, backgroundColor: `${colors.NEON_CYAN}20` }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={nextTestimonial}
+                            className="absolute right-[-60px] top-1/2 -translate-y-1/2 p-4 rounded-full border border-white/10 bg-white/5 text-white transition-all shadow-xl backdrop-blur-md"
+                            style={{ borderColor: `${colors.BORDER}20` }}
+                        >
+                            <ChevronRight size={24} />
+                        </motion.button>
+                    </div>
+
+                    {/* Mobile Navigation Controls */}
+                    <div className="flex md:hidden justify-center gap-4 mt-8">
                         <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={prevTestimonial}
-                            className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-cyan-500/20 text-white transition-colors"
+                            className="p-3 rounded-full border border-white/10 bg-white/5 text-white"
                         >
                             <ChevronLeft size={24} />
                         </motion.button>
@@ -133,7 +155,7 @@ const Testimonials = () => {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={nextTestimonial}
-                            className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-cyan-500/20 text-white transition-colors"
+                            className="p-3 rounded-full border border-white/10 bg-white/5 text-white"
                         >
                             <ChevronRight size={24} />
                         </motion.button>

@@ -14,7 +14,7 @@
   --text-tertiary-light: #64748b;
   --border-light: #cbd5e1;
   --border-accent-light: #0891b220;
-  
+
   /* Dark Theme Colors */
   --neon-cyan-dark: #00ffff;
   --neon-purple-dark: #a855f7;
@@ -108,17 +108,22 @@ html {
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
   background: #0e7490;
 }
+
 /* Custom Scrollbar Utility */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: var(--neon-cyan);
   border-radius: 10px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-purple);
+  background: var(--neon-cyan);
+  filter: brightness(1.2);
 }

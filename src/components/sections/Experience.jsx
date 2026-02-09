@@ -36,24 +36,23 @@ const TimelineCard = ({ data, index, colors }) => (
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.2 }}
-    className="relative pl-8 sm:pl-0 sm:flex sm:items-center sm:justify-between group"
+    className="relative pl-10 sm:pl-0 sm:flex sm:items-center sm:justify-between group w-full"
   >
-    {/* Center Line & Dot */}
-    <div className="absolute left-0 sm:left-1/2 top-0 bottom-0 w-px -ml-px bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent sm:block hidden"
-      style={{ borderColor: `${colors.NEON_CYAN}40` }} />
-
-    <div className={`absolute left-0 sm:left-1/2 w-4 h-4 rounded-full border-2 transform -translate-x-1/2 mt-6 sm:mt-0 z-10 transition-all duration-300 group-hover:scale-125`}
+    {/* Center Line Dot */}
+    <div
+      className="absolute left-0 sm:left-1/2 w-4 h-4 rounded-full border-2 transform -translate-x-1/2 mt-6 sm:mt-0 z-10 transition-all duration-300 group-hover:scale-125"
       style={{
         backgroundColor: colors.DARK_BG,
         borderColor: colors.NEON_CYAN,
-        boxShadow: `0 0 10px ${colors.NEON_CYAN}`
+        boxShadow: `0 0 10px ${colors.NEON_CYAN}`,
+        left: 'calc(0px)' // Aligns with the line at left-4 by adjusting parent relative positioning if needed, or just using 4px
       }}
     />
 
     {/* Content Card - Left or Right */}
-    <div className={`sm:w-[45%] ${index % 2 === 0 ? 'sm:mr-auto sm:text-right' : 'sm:ml-auto sm:text-left'} relative`}>
+    <div className={`w-full sm:w-[45%] ${index % 2 === 0 ? 'sm:mr-auto sm:text-right' : 'sm:ml-auto sm:text-left'} relative`}>
       <motion.div
-        className="p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:-translate-y-1"
+        className="p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 overflow-hidden"
         style={{
           backgroundColor: `${colors.CARD_BG}60`,
           borderColor: `${colors.BORDER}40`,
@@ -65,46 +64,46 @@ const TimelineCard = ({ data, index, colors }) => (
         }}
       >
         <div className={`flex flex-col ${index % 2 === 0 ? 'sm:items-end' : 'sm:items-start'}`}>
+          {/* Mobile Date Badge */}
+          <div className="sm:hidden mb-4 self-start">
+            <span className="text-[10px] font-mono px-2 py-1 rounded-full uppercase tracking-tighter" style={{ backgroundColor: `${colors.NEON_CYAN}20`, color: colors.NEON_CYAN, border: `1px solid ${colors.NEON_CYAN}30` }}>
+              {data.duration}
+            </span>
+          </div>
+
           <h3 className="text-xl font-bold mb-1" style={{ color: colors.TEXT_PRIMARY }}>{data.role}</h3>
           <div className="flex items-center gap-2 mb-3 text-sm font-medium" style={{ color: colors.NEON_CYAN }}>
             <Building2 size={14} />
             <span>{data.company}</span>
           </div>
 
-          <p className="text-sm leading-relaxed mb-4" style={{ color: colors.TEXT_SECONDARY }}>
+          <p className="text-sm leading-relaxed mb-6 opacity-80" style={{ color: colors.TEXT_SECONDARY }}>
             {data.description}
           </p>
 
           <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'sm:justify-end' : 'sm:justify-start'}`}>
             {data.tech.map(t => (
-              <span key={t} className="text-xs px-2 py-1 rounded bg-white/5 border" style={{ borderColor: `${colors.BORDER}`, color: colors.TEXT_TERTIARY }}>
+              <span key={t} className="text-[10px] px-2 py-0.5 rounded-md bg-white/5 border font-medium" style={{ borderColor: `${colors.BORDER}40`, color: colors.TEXT_TERTIARY }}>
                 {t}
               </span>
             ))}
           </div>
 
-          <div className={`absolute top-4 ${index % 2 === 0 ? 'left-4' : 'right-4'} opacity-20`}>
-            <span className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-transparent font-outline-1">
+          <div className={`absolute -bottom-2 ${index % 2 === 0 ? 'left-4' : 'right-4'} opacity-10 pointer-events-none`}>
+            <span className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-transparent">
               0{data.id}
             </span>
           </div>
         </div>
       </motion.div>
 
-      {/* Date Label - Opposite Side */}
+      {/* Desktop Date Label - Opposite Side */}
       <div className={`absolute top-1/2 -translate-y-1/2 ${index % 2 === 0 ? 'right-[-120%] text-left pl-8' : 'left-[-120%] text-right pr-8'} hidden sm:block w-full`}>
         <div className="flex items-center gap-2 font-mono text-sm tracking-widest opacity-70" style={{ color: colors.TEXT_TERTIARY }}>
           <Calendar size={14} />
           {data.duration}
         </div>
       </div>
-    </div>
-
-    {/* Mobile Date (inside card for mobile) */}
-    <div className="sm:hidden mb-2 pl-6">
-      <span className="text-xs font-mono px-2 py-1 rounded" style={{ backgroundColor: `${colors.NEON_CYAN}15`, color: colors.NEON_CYAN }}>
-        {data.duration}
-      </span>
     </div>
   </motion.div>
 );
@@ -115,7 +114,7 @@ const ExperienceTimeline = () => {
   return (
     <section
       id="experience"
-      className="py-24 sm:py-32 relative overflow-hidden"
+      className="py-16 sm:py-20 relative overflow-hidden"
       style={{ backgroundColor: colors.DARK_BG }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">

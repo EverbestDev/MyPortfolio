@@ -97,7 +97,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-24 sm:py-32 relative overflow-hidden"
+      className="py-16 sm:py-20 relative overflow-hidden"
       style={{ backgroundColor: colors.DARK_BG }}
     >
       {/* Background Decor */}
@@ -110,7 +110,7 @@ const About = () => {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

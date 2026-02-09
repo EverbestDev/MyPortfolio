@@ -176,17 +176,17 @@ const Chatbot = () => {
                             whileHover={{ scale: 1.1, backgroundColor: colors.NEON_CYAN, color: colors.DARK_BG }}
                             whileTap={{ scale: 0.9 }}
                             onClick={scrollToTop}
-                            className="p-3.5 rounded-xl pointer-events-auto transition-colors duration-300"
+                            className="p-2 rounded-lg pointer-events-auto transition-colors duration-300"
                             style={{
                                 backgroundColor: `${colors.CARD_BG}e6`,
                                 border: `1px solid ${colors.NEON_CYAN}40`,
                                 color: colors.NEON_CYAN,
                                 backdropFilter: "blur(12px)",
-                                boxShadow: `0 8px 32px -8px rgba(0,0,0,0.4), 0 0 16px ${colors.NEON_CYAN}20`,
+                                boxShadow: `0 4px 12px -4px rgba(0,0,0,0.4), 0 0 8px ${colors.NEON_CYAN}10`,
                             }}
                             aria-label="Scroll to top"
                         >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="m18 15-6-6-6 6" />
                             </svg>
                         </motion.button>
@@ -209,26 +209,26 @@ const Chatbot = () => {
                                     backdropFilter: "blur(12px)"
                                 }}
                             >
-                                <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                                <p className="text-sm font-semibold italic opacity-90">Everbot is online</p>
+                                <span className="flex h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+                                <p className="text-[11px] font-semibold italic opacity-90">Everbot is online</p>
                             </motion.div>
 
                             <motion.button
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setIsOpen(true)}
-                                className="p-4 rounded-2xl shadow-2xl relative group overflow-hidden"
+                                className="w-9 h-9 rounded-lg shadow-lg relative group overflow-hidden"
                                 style={{
                                     backgroundColor: colors.NEON_CYAN,
                                     color: colors.DARK_BG,
-                                    boxShadow: `0 12px 40px -12px ${colors.NEON_CYAN}80`,
+                                    boxShadow: `0 6px 20px -6px ${colors.NEON_CYAN}60`,
                                 }}
                                 aria-label="Open chat"
                             >
                                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                                <Bot size={28} className="relative z-10" />
-                                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-lg border-2 border-white animate-bounce flex items-center justify-center">
-                                    <span className="text-[10px] font-bold text-white">!</span>
+                                <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg relative z-10" />
+                                <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border border-white animate-bounce flex items-center justify-center">
+                                    <span className="text-[7px] font-bold text-white">!</span>
                                 </span>
                             </motion.button>
                         </div>
@@ -277,7 +277,7 @@ const Chatbot = () => {
                                             border: `1px solid ${colors.NEON_CYAN}20`
                                         }}
                                     >
-                                        <Bot size={24} style={{ color: colors.NEON_CYAN }} />
+                                        <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-xl" />
                                         <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-slate-900 shadow-sm" />
                                     </div>
                                     <div>
@@ -322,15 +322,15 @@ const Chatbot = () => {
                                             }}
                                         >
                                             {message.type === 'bot' ? (
-                                                <Bot size={18} style={{ color: colors.NEON_CYAN }} />
+                                                <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg" />
                                             ) : (
                                                 <User size={18} style={{ color: colors.TEXT_SECONDARY }} />
                                             )}
                                         </div>
                                         <div
                                             className={`max-w-[82%] px-4 py-3 shadow-sm relative ${message.type === 'bot'
-                                                    ? 'rounded-2xl rounded-tl-none'
-                                                    : 'rounded-2xl rounded-tr-none'
+                                                ? 'rounded-2xl rounded-tl-none'
+                                                : 'rounded-2xl rounded-tr-none'
                                                 }`}
                                             style={{
                                                 backgroundColor: message.type === 'bot' ? `${colors.CARD_BG}90` : colors.NEON_CYAN,
@@ -361,7 +361,7 @@ const Chatbot = () => {
                                             className="w-9 h-9 rounded-xl flex items-center justify-center animate-pulse"
                                             style={{ backgroundColor: `${colors.NEON_CYAN}15` }}
                                         >
-                                            <Bot size={18} style={{ color: colors.NEON_CYAN }} />
+                                            <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg" />
                                         </div>
                                         <div
                                             className="px-5 py-3.5 rounded-2xl rounded-tl-none flex gap-1.5 items-center shadow-inner"

@@ -253,28 +253,50 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                     <Link
                       to="/github"
                       onClick={() => setIsOpen(false)}
-                      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all bg-white/5 border border-white/10"
+                      style={{
+                        color: colors.NEON_CYAN,
+                        boxShadow: `0 2px 10px ${colors.NEON_CYAN}10`
+                      }}
+                    >
+                      <Github size={18} />
+                    </Link>
+                    <SocialLink
+                      href="https://www.linkedin.com/in/everbest-studios-198464291"
+                      icon={<Linkedin size={18} />}
+                      label="LinkedIn"
+                      colors={colors}
+                    />
+                    <SocialLink
+                      href="mailto:EverbestDev@gmail.com"
+                      icon={<Mail size={18} />}
+                      label="Email"
+                      colors={colors}
+                    />
+                    <motion.a
+                      href="https://wa.me/2349117450722"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all grayscale hover:grayscale-0"
                       style={{
                         background: `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`,
                         color: colors.NEON_CYAN,
                         boxShadow: `0 2px 10px ${colors.NEON_CYAN}10`,
                         border: `1px solid ${colors.NEON_CYAN}20`
                       }}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
                     >
-                      <Github size={18} />
-                    </Link>
-                    <SocialLink
-                      href="https://linkedin.com/in/yourusername"
-                      icon={<Linkedin size={18} />}
-                      label="LinkedIn"
-                      colors={colors}
-                    />
-                    <SocialLink
-                      href="mailto:your.email@example.com"
-                      icon={<Mail size={18} />}
-                      label="Email"
-                      colors={colors}
-                    />
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.821 4.754c-1.836 0-3.633-.485-5.204-1.402l-.374-.223-3.875 1.015 1.034-3.778-.245-.39a9.66 9.66 0 01-1.477-5.147C2.5 4.545 6.64 1 11.66 1c2.43 0 4.717.946 6.438 2.668 1.72 1.722 2.66 4.008 2.66 6.439 0 5.056-4.14 8.604-9.16 8.604m10.153-12.724C19.083 2.697 15.503 1 11.66 1 5.23 1 .01 6.225.01 12.655c0 2.05.534 4.054 1.55 5.85L0 23l4.63-.122-4.63-1.212c1.71 1.03 3.67 1.577 5.7 1.577h.001c6.43 0 11.65-5.225 11.65-11.655 0-3.116-1.21-6.046-3.41-8.245z" />
+                      </svg>
+                    </motion.a>
                   </div>
                 </div>
               </div>

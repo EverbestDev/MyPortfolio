@@ -9,8 +9,10 @@ import {
   XCircle,
   Phone,
   Smartphone,
-  ArrowRight
+  ArrowRight,
+  AlertCircle
 } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 import { useThemeColors } from "../../hooks/useThemeColors";
 
 const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || "YOUR_FORMSPREE_ENDPOINT_HERE";
@@ -24,6 +26,9 @@ const Contact = () => {
     message: "",
   });
   const [status, setStatus] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState(null); // 'validation' | 'success' | 'error'
+  const [missingFields, setMissingFields] = useState([]);
   const isSubmitting = status === "submitting";
 
   const handleChange = (e) => {
@@ -38,12 +43,26 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Manual Validation for Everbot
+    const required = ["name", "email", "subject", "message"];
+    const empty = required.filter(field => !formData[field].trim());
+
+    if (empty.length > 0) {
+      setMissingFields(empty);
+      setModalType("validation");
+      setShowModal(true);
+      return;
+    }
+
     setStatus("submitting");
 
     try {
-      if (FORMSPREE_ENDPOINT === "YOUR_FORMSPREE_ENDPOINT_HERE") {
+      if (FORMSPREE_ENDPOINT === "YOUR_FORMSPREE_ENDPOINT_HERE" || !FORMSPREE_ENDPOINT.startsWith("http")) {
         await new Promise((resolve) => setTimeout(resolve, 1500));
         setStatus("success");
+        setModalType("success");
+        setShowModal(true);
         setFormData({ name: "", email: "", subject: "", message: "" });
         return;
       }
@@ -59,15 +78,22 @@ const Contact = () => {
 
       if (response.ok) {
         setStatus("success");
+        setModalType("success");
+        setShowModal(true);
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         setStatus("error");
+        setModalType("error");
+        setShowModal(true);
       }
     } catch (error) {
       console.error("Submission error:", error);
       setStatus("error");
+      setModalType("error");
+      setShowModal(true);
     } finally {
-      setTimeout(() => setStatus(null), 5000);
+      // Keep state for modal, but clear loading
+      if (status === "submitting") setStatus(null);
     }
   };
 
@@ -166,14 +192,13 @@ const Contact = () => {
               boxShadow: `0 20px 40px -20px rgba(0,0,0,0.5)`
             }}
           >
-            <form onSubmit={handleSubmit} className="relative z-10">
+            <form onSubmit={handleSubmit} className="relative z-10" noValidate>
               <div className="grid sm:grid-cols-2 gap-4">
                 <InputField
                   label="Name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  required
                   colors={colors}
                 />
                 <InputField
@@ -182,7 +207,6 @@ const Contact = () => {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
                   colors={colors}
                 />
               </div>
@@ -191,7 +215,6 @@ const Contact = () => {
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
-                required
                 colors={colors}
               />
               <InputField
@@ -199,7 +222,6 @@ const Contact = () => {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                required
                 textArea
                 colors={colors}
               />
@@ -218,79 +240,141 @@ const Contact = () => {
                 {isSubmitting ? <Loader2 className="animate-spin" /> : <Send size={20} />}
                 {isSubmitting ? "Sending..." : "Send Message"}
               </motion.button>
-
-              {status === "success" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-4 p-4 rounded-xl flex items-center gap-3 bg-green-500/10 text-green-400 border border-green-500/20"
-                >
-                  <CheckCircle size={20} />
-                  <span>Message sent successfully! I'll get back to you soon.</span>
-                </motion.div>
-              )}
-
-              {status === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-4 p-4 rounded-xl flex items-center gap-3 bg-red-500/10 text-red-400 border border-red-500/20"
-                >
-                  <XCircle size={20} />
-                  <span>Something went wrong. Please try again.</span>
-                </motion.div>
-              )}
             </form>
           </motion.div>
         </div>
       </div>
+
+      {/* Everbot Feedback Modal */}
+      <AnimatePresence>
+        {showModal && (
+          <div className="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setShowModal(false)}
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative max-w-sm w-full p-8 rounded-[2.5rem] border text-center overflow-hidden"
+              style={{
+                backgroundColor: colors.DARK_BG,
+                borderColor: `${colors.BORDER}40`,
+                boxShadow: `0 25px 50px -12px rgba(0,0,0,0.5)`
+              }}
+            >
+              {/* Everbot Avatar */}
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-cyan-500/30">
+                    <img src="/public/pfp.jpg" alt="Everbot" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-4 border-slate-900 shadow-sm" />
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-xl font-bold" style={{ color: colors.TEXT_PRIMARY }}>
+                  {modalType === 'validation' ? 'Everbot Detects...' : 'Everbot Says:'}
+                </h3>
+
+                <p className="text-sm leading-relaxed" style={{ color: colors.TEXT_SECONDARY }}>
+                  {modalType === 'validation' && (
+                    <>
+                      It looks like the <span className="font-bold text-cyan-400 capitalize">{missingFields.join(", ")}</span> {missingFields.length > 1 ? 'sections are' : 'section is'} yet to be filled. Please complete {missingFields.length > 1 ? 'them' : 'it'} so I can deliver your message!
+                    </>
+                  )}
+                  {modalType === 'success' && (
+                    <>
+                      <span className="text-green-400 font-bold block mb-2 text-lg">Message Sent Successfully!</span>
+                      Your inquiry has been logged in my neural circuits. Should I contact you via email once I've processed this?
+                    </>
+                  )}
+                  {modalType === 'error' && (
+                    <>
+                      I encountered a disturbance in the digital force. Please try beaming your message again in a few moments.
+                    </>
+                  )}
+                </p>
+
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="w-full py-3 rounded-xl font-bold transition-all mt-4"
+                  style={{
+                    backgroundColor: colors.NEON_CYAN,
+                    color: colors.DARK_BG
+                  }}
+                >
+                  {modalType === 'validation' ? "I'll fix it!" : "Acknowledged"}
+                </button>
+              </div>
+
+              {/* Decorative Glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-cyan-500/10 blur-2xl rounded-full pointer-events-none" />
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
 
 const InputField = ({ label, name, type = "text", required, value, onChange, textArea = false, colors }) => (
   <div className="relative mb-6">
-    {textArea ? (
-      <textarea
-        name={name}
-        required={required}
-        value={value}
-        onChange={onChange}
-        rows="4"
-        className="peer w-full px-4 py-3 rounded-xl bg-transparent border outline-none transition-all resize-none"
-        style={{
-          borderColor: `${colors.BORDER}60`,
-          color: colors.TEXT_PRIMARY,
-          backgroundColor: `${colors.CARD_BG}40`
-        }}
-        placeholder=" "
+    <div className="relative rounded-xl overflow-hidden">
+      {textArea ? (
+        <textarea
+          name={name}
+          required={required}
+          value={value}
+          onChange={onChange}
+          rows="4"
+          className="peer w-full px-4 py-3 bg-transparent border-0 outline-none transition-all resize-none relative z-10"
+          style={{
+            color: colors.TEXT_PRIMARY,
+            backgroundColor: `${colors.CARD_BG}40`
+          }}
+          placeholder=" "
+        />
+      ) : (
+        <input
+          type={type}
+          name={name}
+          required={required}
+          value={value}
+          onChange={onChange}
+          className="peer w-full px-4 py-3 bg-transparent border-0 outline-none transition-all relative z-10"
+          style={{
+            color: colors.TEXT_PRIMARY,
+            backgroundColor: `${colors.CARD_BG}40`
+          }}
+          placeholder=" "
+        />
+      )}
+      {/* Background/Border Container */}
+      <div
+        className="absolute inset-0 border rounded-xl pointer-events-none"
+        style={{ borderColor: `${colors.BORDER}60` }}
       />
-    ) : (
-      <input
-        type={type}
-        name={name}
-        required={required}
-        value={value}
-        onChange={onChange}
-        className="peer w-full px-4 py-3 rounded-xl bg-transparent border outline-none transition-all"
-        style={{
-          borderColor: `${colors.BORDER}60`,
-          color: colors.TEXT_PRIMARY,
-          backgroundColor: `${colors.CARD_BG}40`
-        }}
-        placeholder=" "
+      {/* Animated Underline */}
+      <div
+        className="absolute bottom-0 left-0 h-[2px] w-0 bg-cyan-500 transition-all duration-500 peer-focus:w-full z-20"
+        style={{ backgroundColor: colors.NEON_CYAN }}
       />
-    )}
+    </div>
     <label
-      className="absolute left-4 top-3 text-sm pointer-events-none transition-all duration-300 peer-focus:-top-2.5 peer-focus:text-xs peer-focus:bg-black peer-focus:px-2 peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:bg-black peer-[:not(:placeholder-shown)]:px-2"
-      style={{ color: colors.TEXT_SECONDARY }}
+      className="absolute left-4 top-3 text-sm pointer-events-none transition-all duration-300 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:px-2 peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:px-2 z-30"
+      style={{
+        color: colors.TEXT_SECONDARY,
+        backgroundColor: colors.DARK_BG
+      }}
     >
       {label}
     </label>
-    <div
-      className="absolute bottom-0 left-0 h-[2px] w-0 bg-cyan-500 transition-all duration-500 peer-focus:w-full"
-      style={{ backgroundColor: colors.NEON_CYAN }}
-    />
   </div>
 );
 

@@ -13,8 +13,7 @@ const projectsData = [
     github: "#",
     live: "https://sscf.com.ng",
     iframeUrl: "https://sscf.com.ng",
-    imageUrl: "https://placehold.co/1200x800/1e1e3f/00ffff?text=SSCF+Platform",
-    featured: true,
+    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=SSCF+Platform",
   },
   {
     id: 2,
@@ -25,7 +24,7 @@ const projectsData = [
     github: "#",
     live: "https://ilin-nigeria.vercel.app",
     iframeUrl: "https://ilin-nigeria.vercel.app",
-    imageUrl: "https://placehold.co/600x400/1e1e3f/00ffff?text=ILIN+Dashboard",
+    imageUrl: "https://placehold.co/600x400/080812/00ffff?text=ILIN+Dashboard",
   },
   {
     id: 3,
@@ -36,7 +35,7 @@ const projectsData = [
     github: "#",
     live: "https://e-attendance.com.ng",
     iframeUrl: "https://e-attendance.com.ng",
-    imageUrl: "https://placehold.co/600x400/1e1e3f/00ffff?text=E-Attendance",
+    imageUrl: "https://placehold.co/600x400/080812/00ffff?text=E-Attendance",
   },
   {
     id: 4,
@@ -47,7 +46,7 @@ const projectsData = [
     github: "#",
     live: "https://zula-shop.vercel.app",
     iframeUrl: "https://zula-shop.vercel.app",
-    imageUrl: "https://placehold.co/600x400/1e1e3f/00ffff?text=Zula+Store",
+    imageUrl: "https://placehold.co/600x400/080812/00ffff?text=Zula+Store",
   },
   {
     id: 5,
@@ -58,7 +57,7 @@ const projectsData = [
     github: "#",
     live: "#",
     iframeUrl: null,
-    imageUrl: "https://placehold.co/600x400/1e1e3f/00ffff?text=Everbot+AI",
+    imageUrl: "https://placehold.co/600x400/080812/00ffff?text=Everbot+AI",
   },
   {
     id: 6,
@@ -69,7 +68,7 @@ const projectsData = [
     github: "#",
     live: "https://dynamic-empire.vercel.app/",
     iframeUrl: "https://dynamic-empire.vercel.app/",
-    imageUrl: "https://placehold.co/600x400/1e1e3f/00ffff?text=Dynamic+Empire",
+    imageUrl: "https://placehold.co/600x400/080812/00ffff?text=Dynamic+Empire",
   },
   {
     id: 7,
@@ -80,7 +79,7 @@ const projectsData = [
     github: "#",
     live: "https://booksync2.vercel.app",
     iframeUrl: "https://booksync2.vercel.app",
-    imageUrl: "https://placehold.co/600x400/1e1e3f/00ffff?text=BookSync",
+    imageUrl: "https://placehold.co/600x400/080812/00ffff?text=BookSync",
   },
 ];
 
@@ -272,12 +271,12 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-24 sm:py-32 relative overflow-hidden"
+      className="py-16 sm:py-20 relative overflow-hidden"
       style={{ backgroundColor: colors.DARK_BG }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
-          className="mb-16 md:flex md:items-end md:justify-between"
+          className="mb-10 md:flex md:items-end md:justify-between"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
