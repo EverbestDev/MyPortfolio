@@ -330,7 +330,7 @@
           
           <div class="footer">
             <p>
-              Generated for <a href="https://erbestdev.vercel.app/">erbestdev.vercel.app</a>
+              Generated for <a href="https://everbestdev.vercel.app/">everbestdev.vercel.app</a>
             </p>
             <p style="margin-top: 10px; font-size: 0.9em;">
               This sitemap follows the <a href="https://www.sitemaps.org/protocol.html" target="_blank">Sitemaps XML Protocol</a>

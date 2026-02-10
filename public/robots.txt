@@ -16,7 +16,7 @@ Disallow: /*.config.ts$
 Disallow: /package.json
 Disallow: /package-lock.json
 
-Sitemap: https://erbestdev.vercel.app/sitemap.xml
+Sitemap: https://everbestdev.vercel.app/sitemap.xml
 
 # Job Search Crawlers
 User-agent: Googlebot
