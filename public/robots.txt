@@ -1,4 +1,127 @@
+# EverbestDev Portfolio - robots.txt
+# Last Updated: 2026-02-10
+
 User-agent: *
 Allow: /
+Allow: /resume
+Allow: /github
+Allow: /src/
+Allow: /assets/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.vscode/
+Disallow: /dist/
+Disallow: /*.config.js$
+Disallow: /*.config.ts$
+Disallow: /package.json
+Disallow: /package-lock.json
 
 Sitemap: https://everbestdev.com.ng/sitemap.xml
+
+# Job Search Crawlers
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /assets/
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.png
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: LinkedInBot
+Allow: /
+Allow: /resume
+Crawl-delay: 1
+
+User-agent: Indeed-Bot
+Allow: /
+Allow: /resume
+Crawl-delay: 1
+
+User-agent: Glassdoor
+Allow: /
+Allow: /resume
+
+User-agent: ZipRecruiter
+Allow: /
+Allow: /resume
+
+User-agent: Monster
+Allow: /
+Allow: /resume
+
+User-agent: CareerBuilder
+Allow: /
+Allow: /resume
+
+User-agent: DiceBot
+Allow: /
+Allow: /resume
+
+User-agent: StackOverflowBot
+Allow: /
+Allow: /resume
+Allow: /github
+
+User-agent: GitHub-Hookshot
+Allow: /
+Allow: /github
+
+# Social Media Crawlers
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Block Malicious Bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+Crawl-delay: 1
