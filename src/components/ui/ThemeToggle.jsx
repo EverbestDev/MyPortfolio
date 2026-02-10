@@ -77,8 +77,11 @@ const ThemeToggle = ({ className = "" }) => {
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
                                         transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
-                                        className="fixed inset-0 bg-black/70 backdrop-blur-sm"
-                                        style={{ zIndex: 9999 }}
+                                        className="fixed inset-0 backdrop-blur-sm"
+                                        style={{
+                                            zIndex: 9999,
+                                            backgroundColor: `${colors.BACKGROUND}80`
+                                        }}
                                         onClick={() => setIsOpen(false)}
                                         aria-hidden="true"
                                     />
@@ -98,9 +101,9 @@ const ThemeToggle = ({ className = "" }) => {
                                         style={{
                                             zIndex: 10000,
                                             maxHeight: '85vh',
-                                            background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.99))',
-                                            borderColor: 'rgba(100, 116, 139, 0.2)',
-                                            boxShadow: '0 -20px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.08)',
+                                            backgroundColor: colors.SURFACE,
+                                            borderColor: `${colors.BORDER}40`,
+                                            boxShadow: `0 -20px 60px -15px ${colors.BACKGROUND}90, 0 0 0 1px ${colors.BORDER}20, inset 0 1px 0 0 ${colors.BORDER}15`,
                                         }}
                                         role="dialog"
                                         aria-modal="true"
@@ -112,7 +115,7 @@ const ThemeToggle = ({ className = "" }) => {
                                             <div
                                                 className="w-12 h-1.5 rounded-full transition-all"
                                                 style={{
-                                                    backgroundColor: 'rgba(148, 163, 184, 0.4)',
+                                                    backgroundColor: `${colors.TEXT_SECONDARY}40`,
                                                 }}
                                             />
                                         </div>
@@ -164,13 +167,13 @@ const ThemeToggle = ({ className = "" }) => {
                                                                 minHeight: '72px',
                                                                 backgroundColor: isActive
                                                                     ? `${colors.NEON_CYAN}12`
-                                                                    : 'rgba(30, 41, 59, 0.4)',
+                                                                    : `${colors.BACKGROUND}60`,
                                                                 border: isActive
                                                                     ? `2px solid ${colors.NEON_CYAN}50`
-                                                                    : '2px solid rgba(71, 85, 105, 0.2)',
+                                                                    : `2px solid ${colors.BORDER}30`,
                                                                 boxShadow: isActive
-                                                                    ? `0 8px 24px -8px ${colors.NEON_CYAN}40, inset 0 1px 0 rgba(255, 255, 255, 0.1)`
-                                                                    : 'inset 0 1px 0 rgba(255, 255, 255, 0.03)',
+                                                                    ? `0 8px 24px -8px ${colors.NEON_CYAN}40, inset 0 1px 0 ${colors.BORDER}20`
+                                                                    : `inset 0 1px 0 ${colors.BORDER}10`,
                                                             }}
                                                             whileTap={{ scale: 0.97 }}
                                                             aria-label={`${themeOption.label} theme${isActive ? ', currently selected' : ''}`}
@@ -193,18 +196,18 @@ const ThemeToggle = ({ className = "" }) => {
                                                                     style={{
                                                                         backgroundColor: isActive
                                                                             ? `${colors.NEON_CYAN}25`
-                                                                            : 'rgba(51, 65, 85, 0.5)',
+                                                                            : `${colors.BORDER}20`,
                                                                         boxShadow: isActive
-                                                                            ? `0 0 20px ${colors.NEON_CYAN}25, inset 0 1px 2px rgba(255, 255, 255, 0.1)`
-                                                                            : 'inset 0 1px 2px rgba(0, 0, 0, 0.2)'
+                                                                            ? `0 0 20px ${colors.NEON_CYAN}25, inset 0 1px 2px ${colors.BORDER}20`
+                                                                            : `inset 0 1px 2px ${colors.BACKGROUND}40`
                                                                     }}
                                                                 >
                                                                     <Icon
                                                                         size={22}
-                                                                        className={`transition-all duration-300 ${isActive
-                                                                                ? "text-cyan-300"
-                                                                                : "text-slate-400 group-hover:text-slate-300"
-                                                                            }`}
+                                                                        style={{
+                                                                            color: isActive ? colors.NEON_CYAN : colors.TEXT_SECONDARY
+                                                                        }}
+                                                                        className="transition-all duration-300"
                                                                         strokeWidth={2.5}
                                                                     />
                                                                 </div>
@@ -212,11 +215,11 @@ const ThemeToggle = ({ className = "" }) => {
                                                                 {/* Label */}
                                                                 <div className="flex flex-col items-start">
                                                                     <span
-                                                                        className={`text-base font-bold tracking-wide transition-all duration-300 ${isActive
-                                                                                ? "text-white"
-                                                                                : "text-slate-300 group-hover:text-white"
-                                                                            }`}
-                                                                        style={{ letterSpacing: '-0.01em' }}
+                                                                        className="text-base font-bold tracking-wide transition-all duration-300"
+                                                                        style={{
+                                                                            letterSpacing: '-0.01em',
+                                                                            color: isActive ? colors.TEXT_PRIMARY : colors.TEXT_SECONDARY
+                                                                        }}
                                                                     >
                                                                         {themeOption.label}
                                                                     </span>
@@ -264,10 +267,10 @@ const ThemeToggle = ({ className = "" }) => {
                                                 className="w-full py-4 rounded-2xl font-semibold text-base transition-all duration-300 border-2"
                                                 style={{
                                                     minHeight: '56px',
-                                                    backgroundColor: 'rgba(30, 41, 59, 0.5)',
-                                                    borderColor: 'rgba(71, 85, 105, 0.3)',
+                                                    backgroundColor: `${colors.BACKGROUND}60`,
+                                                    borderColor: `${colors.BORDER}40`,
                                                     color: colors.TEXT_SECONDARY,
-                                                    boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                                                    boxShadow: `inset 0 1px 0 ${colors.BORDER}10`
                                                 }}
                                                 aria-label="Close theme selector"
                                             >
