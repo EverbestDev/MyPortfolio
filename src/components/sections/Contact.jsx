@@ -337,7 +337,7 @@ const InputField = ({ label, name, type = "text", required, value, onChange, tex
           value={value}
           onChange={onChange}
           rows="4"
-          className="peer w-full px-4 py-3 bg-transparent border-0 outline-none transition-all resize-none relative z-10"
+          className="peer w-full px-4 pt-6 pb-3 bg-transparent border-0 outline-none transition-all resize-none relative z-10"
           style={{
             color: colors.TEXT_PRIMARY,
             backgroundColor: `${colors.CARD_BG}40`
@@ -351,7 +351,7 @@ const InputField = ({ label, name, type = "text", required, value, onChange, tex
           required={required}
           value={value}
           onChange={onChange}
-          className="peer w-full px-4 py-3 bg-transparent border-0 outline-none transition-all relative z-10"
+          className="peer w-full px-4 pt-6 pb-3 bg-transparent border-0 outline-none transition-all relative z-10"
           style={{
             color: colors.TEXT_PRIMARY,
             backgroundColor: `${colors.CARD_BG}40`
@@ -360,25 +360,25 @@ const InputField = ({ label, name, type = "text", required, value, onChange, tex
         />
       )}
 
+      <label
+        className="absolute left-4 top-4 text-base pointer-events-none transition-all duration-300 peer-focus:top-2 peer-focus:text-xs peer-focus:font-medium peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:font-medium"
+        style={{
+          color: colors.TEXT_SECONDARY
+        }}
+      >
+        {label}
+      </label>
+
       <div
-        className="absolute inset-0 border rounded-xl pointer-events-none"
+        className="absolute inset-0 border rounded-xl pointer-events-none transition-colors duration-300 peer-focus:border-cyan-500/60"
         style={{ borderColor: `${colors.BORDER}60` }}
       />
 
       <div
-        className="absolute bottom-0 left-0 h-[2px] w-0 bg-cyan-500 transition-all duration-500 peer-focus:w-full z-20"
+        className="absolute bottom-0 left-0 right-0 h-[2px] w-0 transition-all duration-500 peer-focus:w-full rounded-b-xl"
         style={{ backgroundColor: colors.NEON_CYAN }}
       />
     </div>
-    <label
-      className="absolute left-4 top-3 text-sm pointer-events-none transition-all duration-300 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:px-2 peer-[:not(:placeholder-shown)]:-top-2.5 peer-[:not(:placeholder-shown)]:text-sm peer-[:not(:placeholder-shown)]:px-2 z-30"
-      style={{
-        color: colors.TEXT_SECONDARY,
-        backgroundColor: colors.DARK_BG
-      }}
-    >
-      {label}
-    </label>
   </div>
 );
 

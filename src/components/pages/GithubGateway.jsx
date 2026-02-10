@@ -2,13 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
     Github,
-    ArrowRight,
     ChevronLeft,
     Code2,
     Star,
     GitFork,
     Terminal,
-    Globe,
     ExternalLink
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -126,7 +124,7 @@ const GithubGateway = () => {
                         </div>
                     </motion.div>
 
-                    {/* Right Side: Visual/Stats */}
+                    {/* Right Side: Profile Card */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -155,12 +153,12 @@ const GithubGateway = () => {
 
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                                        <div className="text-2xl font-bold tracking-tight" style={{ color: colors.NEON_CYAN }}>50+</div>
-                                        <div className="text-[10px] uppercase opacity-50 font-semibold mt-1">Total Projects</div>
+                                        <div className="text-2xl font-bold tracking-tight" style={{ color: colors.NEON_CYAN }}>Fullstack</div>
+                                        <div className="text-[10px] uppercase opacity-50 font-semibold mt-1">Focus Stack</div>
                                     </div>
                                     <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                                        <div className="text-2xl font-bold tracking-tight" style={{ color: colors.TEXT_PRIMARY }}>Fullstack</div>
-                                        <div className="text-[10px] uppercase opacity-50 font-semibold mt-1">Focus Stack</div>
+                                        <div className="text-2xl font-bold tracking-tight" style={{ color: colors.TEXT_PRIMARY }}>MERN</div>
+                                        <div className="text-[10px] uppercase opacity-50 font-semibold mt-1">Primary Tech</div>
                                     </div>
                                 </div>
 
