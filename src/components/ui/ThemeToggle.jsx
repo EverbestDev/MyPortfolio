@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Monitor, Check } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -8,6 +9,17 @@ const ThemeToggle = ({ className = "" }) => {
     const { theme, setTheme } = useTheme();
     const colors = useThemeColors();
     const [isOpen, setIsOpen] = React.useState(false);
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const themes = [
         { name: 'light', icon: Sun, label: 'Light' },
@@ -55,159 +67,295 @@ const ThemeToggle = ({ className = "" }) => {
             <AnimatePresence>
                 {isOpen && (
                     <>
-                        {/* Backdrop - Only on Mobile */}
-                        {window.innerWidth < 768 && (
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                                className="fixed inset-0 bg-black/60 backdrop-blur-md"
-                                style={{ zIndex: 9999 }}
-                                onClick={() => setIsOpen(false)}
-                            />
-                        )}
+                        {isMobile ? (
+                            // Mobile: Use portal for full-screen modal with bottom sheet
+                            typeof document !== 'undefined' && ReactDOM.createPortal(
+                                <>
+                                    {/* Full-screen backdrop with blur */}
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+                                        className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+                                        style={{ zIndex: 9999 }}
+                                        onClick={() => setIsOpen(false)}
+                                        aria-hidden="true"
+                                    />
 
-                        {/* Desktop Backdrop - Invisible click area */}
-                        {window.innerWidth >= 768 && (
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="fixed inset-0 z-[90] hidden md:block"
-                                onClick={() => setIsOpen(false)}
-                            />
-                        )}
+                                    {/* Bottom Sheet Modal - Slides up from bottom */}
+                                    <motion.div
+                                        initial={{ y: '100%', opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        exit={{ y: '100%', opacity: 0 }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 350,
+                                            damping: 35,
+                                            mass: 0.5
+                                        }}
+                                        className="fixed left-0 right-0 bottom-0 rounded-t-[32px] shadow-2xl border-t border-x backdrop-blur-3xl"
+                                        style={{
+                                            zIndex: 10000,
+                                            maxHeight: '85vh',
+                                            background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.99))',
+                                            borderColor: 'rgba(100, 116, 139, 0.2)',
+                                            boxShadow: '0 -20px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.08)',
+                                        }}
+                                        role="dialog"
+                                        aria-modal="true"
+                                        aria-labelledby="theme-modal-title"
+                                        aria-describedby="theme-modal-description"
+                                    >
+                                        {/* Drag Indicator */}
+                                        <div className="flex justify-center pt-3 pb-2">
+                                            <div
+                                                className="w-12 h-1.5 rounded-full transition-all"
+                                                style={{
+                                                    backgroundColor: 'rgba(148, 163, 184, 0.4)',
+                                                }}
+                                            />
+                                        </div>
 
-                        {/* Theme Selection Container */}
-                        <motion.div
-                            initial={
-                                window.innerWidth < 768
-                                    ? { opacity: 0, scale: 0.9, y: 20 }
-                                    : { opacity: 0, y: 8, scale: 0.95 }
-                            }
-                            animate={
-                                window.innerWidth < 768
-                                    ? { opacity: 1, scale: 1, y: 0 }
-                                    : { opacity: 1, y: 0, scale: 1 }
-                            }
-                            exit={
-                                window.innerWidth < 768
-                                    ? { opacity: 0, scale: 0.9, y: 20 }
-                                    : { opacity: 0, y: 8, scale: 0.95 }
-                            }
-                            transition={{
-                                type: "spring",
-                                stiffness: 400,
-                                damping: 30,
-                                mass: 0.8
-                            }}
-                            className={`
-                                ${window.innerWidth < 768
-                                    ? "fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[300px] p-5 rounded-3xl"
-                                    : "absolute top-full right-0 mt-3 p-2 min-w-[150px] rounded-2xl"
-                                } 
-                                shadow-2xl border backdrop-blur-2xl
-                            `}
-                            style={{
-                                ...(window.innerWidth < 768 ? {
-                                    top: '50%',
-                                    transform: 'translate(-50%, -50%)',
-                                    maxHeight: 'calc(100vh - 100px)',
-                                    overflowY: 'auto',
-                                    zIndex: 10000
-                                } : { zIndex: 100 }),
-                                backgroundColor: window.innerWidth < 768 ? `${colors.CARD_BG}F8` : `${colors.CARD_BG}F0`,
-                                borderColor: `${colors.NEON_CYAN}30`,
-                                boxShadow: window.innerWidth < 768
-                                    ? `0 24px 60px -12px rgba(0, 0, 0, 0.5), 0 0 30px ${colors.NEON_CYAN}20`
-                                    : `0 12px 40px -8px rgba(0, 0, 0, 0.4), 0 0 20px ${colors.NEON_CYAN}15`,
-                            }}
-                        >
-                            {/* Mobile Header */}
-                            {window.innerWidth < 768 && (
-                                <div className="mb-4 text-center">
-                                    <h3 className="text-lg font-bold tracking-tight mb-0.5" style={{ color: colors.TEXT_PRIMARY }}>
-                                        Select Appearance
-                                    </h3>
-                                    <p className="text-xs opacity-60" style={{ color: colors.TEXT_SECONDARY }}>
-                                        Choose your preferred theme
-                                    </p>
-                                </div>
-                            )}
-
-                            <div className={window.innerWidth < 768 ? "flex flex-col gap-2.5" : "flex flex-col gap-1"}>
-                                {themes.map((themeOption) => {
-                                    const Icon = themeOption.icon;
-                                    const isActive = theme === themeOption.name;
-                                    const isMobile = window.innerWidth < 768;
-
-                                    return (
-                                        <button
-                                            key={themeOption.name}
-                                            onClick={() => {
-                                                setTheme(themeOption.name);
-                                                setIsOpen(false);
-                                            }}
-                                            className={`group flex items-center justify-between transition-all duration-200 ${isMobile ? "px-3.5 py-3 rounded-2xl" : "px-3 py-2.5 rounded-xl"
-                                                }`}
-                                            style={{
-                                                backgroundColor: isActive ? `${colors.NEON_CYAN}15` : 'transparent',
-                                                border: isMobile && isActive ? `1px solid ${colors.NEON_CYAN}30` : '1px solid transparent',
-                                                color: isActive ? colors.NEON_CYAN : colors.TEXT_SECONDARY,
-                                            }}
-                                        >
-                                            <div className={`flex items-center ${isMobile ? "gap-4" : "gap-3"}`}>
-                                                <div
-                                                    className={`rounded-lg flex items-center justify-center transition-colors ${isMobile ? "w-10 h-10 rounded-xl" : "w-8 h-8"
-                                                        }`}
+                                        {/* Content Container with padding */}
+                                        <div className="px-6 pb-8 pt-2 overflow-y-auto" style={{ maxHeight: 'calc(85vh - 24px)' }}>
+                                            {/* Mobile Header */}
+                                            <div className="mb-6 text-center">
+                                                <h3
+                                                    id="theme-modal-title"
+                                                    className="text-xl font-bold tracking-tight mb-1.5"
                                                     style={{
-                                                        backgroundColor: isActive ? `${colors.NEON_CYAN}20` : `${colors.BORDER}10`,
-                                                        boxShadow: isMobile && isActive ? `0 0 15px ${colors.NEON_CYAN}30` : 'none'
+                                                        color: colors.TEXT_PRIMARY,
+                                                        letterSpacing: '-0.02em'
                                                     }}
                                                 >
-                                                    <Icon size={isMobile ? 18 : 16} className={isActive ? "text-cyan-400" : "opacity-70 group-hover:opacity-100"} />
-                                                </div>
-                                                <span className={`tracking-wide ${isMobile
-                                                    ? "text-base font-bold"
-                                                    : "text-sm font-semibold"
-                                                    } ${isActive ? "text-white" : "opacity-80 group-hover:opacity-100"}`}>
-                                                    {themeOption.label}
-                                                </span>
+                                                    Choose Theme
+                                                </h3>
+                                                <p
+                                                    id="theme-modal-description"
+                                                    className="text-sm"
+                                                    style={{
+                                                        color: colors.TEXT_SECONDARY,
+                                                        opacity: 0.7
+                                                    }}
+                                                >
+                                                    Select your preferred appearance
+                                                </p>
                                             </div>
 
-                                            {isActive && (
-                                                <motion.div
-                                                    initial={{ scale: 0, opacity: 0 }}
-                                                    animate={{ scale: 1, opacity: 1 }}
-                                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                                    className={isMobile ? "w-6 h-6 rounded-full flex items-center justify-center" : ""}
-                                                    style={isMobile ? { backgroundColor: colors.NEON_CYAN } : {}}
-                                                >
-                                                    <Check size={14} className={isMobile ? "text-black" : "text-cyan-400"} />
-                                                </motion.div>
-                                            )}
-                                        </button>
-                                    );
-                                })}
-                            </div>
+                                            {/* Theme Options */}
+                                            <div className="flex flex-col gap-3 mb-5">
+                                                {themes.map((themeOption, index) => {
+                                                    const Icon = themeOption.icon;
+                                                    const isActive = theme === themeOption.name;
 
-                            {/* Mobile Close Button */}
-                            {window.innerWidth < 768 && (
-                                <motion.button
-                                    whileTap={{ scale: 0.95 }}
+                                                    return (
+                                                        <motion.button
+                                                            key={themeOption.name}
+                                                            initial={{ opacity: 0, y: 20 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ delay: index * 0.05 }}
+                                                            onClick={() => {
+                                                                setTheme(themeOption.name);
+                                                                setTimeout(() => setIsOpen(false), 200);
+                                                            }}
+                                                            className="group relative flex items-center justify-between transition-all duration-300 px-5 py-4 rounded-2xl overflow-hidden"
+                                                            style={{
+                                                                minHeight: '72px',
+                                                                backgroundColor: isActive
+                                                                    ? `${colors.NEON_CYAN}12`
+                                                                    : 'rgba(30, 41, 59, 0.4)',
+                                                                border: isActive
+                                                                    ? `2px solid ${colors.NEON_CYAN}50`
+                                                                    : '2px solid rgba(71, 85, 105, 0.2)',
+                                                                boxShadow: isActive
+                                                                    ? `0 8px 24px -8px ${colors.NEON_CYAN}40, inset 0 1px 0 rgba(255, 255, 255, 0.1)`
+                                                                    : 'inset 0 1px 0 rgba(255, 255, 255, 0.03)',
+                                                            }}
+                                                            whileTap={{ scale: 0.97 }}
+                                                            aria-label={`${themeOption.label} theme${isActive ? ', currently selected' : ''}`}
+                                                            aria-pressed={isActive}
+                                                        >
+                                                            {/* Gradient overlay on active */}
+                                                            {isActive && (
+                                                                <div
+                                                                    className="absolute inset-0 opacity-30"
+                                                                    style={{
+                                                                        background: `linear-gradient(135deg, ${colors.NEON_CYAN}15 0%, transparent 60%)`
+                                                                    }}
+                                                                />
+                                                            )}
+
+                                                            <div className="flex items-center gap-4 relative z-10">
+                                                                {/* Icon Container */}
+                                                                <div
+                                                                    className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
+                                                                    style={{
+                                                                        backgroundColor: isActive
+                                                                            ? `${colors.NEON_CYAN}25`
+                                                                            : 'rgba(51, 65, 85, 0.5)',
+                                                                        boxShadow: isActive
+                                                                            ? `0 0 20px ${colors.NEON_CYAN}25, inset 0 1px 2px rgba(255, 255, 255, 0.1)`
+                                                                            : 'inset 0 1px 2px rgba(0, 0, 0, 0.2)'
+                                                                    }}
+                                                                >
+                                                                    <Icon
+                                                                        size={22}
+                                                                        className={`transition-all duration-300 ${isActive
+                                                                                ? "text-cyan-300"
+                                                                                : "text-slate-400 group-hover:text-slate-300"
+                                                                            }`}
+                                                                        strokeWidth={2.5}
+                                                                    />
+                                                                </div>
+
+                                                                {/* Label */}
+                                                                <div className="flex flex-col items-start">
+                                                                    <span
+                                                                        className={`text-base font-bold tracking-wide transition-all duration-300 ${isActive
+                                                                                ? "text-white"
+                                                                                : "text-slate-300 group-hover:text-white"
+                                                                            }`}
+                                                                        style={{ letterSpacing: '-0.01em' }}
+                                                                    >
+                                                                        {themeOption.label}
+                                                                    </span>
+                                                                    {isActive && (
+                                                                        <motion.span
+                                                                            initial={{ opacity: 0, y: -5 }}
+                                                                            animate={{ opacity: 1, y: 0 }}
+                                                                            className="text-xs font-medium mt-0.5"
+                                                                            style={{ color: colors.NEON_CYAN }}
+                                                                        >
+                                                                            Active
+                                                                        </motion.span>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+
+                                                            {/* Check Icon */}
+                                                            {isActive && (
+                                                                <motion.div
+                                                                    initial={{ scale: 0, rotate: -180 }}
+                                                                    animate={{ scale: 1, rotate: 0 }}
+                                                                    transition={{
+                                                                        type: "spring",
+                                                                        stiffness: 400,
+                                                                        damping: 25
+                                                                    }}
+                                                                    className="w-8 h-8 rounded-full flex items-center justify-center relative z-10"
+                                                                    style={{
+                                                                        backgroundColor: colors.NEON_CYAN,
+                                                                        boxShadow: `0 4px 12px ${colors.NEON_CYAN}50`
+                                                                    }}
+                                                                >
+                                                                    <Check size={16} className="text-slate-900" strokeWidth={3} />
+                                                                </motion.div>
+                                                            )}
+                                                        </motion.button>
+                                                    );
+                                                })}
+                                            </div>
+
+                                            {/* Close Button - Larger touch target */}
+                                            <motion.button
+                                                whileTap={{ scale: 0.97 }}
+                                                onClick={() => setIsOpen(false)}
+                                                className="w-full py-4 rounded-2xl font-semibold text-base transition-all duration-300 border-2"
+                                                style={{
+                                                    minHeight: '56px',
+                                                    backgroundColor: 'rgba(30, 41, 59, 0.5)',
+                                                    borderColor: 'rgba(71, 85, 105, 0.3)',
+                                                    color: colors.TEXT_SECONDARY,
+                                                    boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                                                }}
+                                                aria-label="Close theme selector"
+                                            >
+                                                Close
+                                            </motion.button>
+                                        </div>
+                                    </motion.div>
+                                </>,
+                                document.body
+                            )
+                        ) : (
+                            // Desktop: Normal dropdown
+                            <>
+                                {/* Invisible backdrop for click-away */}
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="fixed inset-0 z-[90]"
                                     onClick={() => setIsOpen(false)}
-                                    className="mt-4 w-full py-2.5 rounded-2xl font-bold text-sm transition-all border"
+                                />
+
+                                {/* Dropdown */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 400,
+                                        damping: 30,
+                                        mass: 0.8
+                                    }}
+                                    className="absolute top-full right-0 mt-3 p-2 min-w-[150px] rounded-2xl shadow-2xl border backdrop-blur-2xl z-[100]"
                                     style={{
-                                        backgroundColor: 'transparent',
-                                        borderColor: `${colors.BORDER}40`,
-                                        color: colors.TEXT_SECONDARY
+                                        backgroundColor: 'rgba(15, 23, 42, 0.98)',
+                                        borderColor: 'rgba(71, 85, 105, 0.3)',
+                                        boxShadow: '0 12px 40px -8px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.1)',
                                     }}
                                 >
-                                    Cancel
-                                </motion.button>
-                            )}
-                        </motion.div>
+                                    <div className="flex flex-col gap-1">
+                                        {themes.map((themeOption) => {
+                                            const Icon = themeOption.icon;
+                                            const isActive = theme === themeOption.name;
+
+                                            return (
+                                                <button
+                                                    key={themeOption.name}
+                                                    onClick={() => {
+                                                        setTheme(themeOption.name);
+                                                        setIsOpen(false);
+                                                    }}
+                                                    className="group flex items-center justify-between transition-all duration-200 px-3 py-2.5 rounded-xl"
+                                                    style={{
+                                                        backgroundColor: isActive ? `${colors.NEON_CYAN}15` : 'transparent',
+                                                        color: isActive ? colors.NEON_CYAN : colors.TEXT_SECONDARY,
+                                                    }}
+                                                >
+                                                    <div className="flex items-center gap-3">
+                                                        <div
+                                                            className="w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
+                                                            style={{
+                                                                backgroundColor: isActive ? `${colors.NEON_CYAN}20` : `${colors.BORDER}10`,
+                                                            }}
+                                                        >
+                                                            <Icon size={16} className={isActive ? "text-cyan-400" : "opacity-70 group-hover:opacity-100"} />
+                                                        </div>
+                                                        <span className={`text-sm font-semibold tracking-wide ${isActive ? "text-white" : "opacity-80 group-hover:opacity-100"}`}>
+                                                            {themeOption.label}
+                                                        </span>
+                                                    </div>
+
+                                                    {isActive && (
+                                                        <motion.div
+                                                            initial={{ scale: 0, opacity: 0 }}
+                                                            animate={{ scale: 1, opacity: 1 }}
+                                                            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                                                        >
+                                                            <Check size={14} className="text-cyan-400" />
+                                                        </motion.div>
+                                                    )}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </motion.div>
+                            </>
+                        )}
                     </>
                 )}
             </AnimatePresence>
