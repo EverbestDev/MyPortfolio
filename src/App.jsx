@@ -13,7 +13,7 @@ import Gallery from "./components/sections/Gallery";
 import ExperienceTimeline from "./components/sections/Experience";
 import Testimonials from "./components/sections/Testimonials";
 import OfflineStatus from "./components/ui/OfflineStatus";
-import MouseCursor from "./components/ui/MouseCursor";
+import SmokeyCursor from "./components/ui/SmokeyCursor";
 import Resume from "./components/pages/Resume";
 import GithubGateway from "./components/pages/GithubGateway";
 
@@ -22,7 +22,7 @@ const MainPortfolio = () => (
     <Navbar />
     <Chatbot />
     <OfflineStatus />
-    <MouseCursor />
+    <SmokeyCursor />
     <Hero />
     <About />
     <Projects />
