@@ -81,23 +81,26 @@ const AnimatedGridBackground = ({ colors }) => {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* Grid Layer */}
       <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-10"
         style={{
-          background: `radial-gradient(ellipse at center, ${colors.NEON_CYAN}15 0%, transparent 70%)`,
+          backgroundImage: `linear-gradient(to right, ${colors.NEON_CYAN}40 1px, transparent 1px), linear-gradient(to bottom, ${colors.NEON_CYAN}40 1px, transparent 1px)`,
+          backgroundSize: "25px 25px",
         }}
       />
 
+      {/* Radial Fade Layer (FundedU style) */}
       <div
-        className="absolute inset-0 opacity-[0.08]"
+        className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center"
         style={{
-          backgroundImage:
-            "linear-gradient(to right, #ffffff12 1px, transparent 1px), linear-gradient(to bottom, #ffffff12 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
-          animation: "moveGrid 60s linear infinite",
+          background: colors.DARK_BG,
+          maskImage: "radial-gradient(ellipse at center, transparent 20%, black)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, transparent 20%, black)",
         }}
       />
 
+      {/* Floating Particles */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
@@ -109,6 +112,7 @@ const AnimatedGridBackground = ({ colors }) => {
             height: `${particle.size}px`,
             backgroundColor: colors.NEON_CYAN,
             boxShadow: `0 0 ${particle.size * 3}px ${colors.NEON_CYAN}`,
+            zIndex: 1,
           }}
           animate={{
             y: [0, -100, 0],
@@ -124,6 +128,7 @@ const AnimatedGridBackground = ({ colors }) => {
         />
       ))}
 
+      {/* Decorative Glows */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-10"
         style={{
@@ -158,13 +163,6 @@ const AnimatedGridBackground = ({ colors }) => {
           delay: 4,
         }}
       />
-
-      <style>{`
-        @keyframes moveGrid {
-          from { background-position: 0 0; }
-          to { background-position: 50px 50px; }
-        }
-      `}</style>
     </div>
   );
 };
