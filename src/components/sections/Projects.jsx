@@ -33,8 +33,8 @@ const projectsData = [
     impact: "Optimized workflow efficiency by 60% for interpreters.",
     tech: ["MongoDB", "Express", "React", "Node.js"],
     github: "#",
-    live: "https://ilin-nigeria.vercel.app",
-    iframeUrl: "https://ilin-nigeria.vercel.app",
+    live: "https://ili-nigeria.vercel.app",
+    iframeUrl: "https://ili-nigeria.vercel.app",
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=ILIN+Dashboard",
   },
   {
