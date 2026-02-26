@@ -17,6 +17,17 @@ const projectsData = [
   },
   {
     id: 2,
+    title: "FundedU — Find Student Funding",
+    description: "A comprehensive platform connecting students with verified scholarships, grants, and internships. Designed to simplify the search for educational funding with a stress-free experience and deadline tracking.",
+    impact: "Empowering students to access global funding opportunities with zero stress.",
+    tech: ["Next.js", "Framer Motion", "Tailwind CSS", "Lucide React"],
+    github: "#",
+    live: "https://fundedu.com.ng",
+    iframeUrl: "https://fundedu.com.ng",
+    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=FundedU+Platform",
+  },
+  {
+    id: 3,
     title: "ILI-Nigeria Translation Hub",
     description: "A full-stack MERN platform streamlining multilingual translation workflows. Features client dashboards, automated email notifications (Brevo), and secure file management via Cloudinary.",
     impact: "Optimized workflow efficiency by 60% for interpreters.",
@@ -27,7 +38,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=ILIN+Dashboard",
   },
   {
-    id: 3,
+    id: 4,
     title: "University E-Attendance",
     description: "A smart attendance management system utilizing Geofencing technology and face recognition for secure, location-based student validation. Developed as a collaborative group initiative.",
     impact: "Eliminated manual roll-call errors and identity fraud.",
@@ -38,7 +49,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=E-Attendance",
   },
   {
-    id: 4,
+    id: 5,
     title: "Zula - Modern E-Commerce",
     description: "A progressive web app (PWA) for e-commerce with seamless cart management, offline capabilities, and a fluid mobile-first shopping experience.",
     impact: "Native-app like experience with instant loading.",
@@ -49,7 +60,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=Zula+Store",
   },
   {
-    id: 5,
+    id: 6,
     title: "Everbot - AI Assistant",
     description: "An intelligent WhatsApp bot built with Python and FastAPI. Handles automated scheduling, user queries, and real-time interaction management.",
     impact: "Automated 80% of routine user inquiries.",
@@ -60,7 +71,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=Everbot+AI",
   },
   {
-    id: 6,
+    id: 7,
     title: "Dynamic Empire",
     description: "A high-performance business management platform featuring real-time data synchronization and an immersive user interface designed for modern enterprises.",
     impact: "Streamlining large-scale operations with sub-second latency.",
@@ -71,7 +82,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=Dynamic+Empire",
   },
   {
-    id: 7,
+    id: 8,
     title: "BookSync",
     description: "A collaborative booktracking and library management system that synchronizes reading progress across multiple devices and platforms.",
     impact: "Used by 500+ active readers to track collections.",
