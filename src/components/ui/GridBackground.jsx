@@ -62,7 +62,7 @@ export const GridBackground = ({
                 <div
                     className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center translate-z-0"
                     style={{
-                        background: "var(--dark-bg, #080812)",
+                        background: "var(--dark-bg, #000000)",
                         maskImage:
                             "radial-gradient(ellipse at center, transparent " +
                             fadeIntensity +

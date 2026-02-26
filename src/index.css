@@ -18,9 +18,9 @@
   /* Dark Theme Colors */
   --neon-cyan-dark: #00ffff;
   --neon-purple-dark: #a855f7;
-  --dark-bg-dark: #080812;
-  --section-bg-dark: #060010;
-  --card-bg-dark: #1a1a2e;
+  --dark-bg-dark: #000000;
+  --section-bg-dark: #000000;
+  --card-bg-dark: #0a0a0a;
   --text-primary-dark: #ffffff;
   --text-secondary-dark: #e2e8f0;
   --text-tertiary-dark: #94a3b8;
@@ -79,7 +79,7 @@ html {
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-track {
-  background: #0f0f1e;
+  background: #000000;
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb {

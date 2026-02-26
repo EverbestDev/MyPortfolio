@@ -19,9 +19,9 @@ export const useThemeColors = () => {
         dark: {
             NEON_CYAN: '#00ffff',
             NEON_PURPLE: '#a855f7',
-            DARK_BG: '#080812',
-            SECTION_BG: '#080812',
-            CARD_BG: '#1a1a2e',
+            DARK_BG: '#000000',
+            SECTION_BG: '#000000',
+            CARD_BG: '#0a0a0a',
             TEXT_PRIMARY: '#ffffff',
             TEXT_SECONDARY: '#e2e8f0',
             TEXT_TERTIARY: '#94a3b8',
