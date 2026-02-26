@@ -8,6 +8,13 @@ import ThemeToggle from "./ThemeToggle";
 const MobileNav = ({ sections, activeSection, scrollToSection }) => {
   const colors = useThemeColors();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "unset";
@@ -26,11 +33,11 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="md:hidden fixed top-0 w-full z-50 px-4 py-3"
+        className="md:hidden fixed top-0 w-full z-50 px-4 py-3 transition-all duration-500"
         style={{
-          backgroundColor: `${colors.DARK_BG}f8`,
-          backdropFilter: "blur(16px)",
-          borderBottom: `1px solid ${colors.NEON_CYAN}10`
+          backgroundColor: scrolled ? `${colors.DARK_BG}cc` : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          borderBottom: scrolled ? `1px solid ${colors.NEON_CYAN}15` : "none"
         }}
       >
         <div className="flex items-center justify-between">
@@ -196,13 +203,8 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                         transition={{ delay: idx * 0.08 }}
                         className="w-full text-left px-5 py-3.5 rounded-xl font-medium text-base capitalize transition-all duration-300"
                         style={{
-                          color: isActive ? colors.NEON_CYAN : `${colors.TEXT_SECONDARY}dd`,
-                          background: isActive
-                            ? `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`
-                            : "transparent",
-                          boxShadow: isActive
-                            ? `0 0 16px ${colors.NEON_CYAN}10, inset 0 0 16px ${colors.NEON_CYAN}06`
-                            : "none",
+                          color: isActive ? colors.NEON_CYAN : colors.TEXT_SECONDARY,
+                          background: "transparent",
                           borderLeft: isActive
                             ? `3px solid ${colors.NEON_CYAN}`
                             : "3px solid transparent"

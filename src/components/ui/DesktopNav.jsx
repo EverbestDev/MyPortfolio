@@ -20,14 +20,12 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 120, damping: 20 }}
-      className="hidden md:block fixed top-0 w-full z-50 transition-all duration-300"
+      className="hidden md:block fixed top-0 w-full z-50 transition-all duration-500"
       style={{
-        backgroundColor: scrolled ? `${colors.DARK_BG}f8` : `${colors.DARK_BG}e6`,
-        backdropFilter: scrolled ? "blur(16px)" : "blur(8px)",
-        boxShadow: scrolled
-          ? `0 4px 24px ${colors.NEON_CYAN}08, 0 1px 0 ${colors.NEON_CYAN}12`
-          : "none",
-        borderBottom: scrolled ? `1px solid ${colors.NEON_CYAN}10` : "none"
+        backgroundColor: scrolled ? `${colors.DARK_BG}cc` : "transparent",
+        backdropFilter: scrolled ? "blur(20px)" : "none",
+        borderBottom: scrolled ? `1px solid ${colors.NEON_CYAN}15` : "none",
+        boxShadow: scrolled ? `0 4px 30px rgba(0, 0, 0, 0.5)` : "none"
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -69,43 +67,26 @@ const DesktopNav = ({ sections, activeSection, scrollToSection }) => {
                 <motion.button
                   key={section}
                   onClick={() => scrollToSection(section)}
-                  className="relative px-4 py-2 text-sm font-medium transition-all duration-300 capitalize"
+                  className="relative px-5 py-2 text-sm font-semibold transition-all duration-500 capitalize group"
                   style={{
-                    color: isActive ? colors.NEON_CYAN : `${colors.TEXT_SECONDARY}dd`
+                    color: isActive ? colors.NEON_CYAN : colors.TEXT_SECONDARY
                   }}
                   whileHover={{
-                    scale: 1.05,
                     color: colors.NEON_CYAN
                   }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   <span className="relative z-10">{section}</span>
 
-
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute inset-0 rounded-lg"
-                      style={{
-                        background: `linear-gradient(135deg, ${colors.NEON_CYAN}12, ${colors.NEON_CYAN}06)`,
-                        boxShadow: `0 0 16px ${colors.NEON_CYAN}12`
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
-
-
+                  {/* Morphing underline */}
                   {isActive && (
                     <motion.div
                       layoutId="navIndicator"
-                      className="absolute -bottom-0.5 left-1/2 h-0.5 rounded-full"
+                      className="absolute bottom-1 left-0 right-0 h-[2px] rounded-full mx-5"
                       style={{
-                        width: "50%",
                         backgroundColor: colors.NEON_CYAN,
-                        boxShadow: `0 0 6px ${colors.NEON_CYAN}`,
-                        x: "-50%"
+                        boxShadow: `0 0 10px ${colors.NEON_CYAN}`,
                       }}
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      transition={{ type: "spring", stiffness: 350, damping: 25 }}
                     />
                   )}
                 </motion.button>
