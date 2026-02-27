@@ -15,6 +15,7 @@ import {
   Activity
 } from "lucide-react";
 import { BorderBeam } from "../ui/BorderBeam";
+import { useThemeColors } from "../../hooks/useThemeColors";
 
 const BentoCard = ({ children, className = "", delay = 0, colors }) => (
   <motion.div
