@@ -48,14 +48,6 @@ const GithubGateway = () => {
             className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
             style={{ backgroundColor: colors.DARK_BG, color: colors.TEXT_PRIMARY }}
         >
-            {/* Background Decorations */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
-                <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full blur-[140px]"
-                    style={{ backgroundColor: colors.NEON_CYAN }} />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[140px]"
-                    style={{ backgroundColor: colors.BORDER }} />
-            </div>
-
             <div className="max-w-5xl mx-auto relative z-10">
                 {/* Header Actions */}
                 <div className="mb-12">

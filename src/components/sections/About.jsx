@@ -102,14 +102,6 @@ const About = () => {
       className="py-16 sm:py-20 relative overflow-hidden"
       style={{ backgroundColor: colors.DARK_BG }}
     >
-      {/* about */}
-      <div className="absolute top-0 right-0 p-20 opacity-20 transform translate-x-1/2 -translate-y-1/2 pointer-events-none">
-        <div
-          className="w-96 h-96 rounded-full blur-3xl"
-          style={{ backgroundColor: colors.NEON_CYAN }}
-        />
-      </div>
-
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-10"

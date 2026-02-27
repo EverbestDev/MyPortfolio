@@ -127,8 +127,7 @@ const AnimatedGridBackground = ({ colors }) => {
           }}
         />
       ))}
-
-      {/* Decorative Glows */}
+      {/* Decorative Glows (Restored as requested) */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-10"
         style={{

@@ -318,7 +318,6 @@ const Contact = () => {
               </div>
 
 
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-cyan-500/10 blur-2xl rounded-full pointer-events-none" />
             </motion.div>
           </div>
         )}
