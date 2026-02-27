@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { useThemeColors } from "../../hooks/useThemeColors";
+import { BorderBeam } from "../ui/BorderBeam";
 
 const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || "YOUR_FORMSPREE_ENDPOINT_HERE";
 
@@ -189,13 +190,14 @@ const Contact = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative p-8 rounded-3xl border backdrop-blur-xl"
+            className="relative p-8 rounded-3xl border backdrop-blur-xl group overflow-hidden"
             style={{
               backgroundColor: `${colors.CARD_BG}60`,
               borderColor: `${colors.BORDER}40`,
               boxShadow: `0 20px 40px -20px rgba(0,0,0,0.5)`
             }}
           >
+            <BorderBeam size={200} duration={12} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
             <form onSubmit={handleSubmit} className="relative z-10" noValidate>
               <div className="grid sm:grid-cols-2 gap-4">
                 <InputField

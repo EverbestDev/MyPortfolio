@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useThemeColors } from "../../hooks/useThemeColors";
 import { Maximize2, Camera, Heart, Share2, X } from "lucide-react";
+import { BorderBeam } from "../ui/BorderBeam";
 
 import img1 from "../../assets/gallery/gal_new_1.jpg";
 import img2 from "../../assets/gallery/gal_new_2.jpg";
@@ -74,6 +75,7 @@ const GalleryItem = ({ image, colors, index, onViewFull }) => {
       }}
       onClick={() => onViewFull(image)}
     >
+      <BorderBeam size={100} duration={8} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
       <motion.img
         src={image.src}
         alt={image.title}
