@@ -62,9 +62,10 @@ const Testimonials = () => {
             <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
                 <motion.div
                     className="text-center mb-10"
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.8 }}
                 >
                     <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10">
                         <MessageSquare size={14} className="text-cyan-400" />
@@ -78,7 +79,13 @@ const Testimonials = () => {
                     </p>
                 </motion.div>
 
-                <div className="relative max-w-4xl mx-auto">
+                <motion.div
+                    className="relative max-w-4xl mx-auto"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 1 }}
+                >
                     {/* Mobile Navigation - Top */}
                     <div className="flex md:hidden justify-between items-center mb-6 px-2">
                         <motion.button
@@ -170,7 +177,7 @@ const Testimonials = () => {
                             <ChevronRight size={24} />
                         </motion.button>
                     </div>
-                </div>
+                </motion.div>
 
 
                 <div className="flex justify-center gap-2 mt-8">
@@ -187,7 +194,7 @@ const Testimonials = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 

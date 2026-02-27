@@ -202,6 +202,8 @@ const Hero = () => {
   const colors = useThemeColors();
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const scale = useTransform(scrollY, [0, 400], [1, 0.9]);
 
   const [typingComplete, setTypingComplete] = useState(false);
 
@@ -243,7 +245,7 @@ const Hero = () => {
 
       <motion.div
         className="relative z-10 max-w-4xl mx-auto text-center px-4"
-        style={{ y: y }}
+        style={{ y: y, opacity: opacity, scale: scale }}
       >
         {/* hero */}
         <motion.p

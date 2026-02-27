@@ -111,9 +111,10 @@ const Contact = () => {
           {/* Left Column: Info & Map */}
           <div className="space-y-8">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.8 }}
             >
               <div className="flex items-center gap-3 mb-6">
                 <span className="flex h-3 w-3 rounded-full bg-green-500 animate-pulse" />
@@ -132,13 +133,19 @@ const Contact = () => {
             </motion.div>
 
             {/* Contact Cards in a row */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.1 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
               <ContactInfoCard
                 icon={Mail}
                 title="Email"
                 value="EverbestDev@gmail.com"
                 link="mailto:EverbestDev@gmail.com"
-                delay={0.1}
+                delay={0}
                 colors={colors}
                 compact
               />
@@ -147,7 +154,7 @@ const Contact = () => {
                 title="WhatsApp"
                 value="+234 911 745 0722"
                 link="https://wa.me/2349117450722"
-                delay={0.2}
+                delay={0.1}
                 colors={colors}
                 compact
               />
@@ -156,11 +163,11 @@ const Contact = () => {
                 title="Location"
                 value="Ijebu-Ode, Ogun"
                 link="https://maps.google.com/?q=240,+Ondo+benin+Road,+Ijebu-Ode+Ogun+state"
-                delay={0.3}
+                delay={0.2}
                 colors={colors}
                 compact
               />
-            </div>
+            </motion.div>
 
             {/* Google Map */}
             <motion.div
@@ -187,9 +194,10 @@ const Contact = () => {
 
           {/* Right Column: Form */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8 }}
             className="relative p-8 rounded-3xl border backdrop-blur-xl group overflow-hidden"
             style={{
               backgroundColor: `${colors.CARD_BG}60`,

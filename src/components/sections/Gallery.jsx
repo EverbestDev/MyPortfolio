@@ -144,9 +144,10 @@ function Gallery() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-10"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.8 }}
         >
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10">
             <Camera size={14} className="text-cyan-400" />
@@ -162,16 +163,14 @@ function Gallery() {
 
         <motion.div
           style={{ y: yMove }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[200px]"
+          className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 1 }}
         >
-          {images.map((image, index) => (
-            <GalleryItem
-              key={image.id}
-              image={image}
-              colors={colors}
-              index={index}
-              onViewFull={setSelectedImage}
-            />
+          {images.map((image) => (
+            <GalleryItem key={image.id} image={image} colors={colors} onViewFull={setSelectedImage} />
           ))}
         </motion.div>
       </div>

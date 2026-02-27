@@ -291,9 +291,10 @@ const Projects = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           className="mb-10 md:flex md:items-end md:justify-between"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="max-w-2xl">
             <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: colors.TEXT_PRIMARY }}>
@@ -311,13 +312,19 @@ const Projects = () => {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           {projectsData.map((project, index) => (
             index === 0
               ? <FeaturedProject key={project.id} project={project} colors={colors} onClick={setSelectedProject} />
               : <ProjectCard key={project.id} project={project} colors={colors} onClick={setSelectedProject} />
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* project details */}

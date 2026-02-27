@@ -121,9 +121,10 @@ const ExperienceTimeline = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: colors.TEXT_PRIMARY }}>
             Professional <span style={{ color: colors.NEON_CYAN }}>Journey</span>
@@ -133,14 +134,20 @@ const ExperienceTimeline = () => {
           </p>
         </motion.div>
 
-        <div className="relative max-w-4xl mx-auto space-y-12 sm:space-y-24">
+        <motion.div
+          className="relative max-w-4xl mx-auto space-y-12 sm:space-y-24"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 1 }}
+        >
           {/* background */}
           <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent" />
 
           {experiences.map((exp, index) => (
             <TimelineCard key={exp.id} data={exp} index={index} colors={colors} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

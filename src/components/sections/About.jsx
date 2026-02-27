@@ -105,9 +105,10 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-10"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
             About <span style={{ color: colors.NEON_CYAN }}>Me</span>
@@ -123,7 +124,13 @@ const About = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6">
 
-          <div className="md:col-span-6 lg:col-span-8">
+          <motion.div
+            className="md:col-span-6 lg:col-span-8"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <BentoCard colors={colors} className="h-full flex flex-col justify-center">
               <div className="md:col-span-7 space-y-6">
                 <h3 className="text-2xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
@@ -139,10 +146,16 @@ const About = () => {
                 </p>
               </div>
             </BentoCard>
-          </div>
+          </motion.div>
 
 
-          <div className="md:col-span-3 lg:col-span-4">
+          <motion.div
+            className="md:col-span-6 lg:col-span-4"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <BentoCard colors={colors} delay={0.1} className="h-full">
               <div className="flex flex-col h-full justify-between gap-6">
                 <div>
@@ -165,123 +178,123 @@ const About = () => {
                 </div>
               </div>
             </BentoCard>
-          </div>
+        </div>
 
 
-          <div className="md:col-span-3 lg:col-span-5">
-            <BentoCard colors={colors} delay={0.2} className="h-full">
-              <h3 className="text-xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
-                Tech Arsenal
-              </h3>
-              <div className="flex flex-col">
-                <TechCategory
-                  title="Frontend"
-                  icon={Layout}
-                  colors={colors}
-                  skills={[
-                    { name: 'React', icon: Code2 },
-                    { name: 'Next.js', icon: Globe },
-                    { name: 'Vue.js', icon: Globe },
-                    { name: 'TypeScript', icon: Terminal },
-                    { name: 'Tailwind CSS', icon: Layout },
-                    { name: 'Framer Motion', icon: Zap },
-                  ]}
-                />
-                <TechCategory
-                  title="Backend"
-                  icon={Cpu}
-                  colors={colors}
-                  skills={[
-                    { name: 'Node.js', icon: Cpu },
-                    { name: 'NestJS', icon: Globe },
-                    { name: 'Python', icon: Code2 },
-                    { name: 'FastAPI', icon: Zap },
-                    { name: 'Django', icon: Code2 },
-                  ]}
-                />
-                <TechCategory
-                  title="Database"
-                  icon={Database}
-                  colors={colors}
-                  skills={[
-                    { name: 'PostgreSQL', icon: Database },
-                    { name: 'MongoDB', icon: Database },
-                    { name: 'Redis', icon: Zap },
-                    { name: 'Prisma', icon: Terminal },
-                  ]}
-                />
-                <TechCategory
-                  title="DevOps & Tools"
-                  icon={Terminal}
-                  colors={colors}
-                  skills={[
-                    { name: 'Docker', icon: Globe },
-                    { name: 'Git', icon: Code2 },
-                    { name: 'AWS', icon: Globe },
-                    { name: 'Linux', icon: Terminal },
-                  ]}
-                />
-                <TechCategory
-                  title="No-Code Development"
-                  icon={Workflow}
-                  colors={colors}
-                  skills={[
-                    { name: 'Bubble', icon: MousePointer2 },
-                    { name: 'WordPress', icon: Globe },
-                    { name: 'Webflow', icon: Layout },
-                    { name: 'Zapier', icon: Zap },
-                    { name: 'Make.com', icon: Workflow },
-                    { name: 'FlutterFlow', icon: Globe },
-                  ]}
-                />
-                <TechCategory
-                  title="IT & Management Tools"
-                  icon={Settings}
-                  colors={colors}
-                  skills={[
-                    { name: 'Jira', icon: Activity },
-                    { name: 'Postman', icon: Terminal },
-                    { name: 'Notion', icon: Layout },
-                    { name: 'Slack', icon: Globe },
-                    { name: 'Trello', icon: Layout },
-                  ]}
-                />
-              </div>
-            </BentoCard>
-          </div>
+        <div className="md:col-span-3 lg:col-span-5">
+          <BentoCard colors={colors} delay={0.2} className="h-full">
+            <h3 className="text-xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
+              Tech Arsenal
+            </h3>
+            <div className="flex flex-col">
+              <TechCategory
+                title="Frontend"
+                icon={Layout}
+                colors={colors}
+                skills={[
+                  { name: 'React', icon: Code2 },
+                  { name: 'Next.js', icon: Globe },
+                  { name: 'Vue.js', icon: Globe },
+                  { name: 'TypeScript', icon: Terminal },
+                  { name: 'Tailwind CSS', icon: Layout },
+                  { name: 'Framer Motion', icon: Zap },
+                ]}
+              />
+              <TechCategory
+                title="Backend"
+                icon={Cpu}
+                colors={colors}
+                skills={[
+                  { name: 'Node.js', icon: Cpu },
+                  { name: 'NestJS', icon: Globe },
+                  { name: 'Python', icon: Code2 },
+                  { name: 'FastAPI', icon: Zap },
+                  { name: 'Django', icon: Code2 },
+                ]}
+              />
+              <TechCategory
+                title="Database"
+                icon={Database}
+                colors={colors}
+                skills={[
+                  { name: 'PostgreSQL', icon: Database },
+                  { name: 'MongoDB', icon: Database },
+                  { name: 'Redis', icon: Zap },
+                  { name: 'Prisma', icon: Terminal },
+                ]}
+              />
+              <TechCategory
+                title="DevOps & Tools"
+                icon={Terminal}
+                colors={colors}
+                skills={[
+                  { name: 'Docker', icon: Globe },
+                  { name: 'Git', icon: Code2 },
+                  { name: 'AWS', icon: Globe },
+                  { name: 'Linux', icon: Terminal },
+                ]}
+              />
+              <TechCategory
+                title="No-Code Development"
+                icon={Workflow}
+                colors={colors}
+                skills={[
+                  { name: 'Bubble', icon: MousePointer2 },
+                  { name: 'WordPress', icon: Globe },
+                  { name: 'Webflow', icon: Layout },
+                  { name: 'Zapier', icon: Zap },
+                  { name: 'Make.com', icon: Workflow },
+                  { name: 'FlutterFlow', icon: Globe },
+                ]}
+              />
+              <TechCategory
+                title="IT & Management Tools"
+                icon={Settings}
+                colors={colors}
+                skills={[
+                  { name: 'Jira', icon: Activity },
+                  { name: 'Postman', icon: Terminal },
+                  { name: 'Notion', icon: Layout },
+                  { name: 'Slack', icon: Globe },
+                  { name: 'Trello', icon: Layout },
+                ]}
+              />
+            </div>
+          </BentoCard>
+        </div>
 
 
-          <div className="md:col-span-6 lg:col-span-7">
-            <BentoCard colors={colors} delay={0.3} className="h-full">
-              <h3 className="text-xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
-                My Approach
-              </h3>
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Zap size={20} style={{ color: colors.NEON_CYAN }} />
-                    <h4 className="font-semibold" style={{ color: colors.TEXT_PRIMARY }}>Performance & SEO</h4>
-                  </div>
-                  <p className="text-sm leading-relaxed" style={{ color: colors.TEXT_SECONDARY }}>
-                    Engineering for speed, accessibility, and organic visibility. I build platforms that search engines reward and users love.
-                  </p>
+        <div className="md:col-span-6 lg:col-span-7">
+          <BentoCard colors={colors} delay={0.3} className="h-full">
+            <h3 className="text-xl font-bold mb-4" style={{ color: colors.TEXT_PRIMARY }}>
+              My Approach
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 mb-2">
+                  <Zap size={20} style={{ color: colors.NEON_CYAN }} />
+                  <h4 className="font-semibold" style={{ color: colors.TEXT_PRIMARY }}>Performance & SEO</h4>
                 </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Layout size={20} style={{ color: colors.NEON_CYAN }} />
-                    <h4 className="font-semibold" style={{ color: colors.TEXT_PRIMARY }}>Market-Ready Design</h4>
-                  </div>
-                  <p className="text-sm leading-relaxed" style={{ color: colors.TEXT_SECONDARY }}>
-                    I build products that are ready for the marketplace. High-conversion interfaces that turn visitors into loyal customers.
-                  </p>
-                </div>
+                <p className="text-sm leading-relaxed" style={{ color: colors.TEXT_SECONDARY }}>
+                  Engineering for speed, accessibility, and organic visibility. I build platforms that search engines reward and users love.
+                </p>
               </div>
-            </BentoCard>
-          </div>
+
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 mb-2">
+                  <Layout size={20} style={{ color: colors.NEON_CYAN }} />
+                  <h4 className="font-semibold" style={{ color: colors.TEXT_PRIMARY }}>Market-Ready Design</h4>
+                </div>
+                <p className="text-sm leading-relaxed" style={{ color: colors.TEXT_SECONDARY }}>
+                  I build products that are ready for the marketplace. High-conversion interfaces that turn visitors into loyal customers.
+                </p>
+              </div>
+            </div>
+          </BentoCard>
         </div>
       </div>
-    </section>
+    </div>
+    </section >
   );
 };
 
