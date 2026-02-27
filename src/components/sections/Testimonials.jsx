@@ -30,6 +30,8 @@ const testimonials = [
     }
 ];
 
+import { BorderBeam } from "../ui/BorderBeam";
+
 const Testimonials = () => {
     const colors = useThemeColors();
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -104,7 +106,7 @@ const Testimonials = () => {
                             animate={{ opacity: 1, x: 0, scale: 1 }}
                             exit={{ opacity: 0, x: -50, scale: 0.9 }}
                             transition={{ duration: 0.5, ease: "easeOut" }}
-                            className="p-8 md:p-12 rounded-[2rem] border relative"
+                            className="p-8 md:p-12 rounded-[2rem] border relative overflow-hidden group"
                             style={{
                                 backgroundColor: `${colors.CARD_BG}c0`,
                                 borderColor: `${colors.BORDER}40`,
@@ -112,6 +114,7 @@ const Testimonials = () => {
                                 boxShadow: `0 20px 40px -10px rgba(0,0,0,0.5)`
                             }}
                         >
+                            <BorderBeam size={200} duration={12} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
                             <Quote className="absolute top-8 left-8 text-cyan-500/20" size={80} />
 
                             <div className="relative z-10">

@@ -14,7 +14,7 @@ import {
   MousePointer2,
   Activity
 } from "lucide-react";
-import { useThemeColors } from "../../hooks/useThemeColors";
+import { BorderBeam } from "../ui/BorderBeam";
 
 const BentoCard = ({ children, className = "", delay = 0, colors }) => (
   <motion.div
@@ -22,7 +22,7 @@ const BentoCard = ({ children, className = "", delay = 0, colors }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.5, delay }}
-    className={`relative overflow-hidden rounded-2xl p-6 border ${className}`}
+    className={`relative overflow-hidden rounded-2xl p-6 border group ${className}`}
     style={{
       backgroundColor: `${colors.CARD_BG}80`,
       borderColor: `${colors.BORDER}60`,
@@ -34,6 +34,7 @@ const BentoCard = ({ children, className = "", delay = 0, colors }) => (
       boxShadow: `0 10px 30px -10px ${colors.NEON_CYAN}20`,
     }}
   >
+    <BorderBeam size={150} duration={8} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
     {children}
   </motion.div>
 );

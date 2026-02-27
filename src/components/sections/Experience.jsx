@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Briefcase, Calendar, Building2 } from "lucide-react";
 import { useThemeColors } from "../../hooks/useThemeColors";
+import { BorderBeam } from "../ui/BorderBeam";
 
 const experiences = [
   {
@@ -51,7 +52,7 @@ const TimelineCard = ({ data, index, colors }) => (
 
     <div className={`w-full sm:w-[45%] ${index % 2 === 0 ? 'sm:mr-auto sm:text-right' : 'sm:ml-auto sm:text-left'} relative`}>
       <motion.div
-        className="p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+        className="p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 overflow-hidden group"
         style={{
           backgroundColor: `${colors.CARD_BG}60`,
           borderColor: `${colors.BORDER}40`,
@@ -62,6 +63,7 @@ const TimelineCard = ({ data, index, colors }) => (
           boxShadow: `0 0 20px ${colors.NEON_CYAN}20`
         }}
       >
+        <BorderBeam size={120} duration={10} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
         <div className={`flex flex-col ${index % 2 === 0 ? 'sm:items-end' : 'sm:items-start'}`}>
 
           <div className="sm:hidden mb-4 self-start">

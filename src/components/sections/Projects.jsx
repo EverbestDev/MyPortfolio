@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, X, ArrowUpRight, Sparkles, Zap, Trophy, Rocket, Lock } from "lucide-react";
 import { useThemeColors } from "../../hooks/useThemeColors";
+import { BorderBeam } from "../ui/BorderBeam";
 
 const projectsData = [
   {
@@ -158,6 +159,7 @@ const FeaturedProject = ({ project, colors, onClick }) => (
     }}
     onClick={() => onClick(project)}
   >
+    <BorderBeam size={250} duration={12} delay={9} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
     <div className="absolute inset-0 z-0">
       <IframePreview
         url={project.iframeUrl}
@@ -215,6 +217,7 @@ const ProjectCard = ({ project, colors, onClick }) => (
     }}
     onClick={() => onClick(project)}
   >
+    <BorderBeam size={100} duration={6} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
     <div className="relative h-48 overflow-hidden bg-black/50">
       <IframePreview
         url={project.iframeUrl}
