@@ -16,9 +16,10 @@ import OfflineStatus from "./components/ui/OfflineStatus";
 import SmokeyCursor from "./components/ui/SmokeyCursor";
 import Resume from "./components/pages/Resume";
 import GithubGateway from "./components/pages/GithubGateway";
+import SmoothScrollProvider from "./components/ui/SmoothScrollProvider";
 
 const MainPortfolio = () => (
-  <>
+  <SmoothScrollProvider>
     <Navbar />
     <Chatbot />
     <OfflineStatus />
@@ -31,7 +32,7 @@ const MainPortfolio = () => (
     <Testimonials />
     <Contact />
     <Footer />
-  </>
+  </SmoothScrollProvider>
 );
 
 function App() {
