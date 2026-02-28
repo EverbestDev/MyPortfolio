@@ -1,7 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef, useEffect, useMemo, useContext } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useAnimationFrame,
+  useInView,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
 import { useThemeColors } from "../../hooks/useThemeColors";
-import { Camera, X } from "lucide-react";
+import { Camera, X, Maximize2 } from "lucide-react";
+import { BorderBeam } from "../ui/BorderBeam";
 
 import img1 from "../../assets/gallery/gal_new_1.jpg";
 import img2 from "../../assets/gallery/gal_new_2.jpg";
@@ -29,128 +40,209 @@ const galleryImages = [
   { src: img11, title: "Cloud Architecture" },
 ];
 
-const ThreeDHoverGallery = ({
-  images = galleryImages.map(img => img.src),
-  itemWidth = 12,
-  itemHeight = 20,
-  gap = 1.2,
-  perspective = 50,
-  hoverScale = 15,
-  transitionDuration = 1.25,
-  backgroundColor,
-  grayscaleStrength = 1,
-  brightnessLevel = 0.5,
-  activeWidth = 45,
-  rotationAngle = 35,
-  zDepth = 10,
-  enableKeyboardNavigation = true,
-  autoPlay = false,
-  autoPlayDelay = 3000,
+/* -------------------------
+   Utility: wrap
+   ------------------------- */
+const wrap = (min, max, v) => {
+  const rangeSize = max - min;
+  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
+};
+
+const ThreeDScrollTriggerContext = React.createContext(null);
+
+/* --------------------------
+   Container that provides velocity
+   -------------------------- */
+export function ThreeDScrollTriggerContainer({ children, className, ...props }) {
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+
+  const velocityFactor = useTransform(smoothVelocity, (v) => {
+    const sign = v < 0 ? -1 : 1;
+    const magnitude = Math.min(5, (Math.abs(v) / 1000) * 5);
+    return sign * magnitude;
+  });
+
+  return (
+    <ThreeDScrollTriggerContext.Provider value={velocityFactor}>
+      <div className={cn("relative w-full", className)} {...props}>
+        {children}
+      </div>
+    </ThreeDScrollTriggerContext.Provider>
+  );
+}
+
+/* --------------------------
+   Row entry that chooses shared or local velocity
+   -------------------------- */
+export function ThreeDScrollTriggerRow(props) {
+  const sharedVelocityFactor = useContext(ThreeDScrollTriggerContext);
+  if (sharedVelocityFactor) {
+    return (
+      <ThreeDScrollTriggerRowImpl
+        {...props}
+        velocityFactor={sharedVelocityFactor}
+      />
+    );
+  }
+  return <ThreeDScrollTriggerRowLocal {...props} />;
+}
+
+function ThreeDScrollTriggerRowImpl({
+  children,
+  baseVelocity = 5,
+  direction = 1,
   className,
-  style,
-  onImageClick,
-}) => {
+  velocityFactor,
+  ...props
+}) {
   const containerRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(null);
-  const [focusedIndex, setFocusedIndex] = useState(null);
-  const autoPlayRef = useRef(null);
+  const [numCopies, setNumCopies] = useState(3);
+  const x = useMotionValue(0);
+
+  const prevTimeRef = useRef(null);
+  const unitWidthRef = useRef(0);
+  const baseXRef = useRef(0);
+
+  const childrenArray = useMemo(() => React.Children.toArray(children), [children]);
+
+  const BlockContent = useMemo(() => {
+    return (
+      <div className="inline-flex shrink-0" style={{ contain: "paint" }}>
+        {childrenArray}
+      </div>
+    );
+  }, [childrenArray]);
 
   useEffect(() => {
-    if (autoPlay && images.length > 0) {
-      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
-      autoPlayRef.current = setInterval(() => {
-        setActiveIndex((prev) => (prev === null ? 0 : (prev + 1) % images.length));
-      }, autoPlayDelay);
-      return () => { if (autoPlayRef.current) clearInterval(autoPlayRef.current); };
-    }
-    if (!autoPlay && autoPlayRef.current) {
-      clearInterval(autoPlayRef.current);
-      autoPlayRef.current = null;
-    }
-  }, [autoPlay, autoPlayDelay, images.length]);
+    const container = containerRef.current;
+    if (!container) return;
 
-  const handleKeyDown = (event, index) => {
-    if (!enableKeyboardNavigation) return;
-    switch (event.key) {
-      case "Enter":
-      case " ":
-        event.preventDefault();
-        onImageClick?.(index, images[index]);
-        break;
-      case "ArrowLeft":
-        event.preventDefault();
-        const prevIndex = index > 0 ? index - 1 : images.length - 1;
-        containerRef.current?.children[prevIndex]?.focus();
-        break;
-      case "ArrowRight":
-        event.preventDefault();
-        const nextIndex = index < images.length - 1 ? index + 1 : 0;
-        containerRef.current?.children[nextIndex]?.focus();
-        break;
+    const block = container.querySelector(".threed-scroll-trigger-block");
+    if (block) {
+      unitWidthRef.current = block.scrollWidth;
+      const containerWidth = container.offsetWidth;
+      const needed = Math.max(3, Math.ceil(containerWidth / unitWidthRef.current) + 2);
+      setNumCopies(needed);
     }
-  };
+  }, [childrenArray]);
 
-  const getItemStyle = (index) => {
-    const isActive = activeIndex === index;
-    const isFocused = focusedIndex === index;
-    const baseWidthPx = 10;
+  const isInView = useInView(containerRef, { margin: "20%" });
 
-    return {
-      width: isActive ? `${activeWidth}vw` : `calc(${itemWidth}vw + ${baseWidthPx}px)`,
-      height: `calc(${itemHeight}vw + ${itemHeight}vh)`,
-      backgroundImage: `url(${images[index]})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      cursor: "pointer",
-      filter: isActive || isFocused ? "inherit" : `grayscale(${grayscaleStrength}) brightness(${brightnessLevel})`,
-      transform: isActive ? `translateZ(calc(${hoverScale}vw + ${hoverScale}vh))` : "none",
-      transition: `transform ${transitionDuration}s cubic-bezier(.1, .7, 0, 1), filter 3s cubic-bezier(.1, .7, 0, 1), width ${transitionDuration}s cubic-bezier(.1, .7, 0, 1)`,
-      willChange: "transform, filter, width",
-      zIndex: isActive ? 100 : "auto",
-      margin: isActive ? "0 0.45vw" : "0",
-      outline: isFocused ? "2px solid #00ffff" : "none",
-      outlineOffset: "2px",
-      borderRadius: "1rem",
-    };
-  };
+  useAnimationFrame((time) => {
+    if (!isInView) return;
+
+    if (prevTimeRef.current == null) prevTimeRef.current = time;
+    const dt = Math.max(0, (time - prevTimeRef.current) / 1000);
+    prevTimeRef.current = time;
+
+    const unitWidth = unitWidthRef.current;
+    if (unitWidth <= 0) return;
+
+    const velocity = velocityFactor.get();
+    const speedMultiplier = Math.min(5, Math.abs(velocity));
+    const scrollDirection = velocity >= 0 ? 1 : -1;
+    const currentDirection = direction * scrollDirection;
+
+    const pixelsPerSecond = (unitWidth * baseVelocity) / 100;
+    const moveBy = currentDirection * pixelsPerSecond * (1 + speedMultiplier) * dt;
+
+    const newX = baseXRef.current + moveBy;
+
+    if (newX >= unitWidth) {
+      baseXRef.current = newX % unitWidth;
+    } else if (newX <= 0) {
+      baseXRef.current = unitWidth + (newX % unitWidth);
+    } else {
+      baseXRef.current = newX;
+    }
+
+    x.set(baseXRef.current);
+  });
+
+  const xTransform = useTransform(x, (v) => `translate3d(${-v}px,0,0)`);
 
   return (
     <div
-      className={cn("flex items-center justify-center min-h-[500px] w-full overflow-hidden", className)}
-      style={style}
+      ref={containerRef}
+      className={cn("w-full overflow-hidden whitespace-nowrap", className)}
+      {...props}
     >
-      <div
-        ref={containerRef}
-        className="flex justify-center items-center w-full py-20"
-        style={{
-          perspective: `calc(${perspective}vw + ${perspective}vh)`,
-          gap: `${gap}rem`,
-        }}
+      <motion.div
+        className="inline-flex will-change-transform transform-gpu"
+        style={{ transform: xTransform }}
       >
-        {images.map((image, index) => (
+        {Array.from({ length: numCopies }).map((_, i) => (
           <div
-            key={index}
-            className="relative will-change-transform rounded-2xl shadow-2xl border border-white/5"
-            style={getItemStyle(index)}
-            tabIndex={enableKeyboardNavigation ? 0 : -1}
-            onClick={() => onImageClick?.(index, image)}
-            onMouseEnter={() => setActiveIndex(index)}
-            onMouseLeave={() => setActiveIndex(null)}
-            onFocus={() => setFocusedIndex(index)}
-            onBlur={() => setFocusedIndex(null)}
-            onKeyDown={(e) => handleKeyDown(e, index)}
-            role="button"
-            aria-label={`Image ${index + 1}`}
-          />
+            key={i}
+            className={cn(
+              "inline-flex shrink-0",
+              i === 0 ? "threed-scroll-trigger-block" : ""
+            )}
+          >
+            {BlockContent}
+          </div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
-};
+}
+
+function ThreeDScrollTriggerRowLocal(props) {
+  const { scrollY } = useScroll();
+  const localVelocity = useVelocity(scrollY);
+  const localSmoothVelocity = useSpring(localVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+  const localVelocityFactor = useTransform(localSmoothVelocity, (v) => {
+    const sign = v < 0 ? -1 : 1;
+    const magnitude = Math.min(5, (Math.abs(v) / 1000) * 5);
+    return sign * magnitude;
+  });
+
+  return (
+    <ThreeDScrollTriggerRowImpl
+      {...props}
+      velocityFactor={localVelocityFactor}
+    />
+  );
+}
+
+const GalleryCard = ({ image, colors, onOpen }) => (
+  <div
+    className="relative shrink-0 w-[280px] sm:w-[350px] md:w-[450px] aspect-[4/3] mx-3 sm:mx-4 rounded-2xl overflow-hidden group cursor-pointer"
+    style={{
+      border: `1px solid ${colors.BORDER}40`,
+      backgroundColor: colors.CARD_BG
+    }}
+    onClick={() => onOpen(image)}
+  >
+    <BorderBeam size={100} duration={8} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
+    <img
+      src={image.src}
+      alt={image.title}
+      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+      <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>
+      <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono">
+        <Maximize2 size={12} /> Click to examine
+      </div>
+    </div>
+  </div>
+);
 
 const Gallery = () => {
   const colors = useThemeColors();
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const row1 = galleryImages.slice(0, 5);
+  const row2 = galleryImages.slice(5, 10);
 
   return (
     <section
@@ -158,9 +250,8 @@ const Gallery = () => {
       className="py-24 relative overflow-hidden"
       style={{ backgroundColor: colors.DARK_BG }}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center mb-16">
         <motion.div
-          className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -174,12 +265,26 @@ const Gallery = () => {
             Creative <span style={{ color: colors.NEON_CYAN }}>Capture</span>
           </h2>
           <p className="max-w-2xl mx-auto opacity-60 text-lg leading-relaxed">
-            An immersive 3D exploration of moments, designs, and visual experiments that fuel my creative process.
+            Scroll to accelerate the neural transmission of visual data.
           </p>
         </motion.div>
-
-        <ThreeDHoverGallery onImageClick={(index, image) => setSelectedImage({ src: image, title: galleryImages[index].title })} />
       </div>
+
+      <ThreeDScrollTriggerContainer>
+        <div className="space-y-8 sm:space-y-12">
+          <ThreeDScrollTriggerRow baseVelocity={-2} direction={-1}>
+            {row1.map((img, idx) => (
+              <GalleryCard key={idx} image={img} colors={colors} onOpen={setSelectedImage} />
+            ))}
+          </ThreeDScrollTriggerRow>
+
+          <ThreeDScrollTriggerRow baseVelocity={3} direction={1}>
+            {row2.map((img, idx) => (
+              <GalleryCard key={idx} image={img} colors={colors} onOpen={setSelectedImage} />
+            ))}
+          </ThreeDScrollTriggerRow>
+        </div>
+      </ThreeDScrollTriggerContainer>
 
       <AnimatePresence>
         {selectedImage && (
