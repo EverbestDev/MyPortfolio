@@ -15,8 +15,11 @@ import {
 import { AnimatePresence } from "framer-motion";
 import { useThemeColors } from "../../hooks/useThemeColors";
 import { BorderBeam } from "../ui/BorderBeam";
+import { getOwnerEmailTemplate, getAutoResponseTemplate } from "../../utils/mailTemplates";
 
-const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || "YOUR_FORMSPREE_ENDPOINT_HERE";
+const BREVO_API_KEY = (import.meta.env.VITE_BREVO_API_KEY || "").trim();
+const SENDER_EMAIL = (import.meta.env.VITE_BREVO_SENDER_EMAIL || "").trim();
+const OWNER_EMAIL = (import.meta.env.VITE_OWNER_EMAIL || "").trim();
 
 const Contact = () => {
   const colors = useThemeColors();
@@ -28,7 +31,7 @@ const Contact = () => {
   });
   const [status, setStatus] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState(null); // 'validation' | 'success' | 'error'
+  const [modalType, setModalType] = useState(null); // 'validation' | 'success' | 'error' | 'email_invalid'
   const [missingFields, setMissingFields] = useState([]);
   const isSubmitting = status === "submitting";
 
@@ -56,44 +59,85 @@ const Contact = () => {
       return;
     }
 
+    const validateEmail = (email) => {
+      return String(email)
+        .toLowerCase()
+        .match(
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        );
+    };
+
+    if (!validateEmail(formData.email)) {
+      setModalType("email_invalid");
+      setShowModal(true);
+      return;
+    }
+
     setStatus("submitting");
 
     try {
-      if (FORMSPREE_ENDPOINT === "YOUR_FORMSPREE_ENDPOINT_HERE" || !FORMSPREE_ENDPOINT.startsWith("http")) {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setStatus("success");
-        setModalType("success");
-        setShowModal(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        return;
+      if (!BREVO_API_KEY) {
+        console.error("Brevo API Key is missing. Please check your .env file and restart your dev server (Ctrl+C and npm run dev).");
+        throw new Error("Brevo API Key is missing");
       }
 
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      // 1. Send email to the Portfolio Owner
+      const ownerMailResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
-          Accept: "application/json",
+          "Accept": "application/json",
           "Content-Type": "application/json",
+          "api-key": BREVO_API_KEY,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          sender: { name: "Portfolio Contact", email: SENDER_EMAIL },
+          to: [{ email: OWNER_EMAIL, name: "Portfolio Owner" }],
+          subject: `New Contact: ${formData.subject}`,
+          htmlContent: getOwnerEmailTemplate(formData),
+        }),
       });
 
-      if (response.ok) {
-        setStatus("success");
-        setModalType("success");
-        setShowModal(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        setStatus("error");
-        setModalType("error");
-        setShowModal(true);
+      if (!ownerMailResponse.ok) {
+        const errorData = await ownerMailResponse.json();
+        console.error("Brevo API Error (Owner Email):", errorData);
+        if (ownerMailResponse.status === 401) {
+          console.error("Unauthorized: Please verify your Brevo API key and ensure you have restarted the dev server.");
+        }
+        throw new Error(`Owner email failed: ${ownerMailResponse.status}`);
       }
+
+      // 2. Send auto-response to the Sender
+      const autoResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "api-key": BREVO_API_KEY,
+        },
+        body: JSON.stringify({
+          sender: { name: "EverbestDev", email: SENDER_EMAIL },
+          to: [{ email: formData.email, name: formData.name }],
+          subject: "Message Received — EverbestDev",
+          htmlContent: getAutoResponseTemplate(formData),
+        }),
+      });
+
+      if (!autoResponse.ok) {
+        const errorData = await autoResponse.json();
+        console.error("Brevo API Error (Auto-response):", errorData);
+      }
+
+      setStatus("success");
+      setModalType("success");
+      setShowModal(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+
     } catch (error) {
       console.error("Submission error:", error);
       setStatus("error");
       setModalType("error");
       setShowModal(true);
     } finally {
-      // Keep state for modal, but clear loading
       if (status === "submitting") setStatus(null);
     }
   };
@@ -293,13 +337,18 @@ const Contact = () => {
 
               <div className="space-y-4">
                 <h3 className="text-xl font-bold" style={{ color: colors.TEXT_PRIMARY }}>
-                  {modalType === 'validation' ? 'Everbot Detects...' : 'Everbot Says:'}
+                  {modalType === 'validation' || modalType === 'email_invalid' ? 'Everbot Detects...' : 'Everbot Says:'}
                 </h3>
 
                 <p className="text-sm leading-relaxed" style={{ color: colors.TEXT_SECONDARY }}>
                   {modalType === 'validation' && (
                     <>
                       It looks like the <span className="font-bold text-cyan-400 capitalize">{missingFields.join(", ")}</span> {missingFields.length > 1 ? 'sections are' : 'section is'} yet to be filled. Please complete {missingFields.length > 1 ? 'them' : 'it'} so I can deliver your message!
+                    </>
+                  )}
+                  {modalType === 'email_invalid' && (
+                    <>
+                      The email address <span className="font-bold text-red-400 truncate max-w-[200px] inline-block align-bottom">"{formData.email}"</span> seems to be invalid. It's missing a proper format (like @example.com). Please fix it so I can verify you're human!
                     </>
                   )}
                   {modalType === 'success' && (
