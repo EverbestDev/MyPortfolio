@@ -93,6 +93,17 @@ const projectsData = [
     iframeUrl: "https://booksync2.vercel.app",
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=BookSync",
   },
+  {
+    id: 9,
+    title: "JaraMix — Luxury Sonic Branding",
+    description: "A premium music production and DJing platform featuring real-time audio contexts, immersive video backgrounds, and a high-fidelity booking system. Designed for luxury events and professional recording sessions.",
+    impact: "Streamlining global bookings and professional studio inquiries with an immersive sonic interface.",
+    tech: ["React", "Audio Context", "Framer Motion", "Tailwind CSS"],
+    github: "#",
+    live: "https://jaramix.vercel.app",
+    iframeUrl: "https://jaramix.vercel.app",
+    imageUrl: "https://placehold.co/1200x800/000000/ffffff?text=JaraMix+Platform",
+  },
 ];
 
 const IframePreview = ({ url, fallbackImage, title, colors }) => {
