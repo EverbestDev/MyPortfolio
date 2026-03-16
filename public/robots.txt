@@ -1,5 +1,5 @@
-# EverbestDev Portfolio - robots.txt
-# Last Updated: 2026-02-10
+# Olawoore Usamah Abidemi (EverbestDev) Portfolio - robots.txt
+# Last Updated: 2026-03-16
 
 User-agent: *
 Allow: /

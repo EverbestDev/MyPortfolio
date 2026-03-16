@@ -6,96 +6,96 @@
   
   <url>
     <loc>https://everbestdev.vercel.app/</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://everbestdev.vercel.app/pfp.jpg</image:loc>
-      <image:title>EverbestDev - Full-Stack and No-Code Web Developer</image:title>
-      <image:caption>Professional developer specializing in React, Node.js, SaaS, and No-Code solutions</image:caption>
+      <image:title>Olawoore Usamah Abidemi (EverbestDev) - Full-Stack and No-Code Web Developer</image:title>
+      <image:caption>Olawoore Usamah Abidemi - Professional developer specializing in React, Node.js, SaaS, and No-Code solutions</image:caption>
     </image:image>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/resume</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/github</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#about</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#projects</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#experience</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#gallery</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#testimonials</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#contact</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.92</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#projects?filter=fullstack</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#projects?filter=react</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#projects?filter=nocode</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
 
   <url>
     <loc>https://everbestdev.vercel.app/#projects?filter=saas</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
