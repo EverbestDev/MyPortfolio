@@ -222,7 +222,7 @@ const GalleryCard = ({ image, colors, onOpen }) => (
     }}
     onClick={() => onOpen(image)}
   >
-    <BorderBeam size={100} duration={8} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
+    <BorderBeam size={100} duration={8} colorFrom="#ffffff" colorTo="#ffffff" />
     <img
       src={image.src}
       alt={image.title}

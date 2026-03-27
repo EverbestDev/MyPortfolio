@@ -29,7 +29,7 @@ const Resume = () => {
         basics: {
             name: "Usamah Abidemi",
             label: "Full Stack Developer & SaaS Architect",
-            email: "EverbestDev@gmail.com",
+            email: "olawooreusamahabidemi@gmail.com",
             phone: "+234 911 745 0722",
             location: "Remote / Nigeria",
             website: "https://everbestdev.com.ng",
@@ -244,8 +244,8 @@ const Resume = () => {
                                 <p className="text-xl font-medium resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>Full Stack Developer & SaaS Architect</p>
                             </div>
                             <div className="flex flex-col items-start md:items-end gap-2 text-sm resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>
-                                <a href="mailto:EverbestDev@gmail.com" className="flex items-center gap-2 hover:text-cyan-400 transition-colors">
-                                    <Mail size={16} /> EverbestDev@gmail.com
+                                <a href="mailto:olawooreusamahabidemi@gmail.com" className="flex items-center gap-2 hover:text-cyan-400 transition-colors">
+                                    <Mail size={16} /> olawooreusamahabidemi@gmail.com
                                 </a>
                                 <a href="tel:+2349117450722" className="flex items-center gap-2 hover:text-cyan-400 transition-colors">
                                     <Phone size={16} /> +234 911 745 0722

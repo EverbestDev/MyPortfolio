@@ -803,8 +803,8 @@ export default function SmokeyCursor({
         function correctDeltaY(delta) { const aspectRatio = canvas.width / canvas.height; if (aspectRatio > 1) delta /= aspectRatio; return delta; }
 
         function generateColor() {
-            const c = HSVtoRGB(Math.random(), 1.0, 1.0);
-            c.r *= 0.15; c.g *= 0.15; c.b *= 0.15; return c;
+            const v = Math.random() * 0.4 + 0.1; // Grey to white shades (0.1 is 10%, 0.5 is 50%)
+            return { r: v, g: v, b: v };
         }
 
         function HSVtoRGB(h, s, v) {

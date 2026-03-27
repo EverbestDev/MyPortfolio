@@ -33,7 +33,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="md:hidden fixed top-0 w-full z-50 px-4 py-3 transition-all duration-500"
+        className="md:hidden fixed top-0 w-full z-[3000] px-4 py-3 transition-all duration-500"
         style={{
           backgroundColor: scrolled ? `${colors.DARK_BG}cc` : "transparent",
           backdropFilter: scrolled ? "blur(20px)" : "none",
@@ -126,7 +126,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[2999] md:hidden"
             />
 
             {/* Menu Panel */}
@@ -135,7 +135,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 h-full w-[min(85vw,360px)] z-50 md:hidden overflow-y-auto"
+              className="fixed top-0 right-0 h-full w-[min(85vw,360px)] z-[3001] md:hidden overflow-y-auto"
               style={{
                 background: `linear-gradient(135deg, ${colors.DARK_BG}fc, ${colors.DARK_BG}f5)`,
                 backdropFilter: "blur(20px)",
@@ -270,7 +270,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                       colors={colors}
                     />
                     <SocialLink
-                      href="mailto:EverbestDev@gmail.com"
+                      href="mailto:olawooreusamahabidemi@gmail.com"
                       icon={<Mail size={18} />}
                       label="Email"
                       colors={colors}

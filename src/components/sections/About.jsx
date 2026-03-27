@@ -35,7 +35,7 @@ const BentoCard = ({ children, className = "", delay = 0, colors }) => (
       boxShadow: `0 10px 30px -10px ${colors.NEON_CYAN}20`,
     }}
   >
-    <BorderBeam size={150} duration={8} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
+    <BorderBeam size={150} duration={8} colorFrom="#ffffff" colorTo="#ffffff" />
     {children}
   </motion.div>
 );

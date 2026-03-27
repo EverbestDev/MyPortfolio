@@ -121,7 +121,7 @@ const Testimonials = () => {
                                 boxShadow: `0 20px 40px -10px rgba(0,0,0,0.5)`
                             }}
                         >
-                            <BorderBeam size={200} duration={12} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
+                            <BorderBeam size={200} duration={12} colorFrom="#ffffff" colorTo="#ffffff" />
                             <Quote className="absolute top-8 left-8 text-cyan-500/20" size={80} />
 
                             <div className="relative z-10">

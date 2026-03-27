@@ -96,7 +96,7 @@ html {
 
 /* Custom scrollbar for dark theme */
 [data-theme="dark"] ::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-track {
@@ -114,7 +114,7 @@ html {
 
 /* Custom scrollbar for light theme */
 [data-theme="light"] ::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
 }
 
 [data-theme="light"] ::-webkit-scrollbar-track {
@@ -132,7 +132,7 @@ html {
 
 /* Custom Scrollbar Utility */
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 3px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {

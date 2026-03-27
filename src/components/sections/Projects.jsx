@@ -170,7 +170,7 @@ const FeaturedProject = ({ project, colors, onClick }) => (
     }}
     onClick={() => onClick(project)}
   >
-    <BorderBeam size={250} duration={12} delay={9} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
+    <BorderBeam size={250} duration={12} delay={9} colorFrom="#ffffff" colorTo="#ffffff" />
     <div className="absolute inset-0 z-0">
       <IframePreview
         url={project.iframeUrl}
@@ -228,7 +228,7 @@ const ProjectCard = ({ project, colors, onClick }) => (
     }}
     onClick={() => onClick(project)}
   >
-    <BorderBeam size={100} duration={6} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
+    <BorderBeam size={100} duration={6} colorFrom="#ffffff" colorTo="#ffffff" />
     <div className="relative h-48 overflow-hidden bg-black/50">
       <IframePreview
         url={project.iframeUrl}

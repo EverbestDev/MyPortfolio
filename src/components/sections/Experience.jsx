@@ -63,7 +63,7 @@ const TimelineCard = ({ data, index, colors }) => (
           boxShadow: `0 0 20px ${colors.NEON_CYAN}20`
         }}
       >
-        <BorderBeam size={120} duration={10} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
+        <BorderBeam size={120} duration={10} colorFrom="#ffffff" colorTo="#ffffff" />
         <div className={`flex flex-col ${index % 2 === 0 ? 'sm:items-end' : 'sm:items-start'}`}>
 
           <div className="sm:hidden mb-4 self-start">

@@ -187,8 +187,8 @@ const Contact = () => {
               <ContactInfoCard
                 icon={Mail}
                 title="Email"
-                value="EverbestDev@gmail.com"
-                link="mailto:EverbestDev@gmail.com"
+                value="olawooreusamahabidemi@gmail.com"
+                link="mailto:olawooreusamahabidemi@gmail.com"
                 delay={0}
                 colors={colors}
                 compact
@@ -249,7 +249,7 @@ const Contact = () => {
               boxShadow: `0 20px 40px -20px rgba(0,0,0,0.5)`
             }}
           >
-            <BorderBeam size={200} duration={12} colorFrom={colors.NEON_CYAN} colorTo={colors.NEON_PURPLE} />
+            <BorderBeam size={200} duration={12} colorFrom="#ffffff" colorTo="#ffffff" />
             <form onSubmit={handleSubmit} className="relative z-10" noValidate>
               <div className="grid sm:grid-cols-2 gap-4">
                 <InputField

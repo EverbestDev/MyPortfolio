@@ -31,7 +31,7 @@ const KNOWLEDGE_BASE = {
     },
     contact: {
         keywords: ['contact', 'reach', 'email', 'hire', 'available', 'get in touch', 'phone', 'whatsapp', 'call', 'message'],
-        response: "You can reach me via:\n\nEmail: EverbestDev@gmail.com\nPhone/WhatsApp: +234 911 745 0722\nLinkedIn: linkedin.com/in/usamah-abidemi-198464291\nGitHub: github.com/EverbestDev\n\nFeel free to use the contact form on this page or reach out directly!"
+        response: "You can reach me via:\n\nEmail: olawooreusamahabidemi@gmail.com\nPhone/WhatsApp: +234 911 745 0722\nLinkedIn: linkedin.com/in/usamah-abidemi-198464291\nGitHub: github.com/EverbestDev\n\nFeel free to use the contact form on this page or reach out directly!"
     },
     services: {
         keywords: ['services', 'offer', 'do', 'help', 'hire', 'freelance', 'work'],
