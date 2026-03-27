@@ -135,12 +135,7 @@ const Resume = () => {
             className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
             style={{ backgroundColor: colors.DARK_BG, color: colors.TEXT_PRIMARY }}
         >
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
-                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[120px]"
-                    style={{ backgroundColor: colors.NEON_CYAN }} />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full blur-[120px]"
-                    style={{ backgroundColor: colors.NEON_CYAN }} />
-            </div>
+
 
             <div className="max-w-4xl mx-auto relative z-10">
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-4 print:hidden">
