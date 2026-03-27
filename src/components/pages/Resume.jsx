@@ -34,7 +34,7 @@ const Resume = () => {
             location: "Remote / Nigeria",
             website: "https://everbestdev.com.ng",
             profiles: [
-                { network: "LinkedIn", url: "https://linkedin.com/in/everbestdev" },
+                { network: "LinkedIn", url: "https://www.linkedin.com/in/usamah-abidemi-198464291/" },
                 { network: "GitHub", url: "https://github.com/everbestDev" }
             ]
         },
@@ -254,7 +254,7 @@ const Resume = () => {
                                     <MapPin size={16} /> Remote / Nigeria
                                 </div>
                                 <div className="flex gap-4 mt-1">
-                                    <a href="https://linkedin.com/in/everbestdev" className="hover:text-cyan-400"><Linkedin size={18} /></a>
+                                    <a href="https://www.linkedin.com/in/usamah-abidemi-198464291/" className="hover:text-cyan-400"><Linkedin size={18} /></a>
                                     <a href="https://github.com/everbestDev" className="hover:text-cyan-400"><Github size={18} /></a>
                                     <a href="https://everbestdev.com.ng" className="hover:text-cyan-400"><Globe size={18} /></a>
                                 </div>

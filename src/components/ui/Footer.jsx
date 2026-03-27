@@ -51,7 +51,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               <SocialIcon href="https://github.com/EverbestDev" icon={Github} colors={colors} />
-              <SocialIcon href="https://www.linkedin.com/in/everbest-studios-198464291" icon={Linkedin} colors={colors} />
+              <SocialIcon href="https://www.linkedin.com/in/usamah-abidemi-198464291/" icon={Linkedin} colors={colors} />
               <SocialIcon href="mailto:EverbestDev@gmail.com" icon={Mail} colors={colors} />
               <motion.a
                 href="https://wa.me/2349117450722"

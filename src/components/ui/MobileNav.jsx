@@ -264,7 +264,7 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                       <Github size={18} />
                     </Link>
                     <SocialLink
-                      href="https://www.linkedin.com/in/everbest-studios-198464291"
+                      href="https://www.linkedin.com/in/usamah-abidemi-198464291/"
                       icon={<Linkedin size={18} />}
                       label="LinkedIn"
                       colors={colors}
