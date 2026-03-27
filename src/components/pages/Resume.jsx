@@ -11,13 +11,11 @@ import {
     ExternalLink,
     ChevronLeft,
     FileText,
-    FileJson,
     Award,
     Trophy,
     Target,
     TrendingUp,
-    CheckCircle2,
-    Code2
+    CheckCircle2
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useThemeColors } from "../../hooks/useThemeColors";
@@ -117,46 +115,18 @@ const Resume = () => {
     };
 
     const handleDownloadPDF = () => {
-        window.print();
+        const link = document.createElement('a');
+        link.href = '/cv/Usamah Abidemi CV.pdf';
+        link.download = 'Usamah Abidemi CV.pdf';
+        link.click();
         setShowDownloadMenu(false);
     };
 
-    const handleDownloadJSON = () => {
-        const dataStr = JSON.stringify(resumeData, null, 2);
-        const dataBlob = new Blob([dataStr], { type: 'application/json' });
-        const url = URL.createObjectURL(dataBlob);
+    const handleDownloadDOCX = () => {
         const link = document.createElement('a');
-        link.href = url;
-        link.download = 'usamah_abidemi_resume.json';
+        link.href = '/cv/Usamah Abidemi CV.docx';
+        link.download = 'Usamah Abidemi CV.docx';
         link.click();
-        URL.revokeObjectURL(url);
-        setShowDownloadMenu(false);
-    };
-
-    const handleDownloadTXT = () => {
-        let txtContent = `${resumeData.basics.name}\n${resumeData.basics.label}\n\n`;
-        txtContent += `Email: ${resumeData.basics.email}\n`;
-        txtContent += `Phone: ${resumeData.basics.phone}\n`;
-        txtContent += `Location: ${resumeData.basics.location}\n`;
-        txtContent += `Website: ${resumeData.basics.website}\n\n`;
-        txtContent += `PROFESSIONAL SUMMARY\n${resumeData.summary}\n\n`;
-        txtContent += `EXPERIENCE\n`;
-        resumeData.experience.forEach(exp => {
-            txtContent += `\n${exp.position} at ${exp.company} (${exp.startDate} - ${exp.endDate})\n`;
-            exp.highlights.forEach(h => txtContent += `• ${h}\n`);
-        });
-        txtContent += `\nSKILLS\n`;
-        Object.entries(resumeData.skills).forEach(([category, skills]) => {
-            txtContent += `${category.toUpperCase()}: ${skills.join(', ')}\n`;
-        });
-
-        const dataBlob = new Blob([txtContent], { type: 'text/plain' });
-        const url = URL.createObjectURL(dataBlob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'usamah_abidemi_resume.txt';
-        link.click();
-        URL.revokeObjectURL(url);
         setShowDownloadMenu(false);
     };
 
@@ -217,29 +187,18 @@ const Resume = () => {
                                         <FileText size={18} style={{ color: colors.NEON_CYAN }} />
                                         <div className="text-left">
                                             <div className="font-semibold text-sm">PDF Format</div>
-                                            <div className="text-xs opacity-60">Print-ready version</div>
+                                            <div className="text-xs opacity-60">Professional PDF version</div>
                                         </div>
                                     </button>
                                     <button
-                                        onClick={handleDownloadJSON}
+                                        onClick={handleDownloadDOCX}
                                         className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors"
                                         style={{ color: colors.TEXT_PRIMARY }}
                                     >
-                                        <FileJson size={18} style={{ color: colors.NEON_CYAN }} />
+                                        <FileText size={18} style={{ color: colors.NEON_CYAN }} />
                                         <div className="text-left">
-                                            <div className="font-semibold text-sm">JSON Format</div>
-                                            <div className="text-xs opacity-60">Machine-readable data</div>
-                                        </div>
-                                    </button>
-                                    <button
-                                        onClick={handleDownloadTXT}
-                                        className="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/5 transition-colors"
-                                        style={{ color: colors.TEXT_PRIMARY }}
-                                    >
-                                        <Code2 size={18} style={{ color: colors.NEON_CYAN }} />
-                                        <div className="text-left">
-                                            <div className="font-semibold text-sm">TXT Format</div>
-                                            <div className="text-xs opacity-60">Plain text version</div>
+                                            <div className="font-semibold text-sm">Word/DOC Format</div>
+                                            <div className="text-xs opacity-60">Editable Word version</div>
                                         </div>
                                     </button>
                                 </motion.div>
