@@ -29,6 +29,28 @@ const projectsData = [
   },
   {
     id: 3,
+    title: "MOMSComfort — Midwifery & Maternal Care",
+    description: "A premium, HEFAMAA-accredited midwife-led maternal care platform. Features client booking engines, custom product sourcing request workflows with automated storytelling email notifications (Brevo), and interactive midwife consultation portals.",
+    impact: "Facilitating clinical health monitoring and direct product sourcing for mothers.",
+    tech: ["Vue.js", "Vite", "Brevo API", "Cloudinary", "Tailwind CSS"],
+    github: "#",
+    live: "https://momscomfort.com",
+    iframeUrl: "https://momscomfort.com",
+    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=MOMSComfort+Platform",
+  },
+  {
+    id: 4,
+    title: "Bazetwo — Specialised Care & Nursing Homes",
+    description: "A modern, high-fidelity healthcare and nursing home management platform. Engineered with Vue 3, GSAP, and Tailwind CSS to connect families with specialised clinical care and supportive residential home directories.",
+    impact: "Streamlining residential placement and specialised care discovery.",
+    tech: ["Vue.js", "TypeScript", "GSAP", "Tailwind CSS"],
+    github: "#",
+    live: "https://bazetwo.com",
+    iframeUrl: "https://bazetwocares.com",
+    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=BazetwoCares+Platform",
+  },
+  {
+    id: 5,
     title: "ILI-Nigeria Translation Hub",
     description: "A full-stack MERN platform streamlining multilingual translation workflows. Features client dashboards, automated email notifications (Brevo), and secure file management via Cloudinary.",
     impact: "Optimized workflow efficiency by 60% for interpreters.",
@@ -39,7 +61,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=ILIN+Dashboard",
   },
   {
-    id: 4,
+    id: 6,
     title: "University E-Attendance",
     description: "A smart attendance management system utilizing Geofencing technology and face recognition for secure, location-based student validation. Developed as a collaborative group initiative.",
     impact: "Eliminated manual roll-call errors and identity fraud.",
@@ -50,7 +72,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=E-Attendance",
   },
   {
-    id: 5,
+    id: 7,
     title: "Zula - Modern E-Commerce",
     description: "A progressive web app (PWA) for e-commerce with seamless cart management, offline capabilities, and a fluid mobile-first shopping experience.",
     impact: "Native-app like experience with instant loading.",
@@ -61,7 +83,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=Zula+Store",
   },
   {
-    id: 6,
+    id: 8,
     title: "Everbot - AI Assistant",
     description: "An intelligent WhatsApp bot built with Python and FastAPI. Handles automated scheduling, user queries, and real-time interaction management.",
     impact: "Automated 80% of routine user inquiries.",
@@ -72,7 +94,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=Everbot+AI",
   },
   {
-    id: 7,
+    id: 9,
     title: "Dynamic Empire",
     description: "A high-performance business management platform featuring real-time data synchronization and an immersive user interface designed for modern enterprises.",
     impact: "Streamlining large-scale operations with sub-second latency.",
@@ -83,7 +105,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=Dynamic+Empire",
   },
   {
-    id: 8,
+    id: 10,
     title: "BookSync",
     description: "A collaborative booktracking and library management system that synchronizes reading progress across multiple devices and platforms.",
     impact: "Used by 500+ active readers to track collections.",
@@ -94,7 +116,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/600x400/080812/00ffff?text=BookSync",
   },
   {
-    id: 9,
+    id: 11,
     title: "JaraMix — Luxury Sonic Branding",
     description: "A premium music production and DJing platform featuring real-time audio contexts, immersive video backgrounds, and a high-fidelity booking system. Designed for luxury events and professional recording sessions.",
     impact: "Streamlining global bookings and professional studio inquiries with an immersive sonic interface.",
