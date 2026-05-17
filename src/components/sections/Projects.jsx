@@ -30,9 +30,9 @@ const projectsData = [
   {
     id: 3,
     title: "MOMSComfort — Midwifery & Maternal Care",
-    description: "A premium, HEFAMAA-accredited midwife-led maternal care platform. Features client booking engines, custom product sourcing request workflows with automated storytelling email notifications (Brevo), and interactive midwife consultation portals.",
-    impact: "Facilitating clinical health monitoring and direct product sourcing for mothers.",
-    tech: ["Vue.js", "Vite", "Brevo API", "Cloudinary", "Tailwind CSS"],
+    description: "A premium, HEFAMAA-accredited maternal healthcare platform providing professional, midwife-led prenatal and postnatal care. Built with seamless booking engines for home visits or clinical care, telemedicine consultations, and expert wellness resources.",
+    impact: "Empowering mothers with accessible, regulated clinical support and maternal wellness guidance.",
+    tech: ["Vue.js", "Vite", "Tailwind CSS", "GSAP", "Brevo API"],
     github: "#",
     live: "https://momscomfort.com",
     iframeUrl: "https://momscomfort.com",
@@ -45,8 +45,8 @@ const projectsData = [
     impact: "Streamlining residential placement and specialised care discovery.",
     tech: ["Vue.js", "TypeScript", "GSAP", "Tailwind CSS"],
     github: "#",
-    live: "https://bazetwo.com",
-    iframeUrl: "https://bazetwocares.com",
+    live: "https://bazetwocares.vercel.app/",
+    iframeUrl: "https://bazetwocares.vercel.app/",
     imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=BazetwoCares+Platform",
   },
   {
