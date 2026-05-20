@@ -34,8 +34,8 @@ const projectsData = [
     impact: "Empowering mothers with accessible, regulated clinical support and maternal wellness guidance.",
     tech: ["Vue.js", "Vite", "Tailwind CSS", "GSAP", "Brevo API"],
     github: "#",
-    live: "https://momscomfort.com",
-    iframeUrl: "https://momscomfort.com",
+    live: "https://momscomfortcare.com/",
+    iframeUrl: "https://momscomfortcare.com/",
     imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=MOMSComfort+Platform",
   },
   {
