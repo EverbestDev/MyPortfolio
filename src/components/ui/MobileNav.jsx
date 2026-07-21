@@ -228,27 +228,28 @@ const MobileNav = ({ sections, activeSection, scrollToSection }) => {
                   style={{ borderColor: `${colors.NEON_CYAN}15` }}
                 >
                   {/* Resume Button */}
-                  <motion.a
-                    href="/resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl text-sm font-semibold"
-                    style={{
-                      border: `1px solid ${colors.NEON_CYAN}30`,
-                      background: `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`,
-                      color: colors.TEXT_PRIMARY,
-                      boxShadow: `0 2px 12px ${colors.NEON_CYAN}12`
-                    }}
+                  <motion.div
                     whileHover={{
                       scale: 1.02,
                       boxShadow: `0 4px 20px ${colors.NEON_CYAN}20`
                     }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => setIsOpen(false)}
                   >
-                    View Resume
-                    <ArrowRight size={16} />
-                  </motion.a>
+                    <Link
+                      to="/resume"
+                      className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl text-sm font-semibold"
+                      style={{
+                        border: `1px solid ${colors.NEON_CYAN}30`,
+                        background: `linear-gradient(135deg, ${colors.NEON_CYAN}15, ${colors.NEON_CYAN}08)`,
+                        color: colors.TEXT_PRIMARY,
+                        boxShadow: `0 2px 12px ${colors.NEON_CYAN}12`
+                      }}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      View Resume
+                      <ArrowRight size={16} />
+                    </Link>
+                  </motion.div>
 
 
                   <div className="flex items-center justify-center gap-3 pt-2">
