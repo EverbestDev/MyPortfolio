@@ -8,10 +8,10 @@ const experiences = [
   {
     id: 1,
     role: "Chief Technology Officer (CTO)",
-    company: "Afribase",
-    companyUrl: "https://useafribase.app/",
-    duration: "2024 - Present",
-    description: "Leading all engineering efforts at Afribase — architecting the core platform, driving product decisions, and building the technical roadmap from the ground up. Overseeing frontend, backend, and infrastructure to deliver a robust, scalable product serving the African market.",
+    company: "Altris Product System",
+    companyUrl: "https://altrisco.tech/",
+    duration: "2025 - Present",
+    description: "Leading all product and engineering efforts at Altris — designing system architectures, driving technical strategy, and building scalable products for the African market. Overseeing cross-functional teams across frontend, backend, and infrastructure to ship production-grade platforms including Afribase.",
     tech: ["Next.js", "Node.js", "PostgreSQL", "AWS", "TypeScript"],
   },
   {
@@ -19,7 +19,7 @@ const experiences = [
     role: "Full-Stack Engineer (Internship)",
     company: "StreetOps NG",
     companyUrl: "https://streetops.ng",
-    duration: "2024 - Present",
+    duration: "2026 - Present",
     description: "Building and shipping production features across the StreetAsk research platform — from the admin portal and survey engine to archetype scoring systems and real-time audit logging. Working across the full stack with React, Next.js, Node.js, and PostgreSQL.",
     tech: ["React", "Next.js", "Node.js", "PostgreSQL", "TypeScript"],
   },
