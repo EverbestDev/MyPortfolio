@@ -7,27 +7,21 @@ import { BorderBeam } from "../ui/BorderBeam";
 const experiences = [
   {
     id: 1,
-    role: "Senior Full-Stack Developer",
-    company: "Innovatech Solutions",
-    duration: "2022 - Present",
-    description: "Spearheaded the migration of legacy monoliths to microservices using Node.js and Docker, reducing deployment times by 60%. Mentored junior devs and implemented strict code quality standards.",
-    tech: ["Node.js", "React", "Docker", "AWS"],
+    role: "Chief Technology Officer (CTO)",
+    company: "Afribase",
+    companyUrl: "https://useafribase.app/",
+    duration: "2024 - Present",
+    description: "Leading all engineering efforts at Afribase — architecting the core platform, driving product decisions, and building the technical roadmap from the ground up. Overseeing frontend, backend, and infrastructure to deliver a robust, scalable product serving the African market.",
+    tech: ["Next.js", "Node.js", "PostgreSQL", "AWS", "TypeScript"],
   },
   {
     id: 2,
-    role: "Frontend Specialist",
-    company: "Creative Digital Agency",
-    duration: "2019 - 2022",
-    description: "Designed and developed award-winning interactive web experiences for Fortune 500 clients. Specialized in complex GSAP animations and accessible, responsive UI components.",
-    tech: ["React", "TypeScript", "GSAP", "Figma"],
-  },
-  {
-    id: 3,
-    role: "Junior Web Developer",
-    company: "Local Tech Startup",
-    duration: "2018 - 2019",
-    description: "Collaborated in an agile team to build the MVP of a SaaS product. Handled UI implementation and integrated third-party APIs for payment and authentication.",
-    tech: ["HTML/CSS", "JavaScript", "PHP", "MySQL"],
+    role: "Full-Stack Engineer (Internship)",
+    company: "StreetOps NG",
+    companyUrl: "https://streetops.ng",
+    duration: "2024 - Present",
+    description: "Building and shipping production features across the StreetAsk research platform — from the admin portal and survey engine to archetype scoring systems and real-time audit logging. Working across the full stack with React, Next.js, Node.js, and PostgreSQL.",
+    tech: ["React", "Next.js", "Node.js", "PostgreSQL", "TypeScript"],
   },
 ];
 
@@ -75,7 +69,13 @@ const TimelineCard = ({ data, index, colors }) => (
           <h3 className="text-xl font-bold mb-1" style={{ color: colors.TEXT_PRIMARY }}>{data.role}</h3>
           <div className="flex items-center gap-2 mb-3 text-sm font-medium" style={{ color: colors.NEON_CYAN }}>
             <Building2 size={14} />
-            <span>{data.company}</span>
+            {data.companyUrl ? (
+              <a href={data.companyUrl} target="_blank" rel="noopener noreferrer" style={{ color: colors.NEON_CYAN, textDecoration: "none" }} className="hover:underline">
+                {data.company}
+              </a>
+            ) : (
+              <span>{data.company}</span>
+            )}
           </div>
 
           <p className="text-sm leading-relaxed mb-6 opacity-80" style={{ color: colors.TEXT_SECONDARY }}>

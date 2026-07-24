@@ -7,6 +7,17 @@ import { BorderBeam } from "../ui/BorderBeam";
 const projectsData = [
   {
     id: 1,
+    title: "Bazetwo — Specialised Care & Nursing Homes",
+    description: "A modern, high-fidelity healthcare and nursing home management platform. Engineered with Vue 3, GSAP, and Tailwind CSS to connect families with specialised clinical care and supportive residential home directories.",
+    impact: "Streamlining residential placement and specialised care discovery across Nigeria.",
+    tech: ["Vue.js", "TypeScript", "GSAP", "Tailwind CSS"],
+    github: "#",
+    live: "https://bazetwo.com",
+    iframeUrl: "https://bazetwo.com",
+    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=Bazetwo+Platform",
+  },
+  {
+    id: 2,
     title: "SSCF - Digital Health Platform",
     description: "A comprehensive digital platform for sickle cell awareness, featuring interactive genotype checkers, video hubs, and a secure donation portal. Built to empower the community with medical wisdom.",
     impact: "Serving 1000+ daily users with vital health resources.",
@@ -17,7 +28,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=SSCF+Platform",
   },
   {
-    id: 2,
+    id: 3,
     title: "FundedU — Find Student Funding",
     description: "A comprehensive platform connecting students with verified scholarships, grants, and internships. Designed to simplify the search for educational funding with a stress-free experience and deadline tracking.",
     impact: "Empowering students to access global funding opportunities with zero stress.",
@@ -28,7 +39,7 @@ const projectsData = [
     imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=FundedU+Platform",
   },
   {
-    id: 3,
+    id: 4,
     title: "MOMSComfort — Midwifery & Maternal Care",
     description: "A premium, HEFAMAA-accredited maternal healthcare platform providing professional, midwife-led prenatal and postnatal care. Built with seamless booking engines for home visits or clinical care, telemedicine consultations, and expert wellness resources.",
     impact: "Empowering mothers with accessible, regulated clinical support and maternal wellness guidance.",
@@ -37,17 +48,6 @@ const projectsData = [
     live: "https://momscomfortcare.com/",
     iframeUrl: "https://momscomfortcare.com/",
     imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=MOMSComfort+Platform",
-  },
-  {
-    id: 4,
-    title: "Bazetwo — Specialised Care & Nursing Homes",
-    description: "A modern, high-fidelity healthcare and nursing home management platform. Engineered with Vue 3, GSAP, and Tailwind CSS to connect families with specialised clinical care and supportive residential home directories.",
-    impact: "Streamlining residential placement and specialised care discovery.",
-    tech: ["Vue.js", "TypeScript", "GSAP", "Tailwind CSS"],
-    github: "#",
-    live: "https://bazetwocares.vercel.app/",
-    iframeUrl: "https://bazetwocares.vercel.app/",
-    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=BazetwoCares+Platform",
   },
   {
     id: 5,
