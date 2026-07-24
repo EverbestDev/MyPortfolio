@@ -117,14 +117,14 @@ const projectsData = [
   },
   {
     id: 11,
-    title: "JaraMix — Luxury Sonic Branding",
-    description: "A premium music production and DJing platform featuring real-time audio contexts, immersive video backgrounds, and a high-fidelity booking system. Designed for luxury events and professional recording sessions.",
-    impact: "Streamlining global bookings and professional studio inquiries with an immersive sonic interface.",
-    tech: ["React", "Audio Context", "Framer Motion", "Tailwind CSS"],
+    title: "Omni — AI Sales & Customer Ops for African Businesses",
+    description: "An AI-powered commerce assistant built for African businesses that operate through WhatsApp, Instagram DMs, and Telegram. Omni handles customer replies, understands voice notes in Nigerian English & Pidgin, follows up on abandoned carts, and automates payment verification — so your business never sleeps.",
+    impact: "Bringing AI-first customer operations to WhatsApp-native African SMEs.",
+    tech: ["Vue 3", "TypeScript", "Tailwind CSS", "Pinia", "Motion One"],
     github: "#",
-    live: "https://jaramix.vercel.app",
-    iframeUrl: "https://jaramix.vercel.app",
-    imageUrl: "https://placehold.co/1200x800/000000/ffffff?text=JaraMix+Platform",
+    live: "https://omni-six-vert.vercel.app",
+    iframeUrl: "https://omni-six-vert.vercel.app",
+    imageUrl: "https://placehold.co/600x400/0a0a0a/ea580c?text=Omni+AI",
   },
 ];
 
