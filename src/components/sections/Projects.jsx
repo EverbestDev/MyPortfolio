@@ -7,14 +7,14 @@ import { BorderBeam } from "../ui/BorderBeam";
 const projectsData = [
   {
     id: 1,
-    title: "Bazetwo — Specialised Care & Nursing Homes",
-    description: "A modern, high-fidelity healthcare and nursing home management platform. Engineered with Vue 3, GSAP, and Tailwind CSS to connect families with specialised clinical care and supportive residential home directories.",
-    impact: "Streamlining residential placement and specialised care discovery across Nigeria.",
-    tech: ["Vue.js", "TypeScript", "GSAP", "Tailwind CSS"],
+    title: "Bazetwo Barbers — Premium Grooming Platform",
+    description: "A full-stack grooming and booking platform for the modern gentleman. Features seamless appointment scheduling with barber preference selection, Stripe-powered payments, a customer dashboard with booking history, an admin studio management panel, and a dedicated barber schedule dashboard.",
+    impact: "Digitising premium barbershop operations with a sleek, end-to-end booking and payment experience.",
+    tech: ["React 19", "TypeScript", "Vite", "GSAP", "Stripe", "Framer Motion"],
     github: "#",
     live: "https://bazetwo.com",
     iframeUrl: "https://bazetwo.com",
-    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=Bazetwo+Platform",
+    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=Bazetwo+Barbers",
   },
   {
     id: 2,
@@ -40,6 +40,17 @@ const projectsData = [
   },
   {
     id: 4,
+    title: "Bazetwo Cares — Specialised Care & Nursing Homes",
+    description: "A high-fidelity care home and specialised residential platform built to connect families with verified nursing homes and clinical care providers across Nigeria. Streamlines residential placement enquiries, care type matching, and facility discovery with an elegant, accessible interface.",
+    impact: "Simplifying specialised care discovery and residential placement for Nigerian families.",
+    tech: ["Vue.js", "TypeScript", "GSAP", "Tailwind CSS"],
+    github: "#",
+    live: "https://cares.bazetwo.com/",
+    iframeUrl: "https://cares.bazetwo.com/",
+    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=Bazetwo+Cares",
+  },
+  {
+    id: 5,
     title: "MOMSComfort — Midwifery & Maternal Care",
     description: "A premium, HEFAMAA-accredited maternal healthcare platform providing professional, midwife-led prenatal and postnatal care. Built with seamless booking engines for home visits or clinical care, telemedicine consultations, and expert wellness resources.",
     impact: "Empowering mothers with accessible, regulated clinical support and maternal wellness guidance.",
