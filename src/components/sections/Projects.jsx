@@ -6,6 +6,17 @@ import { BorderBeam } from "../ui/BorderBeam";
 
 const projectsData = [
   {
+    id: 0,
+    title: "Entrix — WhatsApp-First Event Ticketing",
+    description: "My event ticketing startup for Nigeria. Organisers create events and sell tickets right inside WhatsApp, check guests in at the gate with QR codes, manage team roles, track sales analytics, and get paid out to their bank. Every ticket, order, attendee and team member belongs to an event, keeping the whole platform event-centred.",
+    impact: "Making it effortless for Nigerian organisers to sell tickets and run check-in where their audience already is — WhatsApp.",
+    tech: ["React", "TypeScript", "NestJS", "Prisma", "Afribase", "QR Codes"],
+    github: "#",
+    live: "https://entrix.altrisco.tech",
+    iframeUrl: "https://entrix.altrisco.tech",
+    imageUrl: "https://placehold.co/1200x800/080812/00ffff?text=Entrix",
+  },
+  {
     id: 1,
     title: "Bazetwo Barbers — Premium Grooming Platform",
     description: "A full-stack grooming and booking platform for the modern gentleman. Features seamless appointment scheduling with barber preference selection, Stripe-powered payments, a customer dashboard with booking history, an admin studio management panel, and a dedicated barber schedule dashboard.",

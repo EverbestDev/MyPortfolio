@@ -148,3 +148,46 @@ html {
   background: var(--neon-cyan);
   filter: brightness(1.2);
 }
+/* Hero typewriter — each letter grows in on its own delay (see Hero.jsx) */
+.type-char {
+  display: inline-block;
+  white-space: pre;
+  overflow: hidden;
+  vertical-align: bottom;
+  max-width: 0;
+  opacity: 0;
+  animation: type-in 1ms linear both;
+}
+
+@keyframes type-in {
+  to {
+    max-width: 1.5em;
+    opacity: 1;
+  }
+}
+
+.type-caret {
+  animation: caret-blink 0.5s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Hero floating particles — CSS instead of per-particle JS animations */
+.hero-particle {
+  opacity: 0;
+  animation-name: particle-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes particle-float {
+  50% {
+    transform: translate(var(--drift-x, 0), -100px);
+    opacity: 0.6;
+  }
+}

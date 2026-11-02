@@ -28,89 +28,112 @@ const Resume = () => {
     const resumeData = {
         basics: {
             name: "Usamah Abidemi",
-            label: "Full Stack Developer & SaaS Architect",
+            label: "Full-Stack Software Engineer | CTO, Altris Product Systems",
             email: "olawooreusamahabidemi@gmail.com",
             phone: "+234 911 745 0722",
             location: "Remote / Nigeria",
-            website: "https://everbestdev.com.ng",
+            website: "https://everbestdev.vercel.app",
             profiles: [
                 { network: "LinkedIn", url: "https://www.linkedin.com/in/usamah-abidemi-198464291/" },
-                { network: "GitHub", url: "https://github.com/everbestDev" }
+                { network: "GitHub", url: "https://github.com/EverbestDev" }
             ]
         },
-        summary: "Results-driven Full Stack Developer with 3+ years of experience building scalable SaaS platforms and high-performance web applications. Specialized in MERN stack, microservices architecture, and rapid MVP deployment. Proven track record of reducing deployment times by 60%, improving page load speeds by 65%, and delivering projects that serve 1000+ daily active users. Expert in translating complex business requirements into production-ready solutions with measurable ROI.",
+        summary: "Full-Stack Software Engineer with 3+ years of experience building and shipping production web platforms in TypeScript and Python. Currently a full-time remote Full-Stack Software Engineer at StreetOps and CTO of Altris Product Systems, leading the engineering of Afribase, Rekora, LexLearn and client products. Experienced in designing REST APIs with NestJS, Express, Next.js and FastAPI; modelling data in PostgreSQL (Prisma) and MongoDB; implementing JWT, RBAC and two-factor authentication, Stripe payments and transactional email; and building fast, responsive, animation-rich interfaces with React and Next.js.",
         experience: [
             {
-                company: "Everbest Studios",
-                position: "Senior Full Stack Developer",
-                startDate: "2023-01",
+                company: "StreetOps — Full-time, Remote (Contract)",
+                position: "Full-Stack Software Engineer",
+                startDate: "2026",
                 endDate: "Present",
                 highlights: [
-                    "Architected and deployed 15+ production-ready web applications serving 10K+ combined users",
-                    "Reduced average page load time by 65% through code splitting and lazy loading optimization",
-                    "Implemented CI/CD pipelines reducing deployment time from 2 hours to 15 minutes (87.5% improvement)",
-                    "Mentored 5 junior developers, improving team code quality score from 6.5/10 to 8.9/10"
+                    "Lead developer on GummyGum, StreetOps’ team-culture and employee-engagement platform (Next.js, TypeScript, Firebase), with 13 live interactive team experiences including Sabi Quiz, Townhall, Lucky Spinner and Story Swap",
+                    "Refactored GummyGum from a 9,000+ line monolith into a modular, single-responsibility architecture",
+                    "Built the backend for Paige, a research and insights platform: Express/TypeScript on PostgreSQL with JWT, TOTP two-factor login, rate limiting and Zod validation",
+                    "Built StreetAsk (polls and surveys with PDF report export) and the StreetOps operations dashboard in React and TypeScript"
                 ]
             },
             {
-                company: "Freelance / Contract Work",
-                position: "Full Stack Developer",
-                startDate: "2022-01",
-                endDate: "2023-01",
+                company: "Altris Product Systems",
+                position: "Chief Technology Officer (CTO)",
+                startDate: "2026",
+                endDate: "Present",
                 highlights: [
-                    "Delivered 20+ client projects with 98% satisfaction rate and 100% on-time delivery",
-                    "Built MERN stack translation platform automating 80% of manual workflow processes",
-                    "Developed e-attendance system eliminating identity fraud and reducing admin time by 12 hours/week"
+                    "Set technical direction and architecture for Altris’ products and client builds; lead the engineering team through code review, Git workflows and deployment",
+                    "Afribase: open-source Firebase/Supabase alternative for Africa with auth, auto-generated REST APIs, realtime, storage and multi-tenant organisations",
+                    "Rekora: trading-education platform with FastAPI, PostgreSQL, Redis and a MetaTrader 5 bridge for live prices and trade management",
+                    "LexLearn: AI-graded CBT platform for schools with LexAI semantic grading and question import from PDF, Word and Excel",
+                    "D’Franklin Apartments: hotel booking redesign on Afribase (Next.js 16, TypeScript), first phase of a hotel management system"
+                ]
+            },
+            {
+                company: "Client Projects (Paid Contracts)",
+                position: "Freelance Full-Stack Developer",
+                startDate: "2025",
+                endDate: "Present",
+                highlights: [
+                    "MOMSComfort: maternal healthcare platform with appointment booking, store, WhatsApp checkout, admin panel and Express/Prisma/PostgreSQL API",
+                    "Political campaign platform: website, admin panel and API with Next.js, PostgreSQL/Prisma, JWT and Brevo email",
+                    "Bazetwo Barbers: booking platform with Stripe payments, QR booking verification and customer, barber and admin dashboards (React, FastAPI, MongoDB)",
+                    "ILI-Nigeria, Zula and SSCF: translation marketplace, WhatsApp-checkout e-commerce and foundation website"
+                ]
+            },
+            {
+                company: "Solace IT Ltd — Ogun State",
+                position: "Software Engineer Intern",
+                startDate: "2023",
+                endDate: "2025",
+                highlights: [
+                    "Built CRUD service modules and authentication workflows with Node.js, Express and MongoDB",
+                    "Supported frontend improvements, debugging, Linux deployment preparation and Git workflows"
                 ]
             }
         ],
         skills: {
-            frontend: ["React", "Vue.js", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
-            backend: ["Node.js", "Express", "NestJS", "Python", "FastAPI", "Django"],
-            database: ["MongoDB", "PostgreSQL", "Redis", "Prisma"],
-            devops: ["Docker", "AWS", "Git", "Linux", "CI/CD"],
-            nocode: ["Bubble", "WordPress", "Webflow", "Zapier", "Make.com", "FlutterFlow"],
-            tools: ["Jira", "Postman", "Notion", "Slack", "Trello", "ClickUp", "Figma"]
+            languages: ["Python", "JavaScript", "TypeScript", "C++", "HTML", "CSS"],
+            frontend: ["React", "Next.js", "Vue.js", "Tailwind CSS", "shadcn/ui", "Redux", "Zustand", "GSAP", "Framer Motion", "Lenis"],
+            backend: ["NestJS", "Node.js", "Express", "FastAPI", "Django REST Framework", "GraphQL", "Swagger/OpenAPI"],
+            database: ["PostgreSQL", "MongoDB", "MySQL", "SQLite", "Prisma", "SQLAlchemy", "Redis"],
+            platforms: ["Afribase", "Supabase", "Firebase"],
+            "payments & comms": ["Stripe", "Paystack", "Twilio", "SendGrid", "Brevo", "Resend", "WhatsApp Cloud API"],
+            devops: ["Docker", "Git", "GitHub", "Vercel", "Render", "Cloudinary", "Postman", "Figma"]
         },
         projects: [
             {
-                name: "SSCF Digital Health Platform",
-                technologies: ["React", "Three.js", "Tailwind", "Framer Motion"],
-                description: "Comprehensive digital platform for sickle cell awareness with interactive genotype checkers and donation portal",
-                impact: "Serving 1000+ daily users, 40% increase in community donations",
-                url: "https://sscf.com.ng"
+                name: "Entrix — WhatsApp-First Event Ticketing",
+                technologies: ["React", "TypeScript", "NestJS", "Prisma", "Afribase"],
+                description: "My event ticketing startup: organisers sell tickets inside WhatsApp, check guests in with QR codes, manage team roles and get paid to their bank",
+                impact: "Personal startup, 2026 – Present",
+                url: "https://entrix.altrisco.tech"
             },
             {
-                name: "ILI-Nigeria Translation Hub",
-                technologies: ["MongoDB", "Express", "React", "Node.js", "Cloudinary", "Brevo"],
-                description: "Full-stack translation workflow platform with automated notifications and file management",
-                impact: "60% workflow efficiency improvement, 80% reduction in manual email tasks",
-                url: "https://ilin-nigeria.vercel.app"
+                name: "E-Attendance — University Platform",
+                technologies: ["FastAPI", "MongoDB", "OpenCV", "Geofencing", "JWT"],
+                description: "University attendance system combining geofencing and face recognition to prevent proxy attendance",
+                impact: "1st Place, EdTech COE TASUED Hackathon v2 (2025)",
+                url: "https://e-attendance.com.ng"
             },
             {
-                name: "University E-Attendance System",
-                technologies: ["Vue.js", "Geofencing", "Face-API.js", "Firebase"],
-                description: "Smart attendance management with location-based validation and facial recognition",
-                impact: "Eliminated manual roll-call errors, saved 12 hours/week of admin time"
+                name: "Kommunity — Community Management Platform",
+                technologies: ["Node.js", "Express", "MongoDB", "JWT", "RBAC"],
+                description: "Multi-tenant backend for activity coordination, land ownership and tenancy workflows",
+                impact: "Multi-tenant architecture with role-based access control"
             }
         ],
         certifications: [
-            { name: "AWS Certified Cloud Practitioner", issuer: "Amazon Web Services", year: "2024" },
-            { name: "Meta Frontend Developer Professional", issuer: "Meta (Coursera)", year: "2023" },
-            { name: "Responsive Web Design", issuer: "freeCodeCamp", year: "2022" },
-            { name: "JavaScript Algorithms and Data Structures", issuer: "freeCodeCamp", year: "2022" }
+            { name: "1st Place — EdTech COE TASUED Hackathon v2", issuer: "Built E-Attendance", year: "2025" },
+            { name: "4th Place — EdTech COE TASUED Hackathon v1", issuer: "Built VisionAI", year: "2024" }
         ],
         achievements: [
-            { title: "15+ Production Apps Deployed", description: "Successfully delivered and maintained" },
-            { title: "10K+ Combined Users", description: "Across all deployed platforms" },
-            { title: "98% Client Satisfaction", description: "Based on project feedback" },
-            { title: "60% Deployment Speed Increase", description: "Through CI/CD optimization" }
+            { title: "3+ Years", description: "Building production web platforms" },
+            { title: "CTO", description: "Altris Product Systems" },
+            { title: "Full-Stack Engineer", description: "StreetOps (Remote)" },
+            { title: "1st Place", description: "TASUED EdTech Hackathon 2025" }
         ],
         education: {
-            institution: "Tai Solarin University of Education",
-            degree: "B.Sc. Computer Science",
-            startDate: "2021",
-            endDate: "Present"
+            institution: "Tai Solarin Federal University of Education, Ijagun",
+            degree: "B.Sc. Computer Science (In View)",
+            startDate: "2024",
+            endDate: "2027"
         }
     };
 
@@ -236,7 +259,7 @@ const Resume = () => {
                                 <h1 className="text-4xl sm:text-5xl font-extrabold uppercase tracking-tight mb-2">
                                     Usamah <span style={{ color: colors.NEON_CYAN }} className="resume-accent">Abidemi</span>
                                 </h1>
-                                <p className="text-xl font-medium resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>Full Stack Developer & SaaS Architect</p>
+                                <p className="text-xl font-medium resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>{resumeData.basics.label}</p>
                             </div>
                             <div className="flex flex-col items-start md:items-end gap-2 text-sm resume-text-secondary" style={{ color: colors.TEXT_SECONDARY }}>
                                 <a href="mailto:olawooreusamahabidemi@gmail.com" className="flex items-center gap-2 hover:text-cyan-400 transition-colors">
@@ -250,8 +273,8 @@ const Resume = () => {
                                 </div>
                                 <div className="flex gap-4 mt-1">
                                     <a href="https://www.linkedin.com/in/usamah-abidemi-198464291/" className="hover:text-cyan-400"><Linkedin size={18} /></a>
-                                    <a href="https://github.com/everbestDev" className="hover:text-cyan-400"><Github size={18} /></a>
-                                    <a href="https://everbestdev.com.ng" className="hover:text-cyan-400"><Globe size={18} /></a>
+                                    <a href="https://github.com/EverbestDev" className="hover:text-cyan-400"><Github size={18} /></a>
+                                    <a href="https://everbestdev.vercel.app" className="hover:text-cyan-400"><Globe size={18} /></a>
                                 </div>
                             </div>
                         </div>
@@ -375,7 +398,7 @@ const Resume = () => {
                             {/* Certifications */}
                             <section>
                                 <h2 className="text-xl font-bold uppercase tracking-widest border-b pb-2 mb-4 flex items-center gap-2" style={{ borderColor: `${colors.BORDER}40` }}>
-                                    <span className="w-2 h-8 block" style={{ backgroundColor: colors.TEXT_PRIMARY }}></span> Certifications
+                                    <span className="w-2 h-8 block" style={{ backgroundColor: colors.TEXT_PRIMARY }}></span> Awards
                                 </h2>
                                 <div className="space-y-3">
                                     {resumeData.certifications.map((cert, i) => (

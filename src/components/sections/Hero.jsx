@@ -8,8 +8,8 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
     },
   },
 };
@@ -75,6 +75,7 @@ const AnimatedGridBackground = ({ colors }) => {
       size: Math.random() * 3 + 1,
       duration: Math.random() * 20 + 15,
       delay: Math.random() * 5,
+      driftX: Math.random() * 50 - 25,
     }));
     setParticles(particleArray);
   }, []);
@@ -102,9 +103,9 @@ const AnimatedGridBackground = ({ colors }) => {
 
       {/* Floating Particles */}
       {particles.map((particle) => (
-        <motion.div
+        <div
           key={particle.id}
-          className="absolute rounded-full"
+          className="hero-particle absolute rounded-full"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -113,17 +114,9 @@ const AnimatedGridBackground = ({ colors }) => {
             backgroundColor: colors.NEON_CYAN,
             boxShadow: `0 0 ${particle.size * 3}px ${colors.NEON_CYAN}`,
             zIndex: 1,
-          }}
-          animate={{
-            y: [0, -100, 0],
-            x: [0, Math.random() * 50 - 25, 0],
-            opacity: [0, 0.6, 0],
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
+            "--drift-x": `${particle.driftX}px`,
+            animationDuration: `${particle.duration}s`,
+            animationDelay: `${particle.delay}s`,
           }}
         />
       ))}
@@ -166,33 +159,37 @@ const AnimatedGridBackground = ({ colors }) => {
   );
 };
 
-const TypingText = ({ text, className = "", onComplete, colors }) => {
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
+// CSS-driven typewriter: each letter reveals on its own animation-delay, so
+// typing starts on first paint and isn't held back by a busy JS thread.
+const CHAR_DELAY_MS = 55;
+const START_DELAY_MS = 100;
 
-  useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayText(text.slice(0, currentIndex + 1));
-        setCurrentIndex((prev) => prev + 1);
-      }, 70);
-      return () => clearTimeout(timeout);
-    } else if (onComplete && currentIndex === text.length) {
-      onComplete();
-    }
-  }, [currentIndex, text, onComplete]);
+const TypingText = ({ text, className = "", onComplete, colors }) => {
+  const [done, setDone] = useState(false);
+  const chars = Array.from(text);
+
+  const finish = () => {
+    setDone(true);
+    onComplete?.();
+  };
 
   return (
-    <span className={className}>
-      {displayText}
-      {currentIndex < text.length && (
-        <motion.span
-          animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.5, repeat: Infinity }}
-          style={{ color: colors.NEON_CYAN }}
+    <span className={className} aria-label={text}>
+      {chars.map((ch, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className="type-char"
+          style={{ animationDelay: `${START_DELAY_MS + i * CHAR_DELAY_MS}ms` }}
+          onAnimationEnd={i === chars.length - 1 ? finish : undefined}
         >
+          {ch}
+        </span>
+      ))}
+      {!done && (
+        <span aria-hidden="true" className="type-caret" style={{ color: colors.NEON_CYAN }}>
           |
-        </motion.span>
+        </span>
       )}
     </span>
   );
@@ -253,7 +250,7 @@ const Hero = () => {
           style={{ color: colors.TEXT_TERTIARY }}
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          transition={{ duration: 0.4 }}
         >
           Hi, I am
         </motion.p>
