@@ -38,7 +38,7 @@ const Resume = () => {
                 { network: "GitHub", url: "https://github.com/EverbestDev" }
             ]
         },
-        summary: "Full-Stack Software Engineer with 3+ years of experience building and shipping production web platforms in TypeScript and Python. Currently a full-time remote Full-Stack Software Engineer at StreetOps and CTO of Altris Product Systems, leading the engineering of Afribase, Rekora, LexLearn and client products. Experienced in designing REST APIs with NestJS, Express, Next.js and FastAPI; modelling data in PostgreSQL (Prisma) and MongoDB; implementing JWT, RBAC and two-factor authentication, Stripe payments and transactional email; and building fast, responsive, animation-rich interfaces with React and Next.js.",
+        summary: "Full-Stack Software Engineer with 3+ years of experience building and shipping production web platforms in TypeScript and Python. Currently a full-time remote Full-Stack Software Engineer at StreetOps and CTO of Altris Product Systems, leading the engineering of Afribase, Rekora, LexLearn and client products. Experienced in designing REST APIs with NestJS, Express, Next.js and FastAPI; modelling data in PostgreSQL (Prisma) and MongoDB; implementing JWT, RBAC and two-factor authentication, Stripe payments and transactional email; and building fast, responsive, animation-rich interfaces with React and Next.js. Final-year Computer Science undergraduate at Tai Solarin Federal University of Education, Ijagun (2023 – Present).",
         experience: [
             {
                 company: "StreetOps — Full-time, Remote (Contract)",
@@ -132,8 +132,8 @@ const Resume = () => {
         education: {
             institution: "Tai Solarin Federal University of Education, Ijagun",
             degree: "B.Sc. Computer Science (In View)",
-            startDate: "2024",
-            endDate: "2027"
+            startDate: "2023",
+            endDate: "Present"
         }
     };
 
