@@ -159,10 +159,12 @@ html {
   animation: type-in 1ms linear both;
 }
 
+/* overflow flips to visible once a letter is shown, so its glow isn't clipped into a box */
 @keyframes type-in {
   to {
     max-width: 1.5em;
     opacity: 1;
+    overflow: visible;
   }
 }
 

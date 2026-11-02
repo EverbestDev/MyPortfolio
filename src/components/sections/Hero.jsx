@@ -173,6 +173,9 @@ const TypingText = ({ text, className = "", onComplete, colors }) => {
     onComplete?.();
   };
 
+  // Once typed, render plain text so the glow isn't split into per-letter boxes
+  if (done) return <span className={className}>{text}</span>;
+
   return (
     <span className={className} aria-label={text}>
       {chars.map((ch, i) => (

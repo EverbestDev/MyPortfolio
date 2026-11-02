@@ -8,20 +8,29 @@ const experiences = [
   {
     id: 1,
     role: "Chief Technology Officer (CTO)",
-    company: "Altris Product System",
+    company: "Altris Product Systems",
     companyUrl: "https://altrisco.tech/",
-    duration: "2025 - Present",
+    duration: "2026 - Present",
     description: "Leading all product and engineering efforts at Altris — designing system architectures, driving technical strategy, and building scalable products for the African market. Overseeing cross-functional teams across frontend, backend, and infrastructure to ship production-grade platforms including Afribase.",
     tech: ["Next.js", "Node.js", "PostgreSQL", "AWS", "TypeScript"],
   },
   {
     id: 2,
-    role: "Full-Stack Engineer (Internship)",
+    role: "Full-Stack Software Engineer",
     company: "StreetOps NG",
     companyUrl: "https://streetops.ng",
     duration: "2026 - Present",
-    description: "Building and shipping production features across the StreetAsk research platform — from the admin portal and survey engine to archetype scoring systems and real-time audit logging. Working across the full stack with React, Next.js, Node.js, and PostgreSQL.",
+    description: "Full-time, remote. Lead developer on GummyGum, StreetOps' team-culture platform, and its 13 live team experiences. Building and shipping production features across the StreetAsk research platform — from the admin portal and survey engine to archetype scoring systems and real-time audit logging. Working across the full stack with React, Next.js, Node.js, and PostgreSQL.",
     tech: ["React", "Next.js", "Node.js", "PostgreSQL", "TypeScript"],
+  },
+  {
+    id: 3,
+    role: "Final-Year Undergraduate, B.Sc. Computer Science",
+    company: "Tai Solarin Federal University of Education, Ijagun",
+    companyUrl: null,
+    duration: "2023 - Present",
+    description: "Final-year Computer Science student, studying alongside full-time engineering work. 1st Place at the EdTech COE TASUED Hackathon v2 (2025) with E-Attendance, and 4th Place at v1 (2024) with VisionAI.",
+    tech: ["Computer Science", "Software Engineering", "Hackathons"],
   },
 ];
 
