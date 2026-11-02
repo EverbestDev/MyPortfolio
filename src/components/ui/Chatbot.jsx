@@ -97,14 +97,25 @@ const Chatbot = () => {
     });
     const [inputValue, setInputValue] = useState('');
     const [isTyping, setIsTyping] = useState(false);
-    const messagesEndRef = useRef(null);
+    const messagesContainerRef = useRef(null);
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
+    // Scroll only the message list — scrollIntoView would also scroll the page behind the chat
+    useEffect(() => {
+        const el = messagesContainerRef.current;
+        if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    }, [messages, isTyping]);
+
+    // On open, jump straight to the latest message (no smooth scroll through history)
+    useEffect(() => {
+        if (!isOpen) return;
+        const id = requestAnimationFrame(() => {
+            const el = messagesContainerRef.current;
+            if (el) el.scrollTop = el.scrollHeight;
+        });
+        return () => cancelAnimationFrame(id);
+    }, [isOpen]);
 
     useEffect(() => {
-        scrollToBottom();
         localStorage.setItem('chatbot_messages', JSON.stringify(messages));
     }, [messages]);
 
@@ -246,7 +257,7 @@ const Chatbot = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 bg-black/60 backdrop-blur-md z-[110]"
+                            className="fixed inset-0 bg-black/60 backdrop-blur-md z-[3100]"
                             onClick={() => setIsOpen(false)}
                         />
 
@@ -255,7 +266,8 @@ const Chatbot = () => {
                             animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
                             exit={{ opacity: 0, y: 40, scale: 0.95, filter: 'blur(10px)' }}
                             transition={{ type: 'spring', damping: 30, stiffness: 350 }}
-                            className="fixed bottom-0 right-0 md:bottom-24 md:right-8 w-full md:w-[410px] max-w-full md:max-w-md h-full md:h-[650px] md:max-h-[calc(100vh-140px)] md:rounded-3xl shadow-[0_24px_80px_-15px_rgba(0,0,0,0.6)] z-[130] flex flex-col overflow-hidden border-t md:border"
+                            data-lenis-prevent
+                            className="fixed bottom-0 right-0 md:bottom-24 md:right-8 w-full md:w-[380px] max-w-full h-[100dvh] md:h-[600px] md:max-h-[calc(100dvh-140px)] md:rounded-3xl shadow-[0_24px_80px_-15px_rgba(0,0,0,0.6)] z-[3110] flex flex-col overflow-hidden border-t md:border"
                             style={{
                                 backgroundColor: `${colors.DARK_BG}f8`,
                                 borderColor: `${colors.NEON_CYAN}20`,
@@ -264,7 +276,7 @@ const Chatbot = () => {
                         >
 
                             <div
-                                className="px-6 py-5 flex items-center justify-between border-b relative overflow-hidden"
+                                className="px-5 py-3.5 flex items-center justify-between border-b relative overflow-hidden flex-shrink-0"
                                 style={{
                                     backgroundColor: `${colors.SECTION_BG}80`,
                                     borderBottomColor: `${colors.NEON_CYAN}15`,
@@ -272,9 +284,9 @@ const Chatbot = () => {
                             >
                                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
 
-                                <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-3">
                                     <div
-                                        className="w-12 h-12 rounded-2xl flex items-center justify-center relative shadow-inner"
+                                        className="w-10 h-10 rounded-xl flex items-center justify-center relative shadow-inner"
                                         style={{
                                             background: `linear-gradient(135deg, ${colors.NEON_CYAN}25, ${colors.NEON_CYAN}05)`,
                                             border: `1px solid ${colors.NEON_CYAN}20`
@@ -284,7 +296,7 @@ const Chatbot = () => {
                                         <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-slate-900 shadow-sm" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-lg tracking-tight" style={{ color: colors.TEXT_PRIMARY }}>
+                                        <h3 className="font-bold text-base tracking-tight" style={{ color: colors.TEXT_PRIMARY }}>
                                             Everbot AI
                                         </h3>
                                         <div className="flex items-center gap-1.5">
@@ -302,23 +314,26 @@ const Chatbot = () => {
                                         className="p-2.5 rounded-xl transition-colors"
                                         style={{ color: colors.TEXT_SECONDARY }}
                                     >
-                                        <X size={22} />
+                                        <X size={20} />
                                     </motion.button>
                                 </div>
                             </div>
 
 
-                            <div className="flex-1 overflow-y-auto px-5 py-6 space-y-6 custom-scrollbar">
+                            <div
+                                ref={messagesContainerRef}
+                                className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-5 space-y-4 custom-scrollbar"
+                            >
                                 {messages.map((message, index) => (
                                     <motion.div
                                         key={index}
                                         initial={{ opacity: 0, y: 15, x: message.type === 'user' ? 20 : -20 }}
                                         animate={{ opacity: 1, y: 0, x: 0 }}
                                         transition={{ duration: 0.4, ease: "easeOut" }}
-                                        className={`flex gap-3 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
+                                        className={`flex gap-2.5 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
                                     >
                                         <div
-                                            className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
+                                            className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg"
                                             style={{
                                                 backgroundColor: message.type === 'bot' ? `${colors.NEON_CYAN}15` : colors.CARD_BG,
                                                 border: `1px solid ${message.type === 'bot' ? colors.NEON_CYAN + '20' : colors.BORDER + '30'}`
@@ -327,11 +342,11 @@ const Chatbot = () => {
                                             {message.type === 'bot' ? (
                                                 <img src="/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg" />
                                             ) : (
-                                                <User size={18} style={{ color: colors.TEXT_SECONDARY }} />
+                                                <User size={16} style={{ color: colors.TEXT_SECONDARY }} />
                                             )}
                                         </div>
                                         <div
-                                            className={`max-w-[82%] px-4 py-3 shadow-sm relative ${message.type === 'bot'
+                                            className={`max-w-[80%] px-3.5 py-2.5 shadow-sm relative ${message.type === 'bot'
                                                 ? 'rounded-2xl rounded-tl-none'
                                                 : 'rounded-2xl rounded-tr-none'
                                                 }`}
@@ -341,11 +356,11 @@ const Chatbot = () => {
                                                 border: message.type === 'bot' ? `1px solid ${colors.BORDER}40` : 'none',
                                             }}
                                         >
-                                            <p className="text-[14.5px] leading-relaxed font-medium">
+                                            <p className="text-[13px] leading-relaxed break-words">
                                                 {message.text}
                                             </p>
                                             <span
-                                                className="text-[9px] mt-2 block opacity-50 font-mono text-right"
+                                                className="text-[9px] mt-1.5 block opacity-50 font-mono text-right"
                                                 style={{ color: message.type === 'bot' ? colors.TEXT_TERTIARY : colors.DARK_BG }}
                                             >
                                                 {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -358,16 +373,16 @@ const Chatbot = () => {
                                     <motion.div
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
-                                        className="flex gap-3"
+                                        className="flex gap-2.5"
                                     >
                                         <div
-                                            className="w-9 h-9 rounded-xl flex items-center justify-center animate-pulse"
+                                            className="w-8 h-8 rounded-lg flex items-center justify-center animate-pulse"
                                             style={{ backgroundColor: `${colors.NEON_CYAN}15` }}
                                         >
                                             <img src="/pfp.jpg" alt="Everbot" className="w-full h-full object-cover rounded-lg" />
                                         </div>
                                         <div
-                                            className="px-5 py-3.5 rounded-2xl rounded-tl-none flex gap-1.5 items-center shadow-inner"
+                                            className="px-4 py-3 rounded-2xl rounded-tl-none flex gap-1.5 items-center shadow-inner"
                                             style={{ backgroundColor: `${colors.CARD_BG}a0`, border: `1px solid ${colors.BORDER}30` }}
                                         >
                                             {[0, 0.2, 0.4].map((delay, i) => (
@@ -379,34 +394,32 @@ const Chatbot = () => {
                                                         scale: [1, 1.2, 1]
                                                     }}
                                                     transition={{ duration: 0.9, repeat: Infinity, delay }}
-                                                    className="w-2.5 h-2.5 rounded-full"
+                                                    className="w-2 h-2 rounded-full"
                                                     style={{ backgroundColor: colors.NEON_CYAN }}
                                                 />
                                             ))}
                                         </div>
                                     </motion.div>
                                 )}
-
-                                <div ref={messagesEndRef} className="h-4" />
                             </div>
 
 
                             {messages.length < 5 && (
-                                <div className="px-6 py-4 space-y-3 bg-gradient-to-t from-black/20 to-transparent">
+                                <div className="px-4 pt-3 pb-3 flex-shrink-0 bg-gradient-to-t from-black/20 to-transparent">
                                     <div className="flex items-center gap-2 mb-2 opacity-60">
                                         <HelpCircle size={14} style={{ color: colors.NEON_CYAN }} />
                                         <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: colors.TEXT_TERTIARY }}>
                                             Popular Queries
                                         </span>
                                     </div>
-                                    <div className="flex flex-col gap-2.5">
+                                    <div className="flex flex-col gap-2">
                                         {PREDEFINED_QUESTIONS.slice(0, 3).map((question, index) => (
                                             <motion.button
                                                 key={index}
                                                 whileHover={{ x: 6, backgroundColor: `${colors.NEON_CYAN}15` }}
                                                 whileTap={{ scale: 0.98 }}
                                                 onClick={() => handlePredefinedQuestion(question)}
-                                                className="text-[12.5px] px-4 py-2.5 rounded-xl border text-left flex items-center justify-between group transition-all duration-300"
+                                                className="text-[12px] px-3.5 py-2 rounded-xl border text-left flex items-center justify-between group transition-all duration-300"
                                                 style={{
                                                     backgroundColor: `${colors.CARD_BG}a0`,
                                                     borderColor: `${colors.NEON_CYAN}20`,
@@ -424,7 +437,7 @@ const Chatbot = () => {
 
 
                             <div
-                                className="p-6 border-t md:rounded-b-3xl relative"
+                                className="px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] border-t md:rounded-b-3xl relative flex-shrink-0"
                                 style={{
                                     backgroundColor: `${colors.SECTION_BG}95`,
                                     borderTopColor: `${colors.NEON_CYAN}15`,
@@ -435,7 +448,7 @@ const Chatbot = () => {
                                         e.preventDefault();
                                         handleSendMessage(inputValue);
                                     }}
-                                    className="flex gap-3 items-center"
+                                    className="flex gap-2.5 items-center"
                                 >
                                     <div className="flex-1 relative group">
                                         <input
@@ -443,7 +456,7 @@ const Chatbot = () => {
                                             value={inputValue}
                                             onChange={(e) => setInputValue(e.target.value)}
                                             placeholder="Message Everbot..."
-                                            className="w-full pl-5 pr-12 py-3.5 rounded-2xl border outline-none transition-all duration-500 font-medium"
+                                            className="w-full pl-4 pr-10 py-2.5 rounded-xl border outline-none transition-all duration-500 text-base md:text-sm"
                                             style={{
                                                 backgroundColor: `${colors.CARD_BG}d0`,
                                                 borderColor: `${colors.BORDER}60`,
@@ -460,17 +473,17 @@ const Chatbot = () => {
                                         disabled={!inputValue.trim()}
                                         whileHover={inputValue.trim() ? { scale: 1.05, rotate: -5 } : {}}
                                         whileTap={inputValue.trim() ? { scale: 0.9 } : {}}
-                                        className="p-4 rounded-2xl flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:grayscale"
+                                        className="p-3 rounded-xl flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:grayscale"
                                         style={{
                                             backgroundColor: colors.NEON_CYAN,
                                             color: colors.DARK_BG,
                                             boxShadow: inputValue.trim() ? `0 8px 24px -6px ${colors.NEON_CYAN}60` : 'none'
                                         }}
                                     >
-                                        <Send size={22} />
+                                        <Send size={18} />
                                     </motion.button>
                                 </form>
-                                <p className="text-[9px] text-center mt-4 opacity-30 font-mono" style={{ color: colors.TEXT_TERTIARY }}>
+                                <p className="text-[9px] text-center mt-2 opacity-30 font-mono" style={{ color: colors.TEXT_TERTIARY }}>
                                     AI-powered assistant • Powered by EverbestDev
                                 </p>
                             </div>
