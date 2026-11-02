@@ -4,68 +4,99 @@ import { X, Send, User, Bot, HelpCircle, ChevronRight } from 'lucide-react';
 import { useThemeColors } from '../../hooks/useThemeColors';
 
 const PREDEFINED_QUESTIONS = [
-    "What technologies do you specialize in?",
-    "Can you tell me about your projects?",
-    "What's your approach to web development?",
+    "What's your tech stack?",
+    "What are you working on right now?",
+    "Tell me about Entrix.",
+    "Are you available for hire?",
     "How can I contact you?",
-    "What services do you offer?",
-    "Tell me about your tech stack."
+    "What's your education?"
 ];
 
+// Keywords are matched as whole words/phrases; the entry with the most matches wins.
 const KNOWLEDGE_BASE = {
-    technologies: {
-        keywords: ['tech', 'technology', 'technologies', 'stack', 'skills', 'tools', 'specialize'],
-        response: "I'm a Full-Stack Software Developer specializing in Next.js, Node.js, and the MERN stack. I also have deep expertise in No-Code Development (WordPress, Bubble, Webflow, Zapier) and modern IT management tools like Jira and Postman. My focus is on blending traditional engineering with efficient automation."
-    },
-    experience: {
-        keywords: ['mern', 'react', 'node', 'mongodb', 'express', 'experience', 'background'],
-        response: "I have extensive experience with the MERN stack (MongoDB, Express, React, Node.js) and have since expanded into Next.js and Python. I've built everything from real-time chat apps and e-commerce platforms to complex data visualization dashboards and serverless APIs."
-    },
-    projects: {
-        keywords: ['project', 'projects', 'portfolio', 'work', 'built', 'created'],
-        response: "I've worked on various projects including an E-Commerce Headless Store with React and Stripe integration, a Real-time Chat App using Socket.io, and this portfolio itself featuring advanced animations with Framer Motion. Check out my Projects section to see more!"
-    },
-    approach: {
-        keywords: ['approach', 'methodology', 'process', 'how do you', 'development process', 'workflow'],
-        response: "I focus on creating clean, scalable code with excellent user experience. I believe in the design-developer hybrid approach - translating beautiful mockups into pixel-perfect, performant reality. I prioritize responsive design, accessibility, and modern best practices."
-    },
-    contact: {
-        keywords: ['contact', 'reach', 'email', 'hire', 'available', 'get in touch', 'phone', 'whatsapp', 'call', 'message'],
-        response: "You can reach me via:\n\nEmail: olawooreusamahabidemi@gmail.com\nPhone/WhatsApp: +234 911 745 0722\nLinkedIn: linkedin.com/in/usamah-abidemi-198464291\nGitHub: github.com/EverbestDev\n\nFeel free to use the contact form on this page or reach out directly!"
-    },
-    services: {
-        keywords: ['services', 'offer', 'do', 'help', 'hire', 'freelance', 'work'],
-        response: "I offer full-stack web development services including custom web applications, e-commerce solutions, API development, database design, and UI/UX implementation. I can help bring your digital ideas to life with modern, scalable solutions."
+    greeting: {
+        keywords: ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'],
+        response: "Hey! 👋 I'm Everbot. Ask me about Usamah's tech stack, current work at StreetOps and Altris, projects like Entrix, education, or how to hire him."
     },
     about: {
-        keywords: ['who', 'about', 'yourself', 'background', 'experience', 'intro'],
-        response: "I'm EverbestDev, a full-stack developer specializing in MERN & MEVM stacks. I'm passionate about creating exceptional digital experiences that blend clean design with robust, scalable code. I thrive as a design-developer hybrid, focusing on both aesthetics and functionality."
+        keywords: ['who', 'about you', 'yourself', 'introduce', 'intro', 'everbestdev', 'usamah'],
+        response: "I'm Olawoore Usamah Abidemi (EverbestDev), a Full-Stack Software Engineer with 3+ years of experience building production web platforms in TypeScript and Python. I'm a full-time remote engineer at StreetOps, CTO of Altris Product Systems, founder of Entrix, and a final-year Computer Science undergraduate at TASUED."
     },
-    location: {
-        keywords: ['location', 'where', 'based', 'from', 'live', 'country'],
-        response: "I'm currently based in Nigeria, working from Solace IT Solution, but I'm available for remote work globally. I've worked with clients and teams across different time zones."
+    current: {
+        keywords: ['streetops', 'gummygum', 'paige', 'streetask', 'current', 'currently', 'right now', 'job', 'role', 'working on', 'work at', 'where do you work', 'employer'],
+        response: "Right now I'm a full-time remote Full-Stack Software Engineer at StreetOps (2026 – present). I'm the lead developer on GummyGum, their team-culture platform, and built 13 live team experiences on it (Sabi Quiz, Townhall, Lucky Spinner and more). I also built the backend for Paige, their research platform, plus StreetAsk and the StreetOps dashboard. Alongside that I'm CTO at Altris Product Systems."
+    },
+    altris: {
+        keywords: ['altris', 'cto', 'afribase', 'rekora', 'lexlearn', 'lexai', 'franklin', 'company', 'lead', 'leadership'],
+        response: "I'm the CTO of Altris Product Systems (2026 – present), where I set technical direction and lead the engineering team. Our products include Afribase (an open-source Firebase/Supabase alternative for Africa), Rekora (a trading-education platform with a MetaTrader 5 bridge), LexLearn (an AI-graded CBT platform for schools) and the D'Franklin Apartments booking site."
+    },
+    entrix: {
+        keywords: ['entrix', 'ticket', 'tickets', 'ticketing', 'event', 'events', 'startup'],
+        response: "Entrix is my event ticketing startup for Nigeria. Organisers sell tickets right inside WhatsApp, check guests in with QR codes, manage team roles and get paid to their bank. It's built with React, TypeScript, NestJS and Prisma on Afribase. Try it at entrix.altrisco.tech."
+    },
+    technologies: {
+        keywords: ['tech', 'stack', 'skills', 'tools', 'technologies', 'technology', 'specialize', 'languages', 'framework', 'frameworks'],
+        response: "My core stack: TypeScript, JavaScript and Python. Frontend: React, Next.js, Vue, Tailwind CSS, GSAP and Framer Motion. Backend: NestJS, Node.js/Express, FastAPI and Django REST Framework. Data: PostgreSQL (Prisma), MongoDB and Redis. Platforms: Afribase, Supabase and Firebase. Plus Stripe, Paystack, Brevo, WhatsApp Cloud API, Docker, Vercel and Render."
+    },
+    backend: {
+        keywords: ['backend', 'nestjs', 'nest', 'node', 'nodejs', 'express', 'fastapi', 'python', 'django', 'api', 'apis', 'database', 'postgres', 'postgresql', 'mongodb', 'prisma', 'redis'],
+        response: "Yes. Backend is a big part of my work. I build REST APIs with NestJS, Express, Next.js route handlers and FastAPI, model data in PostgreSQL with Prisma or in MongoDB, and handle JWT/RBAC auth, two-factor login, rate limiting, payments and transactional email. Entrix runs on NestJS + Prisma, and Paige on Express + PostgreSQL."
+    },
+    frontend: {
+        keywords: ['frontend', 'react', 'next', 'nextjs', 'vue', 'tailwind', 'gsap', 'framer', 'animation', 'animations', 'ui', 'design'],
+        response: "On the frontend I work mostly in React and Next.js (and Vue when it fits), with Tailwind CSS and shadcn/ui. I like fast, responsive, animation-rich interfaces using GSAP, Framer Motion and Lenis, like this portfolio."
+    },
+    projects: {
+        keywords: ['project', 'projects', 'portfolio', 'built', 'clients', 'momscomfort', 'bazetwo', 'sscf', 'ili', 'examples'],
+        response: "Some highlights: Entrix (WhatsApp event ticketing), GummyGum for StreetOps, Afribase and Rekora at Altris, MOMSComfort (maternal healthcare booking and store), Bazetwo Barbers (booking with Stripe), a political campaign platform, ILI-Nigeria (translation marketplace) and E-Attendance, which won 1st place at the TASUED hackathon. Scroll to the Projects section for live previews!"
+    },
+    experience: {
+        keywords: ['experience', 'years', 'background', 'career', 'journey', 'internship', 'solace'],
+        response: "I have 3+ years of experience. I started as a Software Engineer Intern at Solace IT (2023 – 2025), have done paid freelance work for clients since 2025, and in 2026 became a Full-Stack Software Engineer at StreetOps and CTO of Altris Product Systems."
     },
     education: {
-        keywords: ['education', 'degree', 'study', 'university', 'college', 'learn', 'training'],
-        response: "I am a self-driven developer with a strong foundation in Computer Science principles. I've completed various advanced certifications in Full-Stack Development and continuously stay updated with the latest industry standards through hands-on practice and specialized training."
+        keywords: ['education', 'degree', 'study', 'student', 'university', 'school', 'tasued', 'undergrad', 'undergraduate', 'graduate', 'final year'],
+        response: "I'm a final-year B.Sc. Computer Science undergraduate at Tai Solarin Federal University of Education, Ijagun (2023 – present), studying alongside full-time engineering work."
     },
-    resume: {
-        keywords: ['resume', 'cv', 'background', 'download', 'profile'],
-        response: "You can find a download link for my full resume in the 'About' section or at the bottom of the page in the Footer. If you'd like a custom version for a specific role, feel free to email me!"
+    awards: {
+        keywords: ['hackathon', 'hackathons', 'award', 'awards', 'won', 'win', 'prize', 'achievement', 'achievements'],
+        response: "I won 1st place at the EdTech COE TASUED Hackathon v2 (2025) with E-Attendance, a geofenced attendance system with face recognition. I also placed 4th at v1 (2024) with VisionAI, an AI-powered virtual classroom."
     },
-    hobbies: {
-        keywords: ['hobbies', 'free time', 'interest', 'fun', 'like to do'],
-        response: "When I'm not coding, I enjoy exploring new design trends, contributing to open-source projects, and staying active in the tech community. I'm also a fan of tech podcasts and exploring futuristic UI concepts."
+    contact: {
+        keywords: ['contact', 'reach', 'email', 'get in touch', 'phone', 'whatsapp', 'call', 'linkedin', 'github'],
+        response: "You can reach me via:\n\nEmail: olawooreusamahabidemi@gmail.com\nPhone/WhatsApp: +234 911 745 0722\nLinkedIn: linkedin.com/in/usamah-abidemi-198464291\nGitHub: github.com/EverbestDev\n\nOr use the contact form on this page!"
     },
-    salary: {
-        keywords: ['salary', 'pay', 'cost', 'rate', 'price', 'charge'],
-        response: "My rates vary depending on the project scope and complexity. For freelance work, I typically offer fixed-price quotes or hourly rates. For full-time roles, I'm open to discussing competitive packages based on the value I bring to the team. Let's get in touch to discuss further!"
+    services: {
+        keywords: ['services', 'offer', 'freelance', 'build for me', 'help me', 'website', 'app', 'mvp'],
+        response: "I build full-stack web products end to end: SaaS platforms, booking and e-commerce sites with payments, admin dashboards, REST APIs and backends, and fast animated marketing sites. I handle architecture, database design and deployment too."
     },
     availability: {
-        keywords: ['available', 'time', 'start', 'hire', 'now'],
-        response: "I'm currently open to new opportunities, whether they are freelance projects or full-time roles. Please reach out via the contact form or my WhatsApp to discuss your timeline!"
+        keywords: ['available', 'availability', 'open to', 'hire', 'hiring', 'remote', 'relocate', 'start'],
+        response: "I'm open to new opportunities: freelance and contract projects, or the right full-time remote role. Reach out via the contact form, email or WhatsApp and let's talk about your timeline."
+    },
+    location: {
+        keywords: ['location', 'where', 'based', 'nigeria', 'country', 'timezone', 'time zone'],
+        response: "I'm based in Nigeria (WAT, UTC+1) and work fully remotely with teams and clients across time zones."
+    },
+    resume: {
+        keywords: ['resume', 'cv', 'download'],
+        response: "Tap the \"Resume\" button in the navigation bar to view my resume online. You can download it there as a PDF or Word file."
+    },
+    salary: {
+        keywords: ['salary', 'pay', 'cost', 'rate', 'rates', 'price', 'pricing', 'charge', 'budget'],
+        response: "My rates depend on the project scope and complexity. For freelance work I usually give a fixed-price quote; for full-time roles I'm happy to discuss a package. Let's get in touch to talk details!"
+    },
+    approach: {
+        keywords: ['approach', 'methodology', 'process', 'how do you work', 'workflow'],
+        response: "I own products end to end: understand the business goal, design the architecture and data model, build clean, maintainable code with a polished UI, then ship and iterate. I care a lot about performance, security and code that's easy for a team to change."
+    },
+    hobbies: {
+        keywords: ['hobbies', 'hobby', 'free time', 'fun', 'like to do'],
+        response: "Outside work I mentor other developers, join hackathons and stay active in Nigerian developer communities, usually while trying out new UI and animation ideas."
     }
 };
+
+const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const Chatbot = () => {
     const colors = useThemeColors();
@@ -136,15 +167,22 @@ const Chatbot = () => {
     };
 
     const findResponse = (question) => {
-        const lowerQuestion = question.toLowerCase();
+        const lowerQuestion = question.toLowerCase().replace(/[’']/g, '');
 
-        for (const [key, data] of Object.entries(KNOWLEDGE_BASE)) {
-            if (data.keywords.some(keyword => lowerQuestion.includes(keyword))) {
-                return data.response;
+        let best = null;
+        let bestScore = 0;
+        for (const data of Object.values(KNOWLEDGE_BASE)) {
+            const score = data.keywords.filter(keyword =>
+                new RegExp(`\\b${escapeRegExp(keyword)}\\b`).test(lowerQuestion)
+            ).length;
+            if (score > bestScore) {
+                best = data;
+                bestScore = score;
             }
         }
+        if (best) return best.response;
 
-        return "I'm specialized in answering questions about EverbestDev's skills, experience, and projects. Try asking about my tech stack, current projects, or how to hire me!";
+        return "I can answer questions about EverbestDev's tech stack, current work at StreetOps and Altris, projects like Entrix, education, or how to hire him. Try one of those!";
     };
 
     const handleSendMessage = (text) => {
@@ -356,7 +394,7 @@ const Chatbot = () => {
                                                 border: message.type === 'bot' ? `1px solid ${colors.BORDER}40` : 'none',
                                             }}
                                         >
-                                            <p className="text-[13px] leading-relaxed break-words">
+                                            <p className="text-[13px] leading-relaxed break-words whitespace-pre-line">
                                                 {message.text}
                                             </p>
                                             <span
