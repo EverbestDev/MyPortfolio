@@ -46,10 +46,17 @@ const MainPortfolio = () => {
     <SmoothScrollProvider>
       <Navbar />
       <Hero />
+      {/* Separate boundaries: a widget loading late must never unmount the
+          sections (the page collapses to the hero and stops scrolling) */}
       <Suspense fallback={null}>
         <Chatbot />
         <OfflineStatus />
+      </Suspense>
+      <Suspense fallback={null}>
         {showCursor && <SmokeyCursor />}
+      </Suspense>
+      {/* Reserve height while sections load so scrolling past the hero works */}
+      <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
         <About />
         <Projects />
         <ExperienceTimeline />
